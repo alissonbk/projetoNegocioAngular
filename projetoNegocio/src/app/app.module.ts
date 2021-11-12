@@ -13,7 +13,7 @@ import { ComprasModule } from './components/compras/compras.module';
 import { PesquisaModule } from './components/pesquisa/pesquisa.module';
 import { ProdutosModule } from './components/produtos/produtos.module';
 import { VendedoresModule } from './components/vendedores/vendedores.module';
-import { ClientesRoutingModule } from './components/clientes/clientes.routing.module';
+import { HeaderModule } from './components/shared/header/header.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { ClientesRoutingModule } from './components/clientes/clientes.routing.mo
     PesquisaModule,
     ProdutosModule,
     VendedoresModule,
+    HeaderModule,
     AppRoutingModule
   ],
   providers: [],

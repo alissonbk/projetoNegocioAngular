@@ -10,7 +10,8 @@ import { FormsModule } from '@angular/forms';
     LoginComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule
   ]
 })
 export class LoginModule { }
