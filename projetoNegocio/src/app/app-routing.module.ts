@@ -13,20 +13,20 @@ import { ClientesGuard } from './guards/clientes.guard';
 const routes: Routes = [
   
   {path: 'clientes',
-    loadChildren: ()=> import('./components/clientes/clientes.module').then(m=> m.ClientesModule),
+    loadChildren: ()=> import('./components/clientes/clientes.module').then(m=> m.ClientesModule), canActivate: [AuthGuard]
     },
   {path: 'vendedores', 
-    loadChildren: ()=> import('./components/vendedores/vendedores.module').then(m=> m.VendedoresModule),
+    loadChildren: ()=> import('./components/vendedores/vendedores.module').then(m=> m.VendedoresModule), canActivate: [AuthGuard]
     },
   {path: 'produtos', 
-    loadChildren: ()=> import('./components/produtos/produtos.module').then(m=> m.ProdutosModule), 
+    loadChildren: ()=> import('./components/produtos/produtos.module').then(m=> m.ProdutosModule), canActivate: [AuthGuard]
     },
   {path: 'compras', 
-    loadChildren: ()=> import('./components/compras/compras.module').then(m=> m.ComprasModule), 
+    loadChildren: ()=> import('./components/compras/compras.module').then(m=> m.ComprasModule), canActivate: [AuthGuard]
     },
-  //{path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: HomeComponent},
+  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo:'home', pathMatch:'full'},
   {path: '**', component: PaginaNaoEncontradaComponent}
 ];
