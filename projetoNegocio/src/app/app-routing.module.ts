@@ -11,22 +11,23 @@ import { AuthGuard } from './guards/auth.guard';
 import { ClientesGuard } from './guards/clientes.guard';
 
 const routes: Routes = [
-  {path: 'clientes', canActivate: [ClientesGuard], canLoad: [AuthGuard],
+  
+  {path: 'clientes',
     loadChildren: ()=> import('./components/clientes/clientes.module').then(m=> m.ClientesModule),
     },
   {path: 'vendedores', 
     loadChildren: ()=> import('./components/vendedores/vendedores.module').then(m=> m.VendedoresModule),
-    canActivate: [AuthGuard], canLoad: [AuthGuard]},
+    },
   {path: 'produtos', 
     loadChildren: ()=> import('./components/produtos/produtos.module').then(m=> m.ProdutosModule), 
-    canActivate: [AuthGuard], canLoad: [AuthGuard]},
+    },
   {path: 'compras', 
     loadChildren: ()=> import('./components/compras/compras.module').then(m=> m.ComprasModule), 
-    canActivate: [AuthGuard], canLoad: [AuthGuard]},
-  // {path: 'login', component: LoginComponent},
+    },
+  //{path: 'login', component: LoginComponent},
   {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: '', redirectTo:'/home', pathMatch:'full'},
+  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo:'home', pathMatch:'full'},
   {path: '**', component: PaginaNaoEncontradaComponent}
 ];
 @NgModule({

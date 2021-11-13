@@ -25,11 +25,7 @@ import { HeaderModule } from './components/shared/header/header.module';
     HomeModule,
     LoginModule,
     PaginaNaoEncontradaModule,
-    ClientesModule,
-    ComprasModule,
     PesquisaModule,
-    ProdutosModule,
-    VendedoresModule,
     HeaderModule,
     AppRoutingModule
   ],

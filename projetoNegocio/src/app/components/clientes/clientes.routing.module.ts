@@ -7,8 +7,8 @@ import { ClientesComponent } from "./clientes.component";
 import { MostrarClientesComponent } from "./mostrar-clientes/mostrar-clientes.component";
 
 
-const ClientesRouter: Routes = [
-    {path: 'clientes', component: ClientesComponent,  canActivateChild: [ClientesGuard],
+const routes: Routes = [
+    {path: '', component: ClientesComponent,  canActivateChild: [ClientesGuard],
         children: [
             {path: 'mostrar', component: MostrarClientesComponent}
         ]
@@ -18,7 +18,7 @@ const ClientesRouter: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(ClientesRouter)
+        RouterModule.forChild(routes)
     ],
     exports: [
         RouterModule

@@ -8,7 +8,7 @@ import { MostrarComprasComponent } from "./mostrar-compras/mostrar-compras.compo
 
 
 const ComprasRouter: Routes = [
-    {path: 'compras', component: ComprasComponent,  canActivateChild: [ClientesGuard],
+    {path: '', component: ComprasComponent,  canActivateChild: [ClientesGuard],
         children: [
             {path: 'mostrar', component: MostrarComprasComponent}
         ]

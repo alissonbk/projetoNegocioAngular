@@ -13,7 +13,7 @@ import { ClientesRoutingModule } from './clientes.routing.module';
   ],
   imports: [
     CommonModule,
-    ClientesRoutingModule,
+    ClientesRoutingModule
   ]
 })
 export class ClientesModule { }

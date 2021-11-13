@@ -8,7 +8,7 @@ import { VendedoresComponent } from "./vendedores.component";
 
 
 const VendedoresRouter: Routes = [
-    {path: 'vendedores', component: VendedoresComponent,  canActivateChild: [ClientesGuard],
+    {path: '', component: VendedoresComponent,  canActivateChild: [ClientesGuard],
         children: [
             {path: 'mostrar', component: MostrarVendedoresComponent}
         ]
