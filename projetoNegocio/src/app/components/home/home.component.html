@@ -1,46 +1,81 @@
 
-  <body>
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+  <body class="bg-dark">
+    <div class="parallax position-relative overflow-hidden text-center bg-light">
       <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 font-weight-normal">Projeto Negocio</h1>
-        <p class="lead font-weight-normal">Este projeto tem como intuito gerenciar um negocio com registros de clientes, produtos e compras.</p>
-        <a class="btn btn-outline-secondary" href="https://github.com/alissonbk/projetoNegocioAngular" target="_blank">Github</a>
+        <h1 class="display-4 font-weight-normal text-white">Projeto Negócio</h1>
+        <p class="lead font-weight-normal text-white">Este projeto tem como intuito gerenciar um negocio com registros de clientes, produtos e compras.</p>
+        <a class="btn btn-outline-dark text-white" href="https://github.com/alissonbk/projetoNegocioAngular" target="_blank">Github</a>
       </div>
-      <div class="product-device shadow-sm d-none d-md-block"></div>
-      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+      <!-- <div class="product-device shadow-sm d-none d-md-block"></div>
+      <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> -->
     </div>
 
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+    <div class="first-container d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div class="bg-right mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-black overflow-hidden">
         <div class="my-3 py-3">
           <h2 class="display-5">Compras</h2>
           <p class="lead">Faça o registro das compras feitas.</p>
         </div>
-        <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+          <div class="row">
+            <div class="col-md-9">
+              <a href="../compras"><button class="btn btn-custom text-white">Registrar</button></a>
+            </div>
+            <div class="col-md-1 btn-mostrar">
+              <a href="../compras/mostrar"><button class="btn btn-custom text-white">Mostrar</button></a>
+            </div>
+          </div>
+        
       </div>
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+
+      <div class="bg-left mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
           <h2 class="display-5">Produtos</h2>
           <p class="lead">Cadastre produtos.</p>
         </div>
-        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+
+        <div class="row">
+          <div class="col-md-9">
+            <a href="../produtos"><button class="btn btn-custom text-white">Cadastrar</button></a>
+          </div>
+          <div class="col-md-1 btn-mostrar">
+            <a href="../produtos/mostrar"><button class="btn btn-custom text-white">Mostrar</button></a>
+          </div>
+        </div>
+        
       </div>
     </div>
 
-    <div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-      <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="second-container d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+      <div class="bg-right mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
         <div class="my-3 p-3">
           <h2 class="display-5">Clientes</h2>
-          <p class="lead">Cadastre novos cliente.</p>
+          <p class="lead">Cadastre novos clientes.</p>
         </div>
-        <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+
+          <div class="row">
+            <div class="col-md-9">
+              <a href="../clientes"><button class="btn btn-custom text-white" >Cadastrar</button></a>
+            </div>
+            <div class="col-md-1 btn-mostrar">
+              <a href="../clientes/mostrar"><button class="btn btn-custom text-white">Mostrar</button></a>
+            </div>
+          </div>
+
       </div>
-      <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
+      <div class="bg-left mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-black overflow-hidden">
         <div class="my-3 py-3">
           <h2 class="display-5">Vendedores</h2>
-          <p class="lead">Cadastre um novo vendedores.</p>
+          <p class="lead">Cadastre um novo vendedor.</p>
         </div>
-        <div class="bg-light shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+          
+          <div class="row">
+            <div class="col-md-9">
+              <a href="../vendedores"><button class="btn btn-custom text-white">Cadastrar</button></a>
+            </div>
+            <div class="col-md-1 btn-mostrar">
+              <a href="../vendedores/mostrar"><button class="btn btn-custom text-white">Mostrar</button></a>
+            </div>
+          </div>
       </div>
     </div>
 
