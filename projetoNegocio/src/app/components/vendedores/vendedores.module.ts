@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { VendedoresComponent } from './vendedores.component';
 import { MostrarVendedoresComponent } from './mostrar-vendedores/mostrar-vendedores.component';
 import { VendedoresRoutingModule } from './vendedores.routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,6 +14,8 @@ import { VendedoresRoutingModule } from './vendedores.routing.module';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     VendedoresRoutingModule
   ]
 })

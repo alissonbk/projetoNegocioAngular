@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vendedores',
@@ -7,9 +9,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendedoresComponent implements OnInit {
 
-  constructor() { }
+  vendedores!: FormGroup;
+  hideBtn!: boolean;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: Router) { }
 
   ngOnInit(): void {
+    this.vendedores = this.formBuilder.group({
+      nome: [null, Validators.required],
+      cpf: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      endereco: this.formBuilder.group({
+        cep: [null, Validators.required],
+        numero: [null, Validators.required],
+        rua: [null, Validators.required],
+        bairro: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+      })
+
+    })
+  }
+
+
+  onSubmit(){
+    console.log(this.vendedores.value);
+  }
+
+  hideButton(){
+    this.hideBtn = !this.hideBtn;
+    if(this.hideBtn){
+      this.route.navigate(['/vendedores/mostrar']);
+    }else{
+      this.route.navigate(['/vendedores']);
+    }
+    
   }
 
 }

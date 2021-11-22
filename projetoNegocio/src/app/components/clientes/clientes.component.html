@@ -1,4 +1,96 @@
-<p>clientes works!</p>
+<div class="d-flex justify-content-center">
+    <div class="clientesContainer d-flex justify-content-center">
+        <form class="form-horizontal" [formGroup]="clientes" (ngSubmit)="onSubmit()">
+            <div class="container mt-5">
+                <div class="title">
+                    Clientes
+                </div>
+                <div class="subtitle">
+                    Faça o cadastro de um cliente!
+                </div>
+    
+                <div class="row afterTitle">
+                    <div class="row d-flex justify-content-left dados">
+                        <p>Dados Pessoais:</p>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nome" class="label">Nome</label>
+                        <input class="form-control input" type="text" name="nome" id="nome" formControlName="nome"/>
+                    </div>
+                    <div class="form-group col-md-4" style="margin-left: 2em;">
+                        <label for="cpf" class="label">CPF</label>
+                        <input class="form-control input" type="text" name="cpf" id="cpf" formControlName="cpf" required />
+                    </div>
+                </div>
+               
+                <div class="row d-flex justify-content-left mt-5">
+                    <div class="form-group col-md-6">
+                        <label for="email" class="label">Email</label>
+                        <input class="form-control input" type="email" name="email" id="email" formControlName="email" required />
+                    </div>
+                </div>
+                <div class="row d-flex justify-content-left mt-5">
+                    <p>Endereço:</p>
+                </div>
+                <!-- ENDEREÇO -->
+                <div formGroupName="endereco">
+                    <div class="row d-flex justify-content-left">
+                        <div class="form-group col-md-6">
+                            <label for="cep" class="label">CEP</label>
+                            <input class="form-control input" type="text" name="cep" id="cep" formControlName="cep" required />
+                        </div>
+                        <div class="form-group col-md-4" style="margin-left: 2em;">
+                            <label for="numero" class="label">Número</label>
+                            <input class="form-control input" type="text" name="numero" id="numero" formControlName="numero" required />
+                        </div>
+                    </div>
+        
+                    <div class="row d-flex justify-content-left mt-5">
+                        <div class="form-group col-md-6">
+                            <label for="rua" class="label">Rua</label>
+                            <input class="form-control input" type="text" name="rua" id="rua" formControlName="rua" required />
+                        </div>
+                        <div class="form-group col-md-4" style="margin-left: 2em;">
+                            <label for="bairro" class="label">Bairro</label>
+                            <input class="form-control input" type="text" name="bairro" id="bairro" formControlName="bairro" required />
+                        </div>
+                    </div>
+    
+        
+                    <div class="row d-flex justify-content-left mt-5">
+                        <div class="form-group col-md-6">
+                            <label for="cidade" class="label">Cidade</label>
+                            <input class="form-control input" type="text" name="cidade" id="cidade" formControlName="cidade" required />
+                        </div>
+                        <div class="form-group col-md-4" style="margin-left: 2em;">
+                            <label for="estado" class="label">Estado</label>
+                            <input class="form-control input" type="text" name="estado" id="estado" formControlName="estado" required />
+                        </div>
+                    </div>
+        
+                </div>
+        
+                <!-- SUBMIT -->
+                <div class="row d-flex justify-content-left mt-5 mb-1">
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
+                    </div>
+                    <div class="form-group col-md-2" *ngIf="!hideBtn">
+                        <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Mostrar Todos</button>
+                    </div>
+
+                    <div class="form-group col-md-2" *ngIf="hideBtn">
+                        <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Esconder</button>
+                    </div>
+                </div>  
+            </div>
+        </form>
+    </div>
+</div>
 
 
-<router-outlet></router-outlet>
+
+<div class="mostrarClientes">
+    <router-outlet></router-outlet>
+</div>
+
