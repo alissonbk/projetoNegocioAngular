@@ -8,16 +8,13 @@ import { HomeModule } from './components/home/home.module';
 import { LoginModule } from './components/login/login.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginaNaoEncontradaModule } from './components/pagina-nao-encontrada/pagina-nao-encontrada.module';
-import { ClientesModule } from './components/clientes/clientes.module';
-import { ComprasModule } from './components/compras/compras.module';
 import { PesquisaModule } from './components/pesquisa/pesquisa.module';
-import { ProdutosModule } from './components/produtos/produtos.module';
-import { VendedoresModule } from './components/vendedores/vendedores.module';
 import { HeaderModule } from './components/shared/header/header.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +24,7 @@ import { HeaderModule } from './components/shared/header/header.module';
     PaginaNaoEncontradaModule,
     PesquisaModule,
     HeaderModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [],
