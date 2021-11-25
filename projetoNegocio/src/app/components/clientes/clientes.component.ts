@@ -2,6 +2,7 @@ import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ClientesService } from 'src/app/services/clientes.service';
 
 @Component({
   selector: 'app-clientes',
@@ -14,7 +15,8 @@ export class ClientesComponent implements OnInit {
   hideBtn!: boolean;
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router) { }
+    private route: Router,
+    private clientesService: ClientesService) { }
 
   ngOnInit(): void {
     this.clientes = this.formBuilder.group({
@@ -36,7 +38,8 @@ export class ClientesComponent implements OnInit {
 
   onSubmit(){
     // console.log(Object.assign({}, this.clientes.value));
-    console.log("form:",this.clientes.value);
+    console.log("form:",this.clientes);
+    this.clientesService.setClientes(this.clientes.value);
   }
 
   hideButton(){

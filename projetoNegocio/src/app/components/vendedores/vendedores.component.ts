@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { VendedoresService } from 'src/app/services/vendedores.service';
 
 @Component({
   selector: 'app-vendedores',
@@ -14,7 +15,8 @@ export class VendedoresComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router) { }
+    private route: Router,
+    private vendedoresService: VendedoresService) { }
 
   ngOnInit(): void {
     this.vendedores = this.formBuilder.group({
@@ -36,6 +38,8 @@ export class VendedoresComponent implements OnInit {
 
   onSubmit(){
     console.log(this.vendedores.value);
+    this.vendedoresService.setVendedores(this.vendedores.value);
+
   }
 
   hideButton(){

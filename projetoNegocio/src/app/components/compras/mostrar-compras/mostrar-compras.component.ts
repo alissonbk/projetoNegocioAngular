@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Compra } from 'src/app/models/compra';
+import { ComprasService } from 'src/app/services/compras.service';
 
 @Component({
   selector: 'app-mostrar-compras',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MostrarComprasComponent implements OnInit {
 
-  constructor() { }
+  data!: Array<Compra>;
+  constructor(private comprasService: ComprasService) { }
 
   ngOnInit(): void {
+    this.data = this.comprasService.getCompras();
   }
 
 }

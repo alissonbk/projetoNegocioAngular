@@ -1,4 +1,62 @@
-<p>produtos works!</p>
+<div class="d-flex justify-content-center">
+    <div class="clientesContainer d-flex justify-content-center">
+        <form class="form-horizontal" [formGroup]="produtos" (ngSubmit)="onSubmit()">
+            <div class="container mt-5">
+                <div class="title">
+                    Produtos
+                </div>
+                <div class="subtitle">
+                    Faça o cadastro de um produto.
+                </div>
+    
+                <div class="afterTitle">
+                    <div class="row d-flex justify-content-left mt-5">
+                        <div class="form-group col-md-8">
+                            <label for="descricao" class="label">Nome / Descricao</label>
+                            <input class="form-control input" type="text" name="descricao" id="descricao" formControlName="descricao"/>
+                        </div>
+                    </div>
+                   
+                    <div class="row d-flex justify-content-left mt-5">
+                        <div class="form-group col-md-6">
+                            <label for="marca" class="label">Marca</label>
+                            <input class="form-control input" type="text" name="marca" id="marca" formControlName="marca" required />
+                        </div>
+                    </div>
+                   
+                    <div class="row d-flex justify-content-left mt-5">
+                        <div class="form-group col-md-6">
+                            <label for="preco" class="label">Preço</label>
+                            <input class="form-control input" type="preco" name="preco" id="preco" formControlName="preco" required />
+                        </div>
+                    </div>
+
+                </div>
+                
+               
+                
+        
+                <!-- SUBMIT -->
+                <div class="row d-flex justify-content-left mt-5 mb-1">
+                    <div class="form-group col-md-2">
+                        <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
+                    </div>
+                    <div class="form-group col-md-2" *ngIf="!hideBtn">
+                        <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Mostrar Todos</button>
+                    </div>
+
+                    <div class="form-group col-md-2" *ngIf="hideBtn">
+                        <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Esconder</button>
+                    </div>
+                </div>  
+            </div>
+        </form>
+    </div>
+</div>
 
 
-<router-outlet></router-outlet>
+
+<div class="mostrarProdutos">
+    <router-outlet></router-outlet>
+</div>
+

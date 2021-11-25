@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Vendedor } from 'src/app/models/vendedor';
+import { VendedoresService } from 'src/app/services/vendedores.service';
 
 @Component({
   selector: 'app-mostrar-vendedores',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MostrarVendedoresComponent implements OnInit {
 
-  constructor() { }
+  data!: Array<Vendedor>;
+
+  constructor(private vendedoresService: VendedoresService) { }
 
   ngOnInit(): void {
+    this.data = this.vendedoresService.getVendedores();
   }
 
 }
