@@ -18,16 +18,17 @@ export class FormValidations{
     }
 
     static cpfValidator(control: FormControl){
-        const numeroCpf = control.value;
+        let numeroCpf = control.value;
         if(numeroCpf && numeroCpf != ''){
+            numeroCpf = numeroCpf.replace(/[^\d]/g, "");
             return cpf.isValid(numeroCpf) ? null : { cpfInvalido: true };
         }
         return null;
     }
     static cepValidator(control: FormControl) {
-        const cep = control.value;
+        let cep = control.value;
         if (cep && cep !== '') {
-            cep.replace(/-/, '');
+            cep = cep.replace(/[^\d]/g, "");
             const validacep = /^[0-9]{8}$/;
             return validacep.test(cep) ? null : { cepInvalido : true };
         }

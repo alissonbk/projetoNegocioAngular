@@ -42,7 +42,7 @@ export class ClientesComponent implements OnInit {
     this.clientes.get('endereco.cep')?.statusChanges
     .pipe(
       distinctUntilChanged(),
-      tap(value => console.log(value)),
+      //tap(value => console.log(value)),
       switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.clientes.get('endereco.cep')?.value)
         : EMPTY)
       ).subscribe(dados => dados ? this.populaForm(dados) : { });
