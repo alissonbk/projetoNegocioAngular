@@ -1,1 +1,158 @@
-<p>pesquisa-cliente works!</p>
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-sm-12 col-xs-12">
+                            <form class="form-horizontal pull-right">
+                                <div class="form-group">
+                                    <label>Show : </label>
+                                    <select class="form-control">
+                                        <option>5</option>
+                                        <option>10</option>
+                                        <option>15</option>
+                                        <option>20</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>CPF</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>View</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                <tr *ngFor="let c of data?.clientes">
+                                    <td>
+                                        <ul class="action-list">
+                                            <li><a href="#" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></li>
+                                            <li><a href="#" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a></li>
+                                        </ul>
+                                    </td>
+                                    <td>{{ c.nome }}</td>
+                                    <td>{{ c.email }}</td>
+                                    <td>{{ c.cpf }}</td>
+                                    <td>{{ c.endereco.cidade }}</td>
+                                    <td>{{ c.endereco.estado }}</td>
+                                    <td><a href="#" class="btn btn-sm btn-success"><i class="bi bi-search"></i></a></td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6 col-xs-6">showing <b>5</b> out of <b>25</b> entries</div>
+                        <div class="col-sm-6 col-xs-6">
+                            <ul class="pagination visible-xs pull-right">
+                                <li><a href="#">«</a></li>
+                                <li><a href="#">»</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div *ngFor="let c of data.clientes">
+    <pre>
+        {{ c | json}}
+    </pre>
+    
+</div> -->
+<div class="card text-white myFilter">
+    <div class="card-body">
+        <div class="row mt-4">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <p>Filtros</p>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <input type="text" class="form-control" [(ngModel)]="queryNome" placeholder="Buscar por nomes ..."
+                                (ngModelChange)="loadClientes()">
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <input type="text" class="form-control" [(ngModel)]="queryCPF" placeholder="Buscar por CPF ..."
+                                (ngModelChange)="loadClientes()">
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <select class="form-control" id="estado" placeholder="Selecione o estado" (ngModelChange)="loadClientes()">
+                            <option *ngFor="let e of queryEstado" [value]="e.sigla">{{ e.nome }}</option>
+                    </select>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <input type="text" class="form-control" [(ngModel)]="queryCidade" placeholder="Buscar por Cidade ..."
+                                (ngModelChange)="loadClientes()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table myTable">
+    <thead class="thead-dark">
+    <tr>
+        <th class="cursor-pointer w-170p">Action</th>
+        <th class="cursor-pointer w-170p">
+            Nome
+        </th>
+        <th class="cursor-pointer w-170p">
+            Email
+        </th>
+        <th class="cursor-pointer w-170p">
+            CPF
+        </th>
+        <th class="cursor-pointer w-170p">
+            CEP
+        </th>
+        <th class="cursor-pointer w-170p">
+            Rua
+        </th>
+        <th class="cursor-pointer w-170p">
+            Número
+        </th>
+        <th class="cursor-pointer w-170p">
+            Bairro
+        </th>
+        <th class="cursor-pointer w-170p">
+            Cidade
+        </th>
+        <th class="cursor-pointer w-170p">
+            Estado
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of (data?.clientes)" class="cursor-pointer">
+            <td>
+                <ul class="action-list">
+                    <li><a href="#" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></li>
+                    <li><a href="#" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a></li>
+                </ul>
+            </td>
+            <td>{{c.nome}}</td>
+            <td>{{c.email}}</td>
+            <td>{{c.cpf}}</td>
+            <td>{{c.endereco.cep}}</td>
+            <td>{{c.endereco.rua}}</td>
+            <td>{{c.endereco.numero}}</td>
+            <td>{{c.endereco.bairro}}</td>
+            <td>{{c.endereco.cidade}}</td>
+            <td>{{c.endereco.estado}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,47 @@
+{
+    "clientes":[
+        {
+            "id": 1,
+            "nome": "Joao Alvez",
+            "cpf": "18009851000",
+            "email": "joao@email.com",
+            "endereco":{
+                "cep": "69915738",
+                "rua": "Avenida Iáco",
+                "numero": "999",
+                "bairro": "Portal da Amazônia",
+                "cidade": "Rio Branco",
+                "estado": "AC"
+            }
+        },
+        {
+            "id": 2,
+            "nome": "Jorge Francisco Novaes",
+            "cpf": "17129722789",
+            "email": "jorge@email.com",
+            "endereco":{
+                "cep": "67146011",
+                "rua": "Quadra Onze",
+                "numero": "438",
+                "bairro": "Maguari",
+                "cidade": "Ananindeua",
+                "estado": "PA"
+            }
+        },
+        {
+            "id": 3,
+            "nome": "Pedro Breno Arthur Lima",
+            "cpf": "61919680942",
+            "email": "pedrobrenoarthurlima-74@engeco.com.br",
+            "endereco":{
+                "cep": "96203400",
+                "rua": "Rua Pedro Rocha Andrade",
+                "numero": "409",
+                "bairro": "Vila Maria",
+                "cidade": "Rio Grande",
+                "estado": "RS"
+            }
+        }
+    ]
+
+}

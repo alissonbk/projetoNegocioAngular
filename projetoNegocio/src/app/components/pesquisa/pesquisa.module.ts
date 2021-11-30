@@ -6,6 +6,8 @@ import { PesquisaRoutingModule } from './pesquisa.routing.module';
 import { PesquisaCompraComponent } from './pesquisa-compra/pesquisa-compra.component';
 import { PesquisaProdutoComponent } from './pesquisa-produto/pesquisa-produto.component';
 import { PesquisaVendedorComponent } from './pesquisa-vendedor/pesquisa-vendedor.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -19,7 +21,10 @@ import { PesquisaVendedorComponent } from './pesquisa-vendedor/pesquisa-vendedor
   ],
   imports: [
     CommonModule,
-    PesquisaRoutingModule
+    PesquisaRoutingModule,
+    FormsModule,
+    NgxPaginationModule,
+    ReactiveFormsModule
   ]
 })
 export class PesquisaModule { }
