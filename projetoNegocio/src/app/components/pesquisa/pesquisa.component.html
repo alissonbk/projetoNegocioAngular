@@ -1,1 +1,48 @@
-<p>pesquisa works!</p>
+<div class="d-flex justify-content-center">
+    <div class="pesquisaContainer">
+        <div>
+            <div class="container mt-5">
+                <div class="title row">
+                    Pesquisa
+                </div>
+                <div class="subtitle row">
+                    Oque você deseja pesquisar?
+                </div>
+    
+                <!-- <div class="afterTitle">
+                    <div class="row">
+                        <div class="col-md-1 d-flex justify-content-center">
+                            <a href=""><button type="button" class="btn btn-pesquisar">Cliente</button></a>
+                        </div>
+                        <div class="col-md-11 d-flex justify-content-center">
+                            <a href=""><button type="button" class="btn btn-pesquisar">Compra</button></a>
+                        </div>
+                    </div>
+
+                    <div class="row second-row">
+                        <div class="col-md-1 d-flex justify-content-center">
+                            <a href=""><button type="button" class="btn btn-pesquisar">Vendedor</button></a>
+                        </div>
+                        <div class="col-md-11 d-flex justify-content-center">
+                            <a href=""><button type="button" class="btn btn-pesquisar">Produto</button></a>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="afterTitle">
+                    <a href="../pesquisa/pesquisaCliente"><button type="button" class="btn btn-pesquisar">Cliente</button></a>
+                    <a href="../pesquisa/pesquisaProduto"><button type="button" class="btn btn-pesquisar">Produto </button></a>
+                    <br>
+                    <a href="../pesquisa/pesquisaCompra"><button type="button" class="btn btn-pesquisar">Compra</button></a>
+                    <a href="../pesquisa/pesquisaVendedor"><button type="button" class="btn btn-pesquisar">Vendedor</button></a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="mostrarPesquisa">
+    <router-outlet></router-outlet>
+</div>
+

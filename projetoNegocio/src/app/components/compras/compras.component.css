@@ -10,7 +10,8 @@
     border: solid rgba(255, 255, 255, 0.418);
 }
 .afterTitle{
-  margin-top: -2.3em;
+  margin-top: -2em;
+  margin-left: -5em;
 }
 
 .label{
@@ -18,7 +19,7 @@
 }
 
 .submit{
-  margin-left: 20em;
+  margin-left: 15em;
   background-color: rgba(26, 226, 0, 0.562);
   border-radius: 12px;
   border: 0;
@@ -38,7 +39,7 @@
 }
 
 .mostrar{
-  margin-left: 2em;
+  margin-left: -3em;
   background-color: #08b;
   border-radius: 12px;
   border: 0;
@@ -64,7 +65,7 @@
   font-size: 36px;
   font-weight: 600;
   margin-top: -1.9em;
-  margin-left: 6.4em;
+  margin-left: 3.4em;
 }
 
 .subtitle {
@@ -72,7 +73,7 @@
   font-family: sans-serif;
   font-size: 16px;
   font-weight: 600;
-  margin-left: 14em;
+  margin-left: 7.5em;
   margin-bottom: 3em;
 }
 

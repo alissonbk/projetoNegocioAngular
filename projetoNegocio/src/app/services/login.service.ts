@@ -8,10 +8,9 @@ export class LoginService {
   constructor() { }
 
   login(user: any){
-    console.log('login service!')
     return new Promise((resolve) => {
       window.localStorage.setItem('token', 'meu-token');
-      console.log('promise login ativado')
+      // console.log('promise login ativado')
     });
   }
 }

@@ -5,10 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PaginaNaoEncontradaComponent } from './components/pagina-nao-encontrada/pagina-nao-encontrada.component';
-import { PesquisaComponent } from './components/pesquisa/pesquisa.component';
-import { HeaderComponent } from './components/shared/header/header.component';
 import { AuthGuard } from './guards/auth.guard';
-import { ClientesGuard } from './guards/clientes.guard';
 
 const routes: Routes = [
   
@@ -18,14 +15,15 @@ const routes: Routes = [
   {path: 'vendedores', 
     loadChildren: ()=> import('./components/vendedores/vendedores.module').then(m=> m.VendedoresModule), canActivate: [AuthGuard]
     },
-  {path: 'produtos', 
+  {path: 'produtos',
     loadChildren: ()=> import('./components/produtos/produtos.module').then(m=> m.ProdutosModule), canActivate: [AuthGuard]
     },
-  {path: 'compras', 
+  {path: 'compras',
     loadChildren: ()=> import('./components/compras/compras.module').then(m=> m.ComprasModule), canActivate: [AuthGuard]
     },
+  {path: 'pesquisa', 
+  loadChildren: ()=> import('./components/pesquisa/pesquisa.module').then(m=> m.PesquisaModule), canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'pesquisa', component: PesquisaComponent, canActivate: [AuthGuard]},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo:'home', pathMatch:'full'},
   {path: '**', component: PaginaNaoEncontradaComponent}
