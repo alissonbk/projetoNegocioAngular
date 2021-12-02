@@ -1,0 +1,19 @@
+{
+    "compras":[
+        {
+            "cliente": "Ana Lúcia",
+            "vendedor": "Alisson",
+            "produto": "Abajur"
+        },
+        {
+            "cliente": "Mauro",
+            "vendedor": "Carlos",
+            "produto": "Balcão"
+        },
+        {
+            "cliente": "Teste",
+            "vendedor": "Teste",
+            "produto": "Teste"
+        }
+    ]
+}

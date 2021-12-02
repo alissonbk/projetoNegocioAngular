@@ -1,11 +1,16 @@
-import { Injectable } from "@angular/core";
-
-
-import { Cliente } from "../models/cliente";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import {catchError, tap} from "rxjs/operators";import { Cliente } from '../models/cliente';
+import { AbstractService } from './abstract.service';
 
 @Injectable({providedIn: 'root'})
 
-export class ClientesService {
+export class ClientesService extends AbstractService {
+
+  constructor(http: HttpClient) {
+    super(http);
+ }
 
   private clientes: Array<Cliente> = new Array();
 
@@ -13,10 +18,15 @@ export class ClientesService {
     this.clientes.push(value);
   }
 
-  getClientes(): Array<Cliente>{
+  // getClientes(): Array<Cliente>{
     
-    return this.clientes;
-    
-    //return of(); //para não retornar undefined
+  //   return this.clientes;
+  //   //return of(); //para não retornar undefined
+  // }
+  getClientes(): Observable<any[]>{
+    return this.http.get<any[]>('assets/mockCliente.json').pipe(
+        tap(console.log),
+        catchError(this.handleError)
+    );
   }
 }

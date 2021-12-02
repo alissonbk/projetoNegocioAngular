@@ -11,15 +11,24 @@ import { Cliente } from 'src/app/models/cliente';
 })
 export class MostrarClientesComponent implements OnInit {
 
-  data!: Array<Cliente>;
+  data: any;
 
   constructor(private clientesService: ClientesService) { }
 
   ngOnInit(): void {
-    this.data = this.clientesService.getClientes();
+    this.loadClientes();
 
     // this.clienteService.emitirCliente.subscribe( cliente => console.log("emiiter", cliente));
     console.log("Mostrar data: ", this.data);
+  }
+
+
+  loadClientes(){
+    this.clientesService.getClientes().subscribe((clientes:any) => {
+      this.data = clientes;
+      console.log("data= ",this.data);
+    })
+    
   }
 
 }

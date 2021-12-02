@@ -1,11 +1,17 @@
-import { Injectable } from "@angular/core";
-
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import {catchError, tap} from "rxjs/operators";
 import { Vendedor } from '../models/vendedor';
+import { AbstractService } from './abstract.service';
 
 @Injectable({providedIn: 'root'})
 
-export class VendedoresService {
+export class VendedoresService extends AbstractService {
+
+  constructor(http: HttpClient){
+    super(http)
+  }
 
   private vendedores: Array<Vendedor> = new Array();
 
@@ -13,10 +19,10 @@ export class VendedoresService {
     this.vendedores.push(value);
   }
 
-  getVendedores(): Array<Vendedor>{
-    
-    return this.vendedores;
-    
-    //return of(); //para não retornar undefined
+  getVendedores(): Observable<any[]>{
+    return this.http.get<any[]>('assets/mockVendedores.json').pipe(
+        tap(console.log),
+        catchError(this.handleError)
+    );
   }
 }

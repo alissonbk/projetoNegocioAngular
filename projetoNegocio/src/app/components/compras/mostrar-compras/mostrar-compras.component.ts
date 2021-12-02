@@ -9,11 +9,19 @@ import { ComprasService } from 'src/app/services/compras.service';
 })
 export class MostrarComprasComponent implements OnInit {
 
-  data!: Array<Compra>;
+  data: any;
   constructor(private comprasService: ComprasService) { }
 
   ngOnInit(): void {
-    this.data = this.comprasService.getCompras();
+    this.loadCompras();
+  }
+
+
+  loadCompras(){
+    this.comprasService.getCompras().subscribe((compras: any) =>{
+      this.data = compras;
+      console.log("data =", this.data);
+    })
   }
 
 }

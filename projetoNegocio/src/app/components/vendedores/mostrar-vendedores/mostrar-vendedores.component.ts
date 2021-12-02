@@ -9,12 +9,21 @@ import { VendedoresService } from 'src/app/services/vendedores.service';
 })
 export class MostrarVendedoresComponent implements OnInit {
 
-  data!: Array<Vendedor>;
+  data: any;
 
   constructor(private vendedoresService: VendedoresService) { }
 
   ngOnInit(): void {
-    this.data = this.vendedoresService.getVendedores();
+    this.loadVendedores();
+  }
+
+  loadVendedores(){
+    this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
+      this.data = vendedores;
+      console.log("data= ",this.data);
+    })
+
+    
   }
 
 }

@@ -23,6 +23,7 @@ export class VendedoresComponent implements OnInit {
       nome: [null, Validators.required],
       cpf: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      senha: [null, [Validators.required]],
       endereco: this.formBuilder.group({
         cep: [null, Validators.required],
         numero: [null, Validators.required],
