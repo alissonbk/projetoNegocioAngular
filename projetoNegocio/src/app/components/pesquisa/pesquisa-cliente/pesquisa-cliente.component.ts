@@ -11,7 +11,6 @@ import { PesquisaService } from 'src/app/services/pesquisa.service';
 export class PesquisaClienteComponent implements OnInit {
 
   data: any;
-  clientes = [];
   queryNome!: string;
   queryCPF!: string;
   queryEstado!: EstadoBr[];

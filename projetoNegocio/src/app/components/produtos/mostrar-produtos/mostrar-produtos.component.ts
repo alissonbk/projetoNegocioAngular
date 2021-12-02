@@ -9,11 +9,18 @@ import { ProdutosService } from 'src/app/services/produtos.service';
 })
 export class MostrarProdutosComponent implements OnInit {
 
-  data!: Array<Produto>;
+  data: any;
   constructor(private produtosService: ProdutosService) { }
 
   ngOnInit(): void {
-    this.data = this.produtosService.getProdutos();
+    this.loadProdutos();
+  }
+
+  loadProdutos(){
+    this.produtosService.getProdutos().subscribe((produtos: any) => {
+      this.data = produtos;
+      console.log("data: ", this.data);
+    })
   }
 
 }

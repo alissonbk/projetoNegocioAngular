@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ComprasService } from 'src/app/services/compras.service';
 
 @Component({
   selector: 'app-pesquisa-compra',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PesquisaCompraComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+  queryCliente!: string;
+  queryVendedor!: string;
+  queryProduto!: string;
+
+  constructor(private comprasService: ComprasService) { }
 
   ngOnInit(): void {
+    this.loadCompras();
+  }
+
+
+  loadCompras(){
+    this.comprasService.getCompras().subscribe((compras:any) =>{
+      this.data = compras;
+      console.log("data : ", this.data);
+    })
   }
 
 }

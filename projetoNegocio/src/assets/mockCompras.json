@@ -1,19 +1,111 @@
 {
     "compras":[
         {
-            "cliente": "Ana Lúcia",
-            "vendedor": "Alisson",
-            "produto": "Abajur"
+            "cliente": {
+                "id": 1,
+                "nome": "Joao Alvez",
+                "cpf": "18009851000",
+                "email": "joao@email.com",
+                "endereco":{
+                    "cep": "69915738",
+                    "rua": "Avenida Iáco",
+                    "numero": "999",
+                    "bairro": "Portal da Amazônia",
+                    "cidade": "Rio Branco",
+                    "estado": "AC"
+                }
+            },
+            "vendedor": {
+                "id": 1,
+                "nome": "Carlos Novaes",
+                "cpf": "18009851000",
+                "email": "joao@email.com",
+                "endereco":{
+                    "cep": "69915738",
+                    "rua": "Avenida Iáco",
+                    "numero": "999",
+                    "bairro": "Portal da Amazônia",
+                    "cidade": "Rio Branco",
+                    "estado": "AC"
+                }
+            },
+            "produto": {
+                "descricao":"Cama",
+                "marca": "King",
+                "preco": "1200.00"
+            }
         },
+        
         {
-            "cliente": "Mauro",
-            "vendedor": "Carlos",
-            "produto": "Balcão"
+            "cliente": {
+                "id": 2,
+                "nome": "Jorge Francisco Novaes",
+                "cpf": "17129722789",
+                "email": "jorge@email.com",
+                "endereco":{
+                    "cep": "67146011",
+                    "rua": "Quadra Onze",
+                    "numero": "438",
+                    "bairro": "Maguari",
+                    "cidade": "Ananindeua",
+                    "estado": "PA"
+                }
+            },
+            "vendedor": {
+                "id": 3,
+                "nome": "Breno Eduardo Pietro Teixeira",
+                "cpf": "55149346756",
+                "email": "brenoeduardopietroteixeira-80@distribuidorapetfarm.com.br",
+                "endereco":{
+                    "cep": "76900057",
+                    "rua": "Avenida Marechal Rondon",
+                    "numero": "988",
+                    "bairro": "Centro",
+                    "cidade": "Ji-Paraná",
+                    "estado": "RO"
+                }
+            },    
+            "produto": {
+                "descricao":"Balcão",
+                "marca": "Henn",
+                "preco": "485.49"
+            }
         },
+
         {
-            "cliente": "Teste",
-            "vendedor": "Teste",
-            "produto": "Teste"
+            "cliente": {
+                "id": 2,
+                "nome": "Jorge Francisco Novaes",
+                "cpf": "17129722789",
+                "email": "jorge@email.com",
+                "endereco":{
+                    "cep": "67146011",
+                    "rua": "Quadra Onze",
+                    "numero": "438",
+                    "bairro": "Maguari",
+                    "cidade": "Ananindeua",
+                    "estado": "PA"
+                }
+            },
+            "vendedor": {
+                "id": 3,
+                "nome": "Breno Eduardo Pietro Teixeira",
+                "cpf": "55149346756",
+                "email": "brenoeduardopietroteixeira-80@distribuidorapetfarm.com.br",
+                "endereco":{
+                    "cep": "76900057",
+                    "rua": "Avenida Marechal Rondon",
+                    "numero": "988",
+                    "bairro": "Centro",
+                    "cidade": "Ji-Paraná",
+                    "estado": "RO"
+                }
+            },
+            "produto":  {
+                "descricao":"Sofa",
+                "marca": "Daf",
+                "preco": "899.99"
+            }
         }
     ]
 }

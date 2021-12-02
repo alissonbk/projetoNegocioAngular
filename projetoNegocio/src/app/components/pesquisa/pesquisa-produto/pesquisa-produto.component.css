@@ -1,0 +1,27 @@
+.w-170p {
+    width: 170px;
+}
+.myFilter{
+    margin-top: 3em;
+    background-color: rgba(199, 196, 226, 0.199); 
+}
+.myTable{
+    margin-top: 1.5rem;
+    background-color: rgba(199, 196, 226, 0.199);
+    /* background-color: #15172b; */
+    color: white;
+}
+
+.action-list li{
+    list-style: none;
+    display: inline;
+    margin-right: 1.3em;
+}
+tr{
+    text-align: center;
+}
+
+td{
+    vertical-align: middle;
+    margin-top: 3em;
+}

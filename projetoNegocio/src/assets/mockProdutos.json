@@ -1,0 +1,19 @@
+{
+    "produtos":[
+        {
+            "descricao":"Cama",
+            "marca": "King",
+            "preco": "1200.00"
+        },
+        {
+            "descricao":"Sofa",
+            "marca": "Daf",
+            "preco": "899.99"
+        },
+        {
+            "descricao":"Balcão",
+            "marca": "Henn",
+            "preco": "485.49"
+        }
+    ]
+}

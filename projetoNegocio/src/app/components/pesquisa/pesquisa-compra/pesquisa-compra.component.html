@@ -1,1 +1,60 @@
-<p>pesquisa-compra works!</p>
+<div class="card text-white myFilter">
+    <div class="card-body">
+        <div class="row mt-4">
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <p>Filtros</p>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <input type="text" class="form-control" [(ngModel)]="queryCliente" placeholder="Buscar por nomes ..."
+                                (ngModelChange)="loadCompras()">
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <input type="text" class="form-control" [(ngModel)]="queryVendedor" placeholder="Buscar por CPF ..."
+                                (ngModelChange)="loadCompras()">
+            </div>
+<!-- 
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <select class="form-control" id="estado" placeholder="Selecione o estado" (ngModelChange)="loadCompras()()">
+                            <option *ngFor="let e of queryProduto" [value]="e.sigla">{{ e.nome }}</option>
+                    </select>
+            </div> -->
+
+            <div class="col-lg-2 col-md-2 col-sm-2">
+                <input type="text" class="form-control" [(ngModel)]="queryProduto" placeholder="Buscar por Cidade ..."
+                                (ngModelChange)="loadCompras()">
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table myTable">
+    <thead class="thead-dark">
+    <tr>
+        <th class="cursor-pointer w-170p">Action</th>
+        <th class="cursor-pointer w-170p">
+            Cliente
+        </th>
+        <th class="cursor-pointer w-170p">
+            Vendedor
+        </th>
+        <th class="cursor-pointer w-170p">
+            Produto
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of (data?.compras)" class="cursor-pointer">
+            <td>
+                <ul class="action-list">
+                    <li><a href="#" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></li>
+                    <li><a href="#" class="btn btn-danger"><i class="bi bi-trash-fill"></i></a></li>
+                </ul>
+            </td>
+            <td>{{c.cliente.nome}}</td>
+            <td>{{c.vendedor.nome}}</td>
+            <td>{{c.produto.descricao}}</td>
+        </tr>
+    </tbody>
+</table>

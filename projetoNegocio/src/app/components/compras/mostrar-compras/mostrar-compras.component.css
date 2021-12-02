@@ -23,5 +23,6 @@ tr{
 }
 
 td{
+    vertical-align: middle;
     margin-top: 3em;
 }
