@@ -13,21 +13,30 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="cliente" class="label">Cliente</label>
-                            <input class="form-control input" type="text" name="cliente" id="cliente" formControlName="cliente"/>
+                            <input class="form-control input" type="text" name="cliente" id="cliente" formControlName="cliente" [ngClass]="cssErro('vendedor')"/>
+                            <div class="erroValidacao">
+                                <app-msg-erro [control]="$any(compras.get('cliente'))" label="Cliente"></app-msg-erro>
+                            </div>
                         </div>
                     </div>
                    
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="produto" class="label">Produto</label>
-                            <input class="form-control input" type="text" name="produto" id="produto" formControlName="produto" required />
+                            <input class="form-control input" type="text" name="produto" id="produto" formControlName="produto" [ngClass]="cssErro('vendedor')"/>
+                            <div class="erroValidacao">
+                                <app-msg-erro [control]="$any(compras.get('produto'))" label="Produto"></app-msg-erro>
+                            </div>
                         </div>
                     </div>
                    
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="vendedor" class="label">Vendedor</label>
-                            <input class="form-control input" type="vendedor" name="vendedor" id="vendedor" formControlName="vendedor" required />
+                            <input class="form-control input" type="vendedor" name="vendedor" id="vendedor" formControlName="vendedor" [ngClass]="cssErro('vendedor')"/>
+                            <div class="erroValidacao">
+                                <app-msg-erro [control]="$any(compras.get('vendedor'))" label="Vendedor"></app-msg-erro>
+                            </div>
                         </div>
                     </div>
 
@@ -37,7 +46,7 @@
                 
         
                 <!-- SUBMIT -->
-                <div class="row d-flex justify-content-left mt-5 mb-1">
+                <div class="row d-flex justify-content-left mt-4 mb-1">
                     <div class="form-group col-md-2">
                         <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
                     </div>

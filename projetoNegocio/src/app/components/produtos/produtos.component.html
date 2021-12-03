@@ -13,21 +13,30 @@
                     <div class="row d-flex justify-content-left mt-5">
                         <div class="form-group col-md-8">
                             <label for="descricao" class="label">Nome / Descricao</label>
-                            <input class="form-control input" type="text" name="descricao" id="descricao" formControlName="descricao"/>
+                            <input class="form-control input" type="text" name="descricao" id="descricao" formControlName="descricao" [ngClass]="cssErro('descricao')"/>
+                            <div class="erroValidacao">
+                                <app-msg-erro [control]="$any(produtos.get('descricao'))" label="Descricao"></app-msg-erro>
+                            </div>
                         </div>
                     </div>
                    
                     <div class="row d-flex justify-content-left mt-5">
                         <div class="form-group col-md-6">
                             <label for="marca" class="label">Marca</label>
-                            <input class="form-control input" type="text" name="marca" id="marca" formControlName="marca" required />
+                            <input class="form-control input" type="text" name="marca" id="marca" formControlName="marca" required [ngClass]="cssErro('marca')" />
+                            <div class="erroValidacao">
+                                <app-msg-erro [control]="$any(produtos.get('marca'))" label="Marca"></app-msg-erro>
+                            </div>
                         </div>
                     </div>
                    
                     <div class="row d-flex justify-content-left mt-5">
                         <div class="form-group col-md-6">
                             <label for="preco" class="label">Preço</label>
-                            <input class="form-control input" type="preco" name="preco" id="preco" formControlName="preco" required />
+                            <input class="form-control input" type="preco" name="preco" id="preco" formControlName="preco" required [ngClass]="cssErro('preco')" />
+                            <div class="erroValidacao">
+                                <app-msg-erro [control]="$any(produtos.get('preco'))" label="Preço"></app-msg-erro>
+                            </div>
                         </div>
                     </div>
 

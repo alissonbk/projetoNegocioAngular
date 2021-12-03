@@ -42,7 +42,23 @@ export class ComprasComponent implements OnInit {
     }else{
       this.route.navigate(['/compras']);
     }
-    
+  }
+
+
+
+  verificaValidTouched(campo: string){
+    //return !this.formulario.controls[campo].valid && this.formulario.controls[campo].touched;
+    return (
+      !this.compras.get(campo)?.valid &&
+      (this.compras.get(campo)?.touched || this.compras.get(campo)?.dirty)
+      );
+  }
+
+
+  cssErro(campo: string){
+    return {
+      'is-invalid': this.verificaValidTouched(campo)
+    }
   }
 
 }

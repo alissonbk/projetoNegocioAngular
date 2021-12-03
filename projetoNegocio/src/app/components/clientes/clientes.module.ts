@@ -6,19 +6,20 @@ import { ClientesRoutingModule } from './clientes.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MsgErroComponent } from '../shared/msg-erro/msg-erro.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MsgErroModule } from '../shared/msg-erro/msg-erro.module';
 
 
 
 @NgModule({
   declarations: [
     ClientesComponent,
-    MostrarClientesComponent,
-    MsgErroComponent
+    MostrarClientesComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MsgErroModule,
     ClientesRoutingModule
   ]
 })

@@ -4,6 +4,7 @@ import { ProdutosComponent } from './produtos.component';
 import { MostrarProdutosComponent } from './mostrar-produtos/mostrar-produtos.component';
 import { ProdutosRoutingModule } from './produtos.routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MsgErroModule } from '../shared/msg-erro/msg-erro.module';
 
 
 
@@ -15,6 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
+    MsgErroModule,
     ReactiveFormsModule,
     ProdutosRoutingModule
   ]

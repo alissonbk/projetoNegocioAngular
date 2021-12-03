@@ -11,6 +11,7 @@ import { PaginaNaoEncontradaModule } from './components/pagina-nao-encontrada/pa
 import { PesquisaModule } from './components/pesquisa/pesquisa.module';
 import { HeaderModule } from './components/shared/header/header.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MsgErroModule } from './components/shared/msg-erro/msg-erro.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     PesquisaModule,
     HeaderModule,
     HttpClientModule,
+    MsgErroModule,
     AppRoutingModule
   ],
   providers: [],

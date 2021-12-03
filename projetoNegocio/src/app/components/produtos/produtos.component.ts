@@ -22,7 +22,7 @@ export class ProdutosComponent implements OnInit {
     this.produtos = this.formBuilder.group({
       descricao: [null, Validators.required],
       marca: [null, Validators.required],
-      preco: [null, [Validators.required, Validators.email]]
+      preco: [null, [Validators.required]]
     })
   }
 
@@ -40,7 +40,22 @@ export class ProdutosComponent implements OnInit {
     }else{
       this.route.navigate(['/produtos']);
     }
-    
   }
+
+  verificaValidTouched(campo: string){
+    //return !this.formulario.controls[campo].valid && this.formulario.controls[campo].touched;
+    return (
+      !this.produtos.get(campo)?.valid &&
+      (this.produtos.get(campo)?.touched || this.produtos.get(campo)?.dirty)
+      );
+  }
+
+
+  cssErro(campo: string){
+    return {
+      'is-invalid': this.verificaValidTouched(campo)
+    }
+  }
+
 
 }

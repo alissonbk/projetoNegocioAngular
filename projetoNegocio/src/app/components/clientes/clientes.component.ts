@@ -27,7 +27,7 @@ export class ClientesComponent implements OnInit {
     // FORMULARIO
     this.clientes = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
-      cpf: [null, [Validators.required, FormValidations.cpfValidator]],
+      cpf: [null, [Validators.required, FormValidations.cpfValidator] ],
       email: [null, [Validators.required, Validators.email]],
       endereco: this.formBuilder.group({
         cep: [null, [Validators.required, FormValidations.cepValidator]],
@@ -45,7 +45,7 @@ export class ClientesComponent implements OnInit {
       //tap(value => console.log(value)),
       switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.clientes.get('endereco.cep')?.value)
         : EMPTY)
-      ).subscribe(dados => dados ? this.populaForm(dados) : { });
+      ).subscribe(dados => dados ? this.populaFormCep(dados) : { });
 
   }
 
@@ -84,7 +84,7 @@ export class ClientesComponent implements OnInit {
   }
 
 
-  populaForm(dados: any){
+  populaFormCep(dados: any){
     this.clientes.patchValue({
       "endereco": {
         "rua": dados.logradouro,
