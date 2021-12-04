@@ -13,16 +13,10 @@ export class ComprasService extends AbstractService{
         super(http)
     }
 
-    private compras!: Array<any>;
-
-    setCompras(value: any){
-        this.compras.push(value);
+    cadastrarCompra(value: any){
+        this.http.post(`${this.API_URL}/api/compras`, value);
     }
-
-    // getCompras(): Array<Compra>{
-    //     return this.compras;
-    // }
-
+    
     getCompras(): Observable<any[]>{
         return this.http.get<any[]>('assets/mockCompras.json').pipe(
             tap(console.log),

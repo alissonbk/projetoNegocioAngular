@@ -16,7 +16,7 @@ import { NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +24,6 @@ import { NgxMaskModule} from 'ngx-mask';
     HomeModule,
     LoginModule,
     PaginaNaoEncontradaModule,
-    PesquisaModule,
     HeaderModule,
     HttpClientModule,
     MsgErroModule,

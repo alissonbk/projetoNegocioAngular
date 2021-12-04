@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EstadoBr } from 'src/app/models/estado-br';
+import { ClientesService } from 'src/app/services/clientes.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
-import { PesquisaService } from 'src/app/services/pesquisa.service';
 
 @Component({
   selector: 'app-pesquisa-cliente',
@@ -17,7 +17,7 @@ export class PesquisaClienteComponent implements OnInit {
   queryCidade!: string;
   
   constructor(
-    private pesquisaService: PesquisaService,
+    private clienteService: ClientesService,
     private dropDownService: DropdownService
     ) {
     // para nunca ser undefined
@@ -33,7 +33,7 @@ export class PesquisaClienteComponent implements OnInit {
 
 
   loadClientes(){
-    this.pesquisaService.getClientes().subscribe((clientes:any) => {
+    this.clienteService.getClientes().subscribe((clientes:any) => {
       this.data = clientes;
       console.log("data= ",this.data);
       console.log("query nome:", this.queryNome);

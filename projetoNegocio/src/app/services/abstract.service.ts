@@ -8,7 +8,7 @@ export class AbstractService {
 
     protected http: HttpClient;
     public headers: HttpHeaders;
-    // public readonly API_URL = environment.apiUrl;
+    public readonly API_URL = environment.apiUrl;
 
     constructor(http: HttpClient) {
         this.http = http;

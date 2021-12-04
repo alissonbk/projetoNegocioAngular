@@ -30,7 +30,8 @@ export class ProdutosComponent implements OnInit {
   onSubmit(){
     // console.log(Object.assign({}, this.clientes.value));
     console.log("form:",this.produtos);
-    this.produtosService.setProdutos(this.produtos.value);
+    this.produtosService.cadastrarProduto(this.produtos.value);
+    this.produtos.reset();
   }
 
   hideButton(){

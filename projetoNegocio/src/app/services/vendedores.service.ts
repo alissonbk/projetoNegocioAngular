@@ -15,8 +15,8 @@ export class VendedoresService extends AbstractService {
 
   private vendedores: Array<Vendedor> = new Array();
 
-  setVendedores(value: any) {
-    this.vendedores.push(value);
+  cadastrarVendedor(value: any) {
+    this.http.post(`${this.API_URL}/api/vendedores`, value);
   }
 
   getVendedores(): Observable<any[]>{

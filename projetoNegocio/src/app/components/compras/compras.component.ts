@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { delay } from 'rxjs/operators';
 import { Compra } from 'src/app/models/compra';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { ComprasService } from 'src/app/services/compras.service';
@@ -51,7 +52,8 @@ export class ComprasComponent implements OnInit {
 
   onSubmit(){
     console.log("form compras:", this.compras);
-    this.comprasService.setCompras(this.compras.value);
+    this.comprasService.cadastrarCompra(this.compras.value);
+    this.compras.reset();
   }
 
 

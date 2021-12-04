@@ -17,16 +17,10 @@ export class ProdutosService extends AbstractService {
     super(http)
   }
 
-  setProdutos(value: any) {
-    this.produtos.push(value);
+  cadastrarProduto(value: any) {
+    this.http.post(`${this.API_URL}/api/produtos`, value);
   }
-
-  // getProdutos(): Array<Produto>{
-    
-  //   return this.produtos;
-    
-  //   //return of(); //para não retornar undefined
-  // }
+  
   getProdutos(): Observable<any[]>{
     return this.http.get<any[]>('assets/mockProdutos.json').pipe(
       tap(console.log),

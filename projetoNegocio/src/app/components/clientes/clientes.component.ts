@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
-import { distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { delay, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { CepService } from 'src/app/services/cep.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { FormValidations } from '../shared/form-validations';
@@ -53,7 +53,8 @@ export class ClientesComponent implements OnInit {
   onSubmit(){
     // console.log(Object.assign({}, this.clientes.value));
     console.log("form:",this.clientes);
-    this.clientesService.setClientes(this.clientes.value);
+    this.clientesService.cadastrarClientes(this.clientes.value);
+    this.clientes.reset();
   }
 
   hideButton(){

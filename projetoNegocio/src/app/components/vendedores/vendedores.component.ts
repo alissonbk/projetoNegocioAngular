@@ -53,7 +53,8 @@ export class VendedoresComponent implements OnInit {
 
   onSubmit(){
     console.log(this.vendedores.value);
-    this.vendedoresService.setVendedores(this.vendedores.value);
+    this.vendedoresService.cadastrarVendedor(this.vendedores.value);
+    this.vendedores.reset();
 
   }
 

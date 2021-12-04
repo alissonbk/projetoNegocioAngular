@@ -10,7 +10,7 @@ import { PesquisaVendedorComponent } from "./pesquisa-vendedor/pesquisa-vendedor
 import { PesquisaComponent } from "./pesquisa.component";
 
 
-const PesquisaRouter: Routes = [
+const routes: Routes = [
     {path: '', component: PesquisaComponent,  canActivateChild: [ClientesGuard],
         children: [
             {path: 'pesquisaCliente', component: PesquisaClienteComponent},
@@ -24,7 +24,7 @@ const PesquisaRouter: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forChild(PesquisaRouter)
+        RouterModule.forChild(routes)
     ],
     exports: [
         RouterModule
