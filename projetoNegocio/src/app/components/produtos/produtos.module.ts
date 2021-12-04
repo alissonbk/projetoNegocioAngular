@@ -1,3 +1,4 @@
+import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProdutosComponent } from './produtos.component';
@@ -18,6 +19,7 @@ import { MsgErroModule } from '../shared/msg-erro/msg-erro.module';
     FormsModule,
     MsgErroModule,
     ReactiveFormsModule,
+    NgxMaskModule.forChild(),
     ProdutosRoutingModule
   ]
 })

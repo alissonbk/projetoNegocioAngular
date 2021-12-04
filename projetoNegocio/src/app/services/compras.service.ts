@@ -13,7 +13,7 @@ export class ComprasService extends AbstractService{
         super(http)
     }
 
-    private compras!: Array<Compra>;
+    private compras!: Array<any>;
 
     setCompras(value: any){
         this.compras.push(value);

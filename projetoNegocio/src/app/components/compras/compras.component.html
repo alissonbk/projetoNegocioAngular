@@ -13,7 +13,10 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="cliente" class="label">Cliente</label>
-                            <input class="form-control input" type="text" name="cliente" id="cliente" formControlName="cliente" [ngClass]="cssErro('vendedor')"/>
+                            <!-- <input class="form-control input" type="text" name="cliente" id="cliente" formControlName="cliente" [ngClass]="cssErro('vendedor')"/> -->
+                            <select class="form-control input" id="cliente" placeholder="Selecione o cliente" formControlName="cliente">
+                                <option *ngFor="let c of clientes?.clientes" [value]="c">{{ c.nome }}</option>
+                            </select>
                             <div class="erroValidacao">
                                 <app-msg-erro [control]="$any(compras.get('cliente'))" label="Cliente"></app-msg-erro>
                             </div>
@@ -23,7 +26,10 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="produto" class="label">Produto</label>
-                            <input class="form-control input" type="text" name="produto" id="produto" formControlName="produto" [ngClass]="cssErro('vendedor')"/>
+                            <!-- <input class="form-control input" type="text" name="produto" id="produto" formControlName="produto" [ngClass]="cssErro('vendedor')"/> -->
+                            <select class="form-control input" id="produto" placeholder="Selecione o produto" formControlName="produto">
+                                <option *ngFor="let p of produtos?.produtos" [value]="p">{{ p.descricao }}</option>
+                            </select>
                             <div class="erroValidacao">
                                 <app-msg-erro [control]="$any(compras.get('produto'))" label="Produto"></app-msg-erro>
                             </div>
@@ -33,7 +39,9 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="vendedor" class="label">Vendedor</label>
-                            <input class="form-control input" type="vendedor" name="vendedor" id="vendedor" formControlName="vendedor" [ngClass]="cssErro('vendedor')"/>
+                            <select class="form-control input" id="vendedor" placeholder="Selecione o vendedor" formControlName="vendedor">
+                                <option *ngFor="let v of vendedores?.vendedores" [value]="v">{{ v.nome }}</option>
+                            </select>
                             <div class="erroValidacao">
                                 <app-msg-erro [control]="$any(compras.get('vendedor'))" label="Vendedor"></app-msg-erro>
                             </div>
@@ -47,8 +55,11 @@
         
                 <!-- SUBMIT -->
                 <div class="row d-flex justify-content-left mt-4 mb-1">
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2" *ngIf="compras.status == 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
+                    </div>
+                    <div class="form-group col-md-2" *ngIf="compras.status != 'VALID'">
+                        <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
                         <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Mostrar Todos</button>

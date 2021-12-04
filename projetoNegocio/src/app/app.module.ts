@@ -12,6 +12,7 @@ import { PesquisaModule } from './components/pesquisa/pesquisa.module';
 import { HeaderModule } from './components/shared/header/header.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MsgErroModule } from './components/shared/msg-erro/msg-erro.module';
+import { NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,9 @@ import { MsgErroModule } from './components/shared/msg-erro/msg-erro.module';
     HeaderModule,
     HttpClientModule,
     MsgErroModule,
+    NgxMaskModule.forRoot({
+      dropSpecialCharacters: true
+    }),
     AppRoutingModule
   ],
   providers: [],

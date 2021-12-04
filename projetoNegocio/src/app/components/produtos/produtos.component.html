@@ -33,7 +33,8 @@
                     <div class="row d-flex justify-content-left mt-5">
                         <div class="form-group col-md-6">
                             <label for="preco" class="label">Preço</label>
-                            <input class="form-control input" type="preco" name="preco" id="preco" formControlName="preco" required [ngClass]="cssErro('preco')" />
+                            <input class="form-control input" type="preco" name="preco" prefix="R$" id="preco" mask="separator.2" thousandSeparator="."
+                            formControlName="preco" [ngClass]="cssErro('preco')" />
                             <div class="erroValidacao">
                                 <app-msg-erro [control]="$any(produtos.get('preco'))" label="Preço"></app-msg-erro>
                             </div>
@@ -47,8 +48,11 @@
         
                 <!-- SUBMIT -->
                 <div class="row d-flex justify-content-left mt-5 mb-1">
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-2" *ngIf="produtos.status == 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
+                    </div>
+                    <div class="form-group col-md-2" *ngIf="produtos.status != 'VALID'">
+                        <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
                         <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Mostrar Todos</button>

@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Compra } from 'src/app/models/compra';
+import { ClientesService } from 'src/app/services/clientes.service';
 import { ComprasService } from 'src/app/services/compras.service';
+import { ProdutosService } from 'src/app/services/produtos.service';
+import { VendedoresService } from 'src/app/services/vendedores.service';
 
 @Component({
   selector: 'app-compras',
@@ -12,12 +15,18 @@ import { ComprasService } from 'src/app/services/compras.service';
 export class ComprasComponent implements OnInit {
 
   compras!: FormGroup;
+  clientes: any;
+  produtos: any;
+  vendedores: any;
   hideBtn!: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
-    private comprasService: ComprasService
+    private comprasService: ComprasService,
+    private clientesService: ClientesService,
+    private produtosService: ProdutosService,
+    private vendedoresService: VendedoresService
     ) { }
 
   ngOnInit(): void {
@@ -26,6 +35,17 @@ export class ComprasComponent implements OnInit {
       produto: [null, Validators.required],
       vendedor: [null, Validators.required]
     })
+
+    this.clientesService.getClientes().subscribe((clientes: any) =>{
+      this.clientes = clientes;
+    });
+    this.produtosService.getProdutos().subscribe((produtos:any) => {
+      this.produtos = produtos;
+    })
+    this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
+      this.vendedores = vendedores;
+    })
+
   }
 
 

@@ -8,6 +8,7 @@ import { PesquisaProdutoComponent } from './pesquisa-produto/pesquisa-produto.co
 import { PesquisaVendedorComponent } from './pesquisa-vendedor/pesquisa-vendedor.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -24,6 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     PesquisaRoutingModule,
     FormsModule,
     NgxPaginationModule,
+    NgxMaskModule,
     ReactiveFormsModule
   ]
 })

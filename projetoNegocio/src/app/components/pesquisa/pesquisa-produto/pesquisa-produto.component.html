@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-2">
-                <input type="text" class="form-control" [(ngModel)]="queryPreco" placeholder="Buscar por Preço ..."
+                <input type="text" class="form-control" mask="separator.2" prefix="R$" thousandSeparator="." [(ngModel)]="queryPreco" placeholder="Buscar por Preço ..."
                                 (ngModelChange)="loadProdutos()">
             </div>
         </div>

@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MsgErroComponent } from '../shared/msg-erro/msg-erro.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MsgErroModule } from '../shared/msg-erro/msg-erro.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -20,6 +21,7 @@ import { MsgErroModule } from '../shared/msg-erro/msg-erro.module';
     FormsModule,
     ReactiveFormsModule,
     MsgErroModule,
+    NgxMaskModule.forChild(),
     ClientesRoutingModule
   ]
 })
