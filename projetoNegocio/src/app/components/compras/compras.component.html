@@ -17,13 +17,14 @@
                         <div class="form-group col-md-6">
                             <label for="cliente" class="label">Cliente</label>
                             <div *ngIf="compras.get('cliente')?.value?.id == null">
-                                <select class="form-control input" id="cliente" placeholder="Selecione o cliente" formControlName="cliente">
+                                <select class="form-control input" id="cliente" placeholder="Selecione o cliente"  formControlName="cliente">
                                     <option *ngFor="let c of clientes?.clientes" [value]="c">{{ c.nome }}</option>
                                 </select>
                             </div>
                             <div *ngIf="compras.get('cliente')?.value?.id != null">
                                 <select class="form-control input" id="cliente" placeholder="Selecione o cliente" formControlName="cliente">
-                                    <option [value]="compras.get('cliente')">{{ compras.get('cliente')?.value.nome }}</option>
+                                    <option hidden [value]="compras.get('cliente')" selected>{{ compras.get('cliente')?.value.nome }}</option>
+                                    <option *ngFor="let c of clientes?.clientes" [value]="c">{{ c.nome }}</option>
                                 </select>
                             </div>
                             
@@ -43,7 +44,8 @@
                             </div>
                             <div *ngIf="compras.get('produto')?.value?.id != null">
                                 <select class="form-control input" id="produto" placeholder="Selecione o produto" formControlName="produto">
-                                    <option [value]="compras.get('produto')">{{ compras.get('produto')?.value.descricao }}</option>
+                                    <option hidden [value]="compras.get('produto')">{{ compras.get('produto')?.value.descricao }}</option>
+                                    <option *ngFor="let p of produtos?.produtos" [value]="p">{{ p.descricao }}</option>
                                 </select>
                             </div>
                             <div class="erroValidacao">
@@ -62,7 +64,8 @@
                             </div>
                             <div *ngIf="compras.get('vendedor')?.value?.id != null">
                                 <select class="form-control input" id="vendedor" placeholder="Selecione o vendedor" formControlName="vendedor">
-                                    <option [value]="compras.get('vendedor')">{{ compras.get('vendedor')?.value.nome }}</option>
+                                    <option hidden [value]="compras.get('vendedor')">{{ compras.get('vendedor')?.value.nome }}</option>
+                                    <option *ngFor="let v of vendedores?.vendedores" [value]="v">{{ v.nome }}</option>
                                 </select>
                             </div>
                             <div class="erroValidacao">
@@ -84,6 +87,8 @@
                     <div class="form-group col-md-2" *ngIf="compras.status != 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
+
+                    <!-- MOSTRAR -->
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
                         <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Mostrar Todos</button>
                     </div>

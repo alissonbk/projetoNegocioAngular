@@ -31,7 +31,7 @@ export class ComprasComponent implements OnInit {
     private comprasService: ComprasService,
     private clientesService: ClientesService,
     private produtosService: ProdutosService,
-    private vendedoresService: VendedoresService
+    private vendedoresService: VendedoresService,
     ) { }
 
   ngOnInit(): void {
@@ -53,10 +53,6 @@ export class ComprasComponent implements OnInit {
     })
 
     //Path params
-    // this.compras.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
-    // this.compras.get('cliente')?.setValue(this.route.snapshot.queryParamMap.get('cliente'));
-    // this.compras.get('produto')?.setValue(this.route.snapshot.queryParamMap.get('produto'));
-    // this.compras.get('vendedor')?.setValue(this.route.snapshot.queryParamMap.get('vendedor'));
     this.paramId = this.route.snapshot.queryParamMap.get('id');
     console.log("id: ",this.paramId);
     if(this.paramId != null){

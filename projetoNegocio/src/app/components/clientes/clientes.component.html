@@ -110,12 +110,15 @@
         
                 <!-- SUBMIT -->
                 <div class="row d-flex justify-content-left mt-5">
+                    
                     <div class="form-group col-md-2" *ngIf="clientes.status == 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
                     </div>
                     <div class="form-group col-md-2" *ngIf="clientes.status != 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
+
+                    <!-- MOSTRAR -->
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
                         <button type="button" (click)="hideButton()" class="btn btn-block mostrar">Mostrar Todos</button>
                     </div>

@@ -57,6 +57,8 @@
                     <div class="form-group col-md-2" *ngIf="produtos.status != 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
+
+                    <!-- MOSTRAR -->
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
                         <button type="button" (click)="hideButton()" class="btn btn-danger mostrar">Mostrar Todos</button>
                     </div>
