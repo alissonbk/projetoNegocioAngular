@@ -2,8 +2,11 @@
     <div class="clientesContainer d-flex justify-content-center">
         <form class="form-horizontal" [formGroup]="compras" (ngSubmit)="onSubmit()">
             <div class="container mt-5">
-                <div class="title">
-                    Compras
+                <div *ngIf="compras.get('id')?.value == null" class="title">
+                    Cadastrar Compra
+                </div>
+                <div *ngIf="compras.get('id')?.value != null" class="titleEditar">
+                    Editar Compra
                 </div>
                 <div class="subtitle">
                     Registre uma compra.

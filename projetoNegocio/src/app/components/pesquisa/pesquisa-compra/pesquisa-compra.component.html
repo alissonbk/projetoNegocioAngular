@@ -6,12 +6,12 @@
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-2">
-                <input type="text" class="form-control" [(ngModel)]="queryCliente" placeholder="Buscar por nomes ..."
+                <input type="text" class="form-control" [(ngModel)]="queryCliente" placeholder="Buscar pelo nome do Cliente ..."
                                 (ngModelChange)="loadCompras()">
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-2">
-                <input type="text" class="form-control" [(ngModel)]="queryVendedor" placeholder="Buscar por CPF ..."
+                <input type="text" class="form-control" [(ngModel)]="queryVendedor" placeholder="Buscar pelo nome do Vendedor ..."
                                 (ngModelChange)="loadCompras()">
             </div>
 <!-- 
@@ -22,7 +22,7 @@
             </div> -->
 
             <div class="col-lg-2 col-md-2 col-sm-2">
-                <input type="text" class="form-control" [(ngModel)]="queryProduto" placeholder="Buscar por Cidade ..."
+                <input type="text" class="form-control" [(ngModel)]="queryProduto" placeholder="Buscar pela descrição do Produto ..."
                                 (ngModelChange)="loadCompras()">
             </div>
         </div>

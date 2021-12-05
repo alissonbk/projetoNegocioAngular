@@ -1,9 +1,12 @@
 <div class="d-flex justify-content-center">
     <div class="vendedoresContainer d-flex justify-content-center">
-        <form class="form-horizontal" [formGroup]="vendedores" (ngSubmit)="onSubmit()">
+        <form class="form-horizontal" [formGroup]="vendedores" autocomplete="nope" (ngSubmit)="onSubmit()">
             <div class="container mt-5">
-                <div class="title">
-                    Vendedores
+                <div *ngIf="vendedores.get('id')?.value == null" class="title">
+                    Cadastrar Vendedor
+                </div>
+                <div *ngIf="vendedores.get('id')?.value != null" class="titleEditar">
+                    Editar Vendedor
                 </div>
                 <div class="subtitle">
                     Faça o cadastro de um vendedor.
@@ -34,14 +37,14 @@
                 <div class="row d-flex justify-content-left mt-4">
                     <div class="form-group col-md-6">
                         <label for="email" class="label">E-Mail</label>
-                        <input class="form-control input" type="email" name="email" id="email" formControlName="email" [ngClass]="cssErro('email')" />
+                        <input class="form-control input" type="email" autocomplete="nope" name="email" id="email" formControlName="email" [ngClass]="cssErro('email')" />
                         <div class="erroValidacao">
                             <app-msg-erro [control]="$any(vendedores.get('email'))" label="E-Mail"></app-msg-erro>
                         </div>
                     </div>
                     <div class="form-group col-md-4" style="margin-left: 2em;">
                         <label for="senha" class="label">Senha</label>
-                        <input class="form-control input" type="password" name="senha" id="senha" formControlName="senha" required [ngClass]="cssErro('senha')" />
+                        <input class="form-control input" type="password" autocomplete="new-password" name="senha" id="senha" formControlName="senha" [ngClass]="cssErro('senha')" />
                         <div class="erroValidacao">
                             <app-msg-erro [control]="$any(vendedores.get('senha'))" label="Senha"></app-msg-erro>
                         </div>

@@ -65,7 +65,16 @@
   font-size: 36px;
   font-weight: 600;
   margin-top: -1.9em;
-  margin-left: 3.4em;
+  margin-left: 1.3em;
+}
+
+.titleEditar {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: -1.9em;
+  margin-left: 2em;
 }
 
 .subtitle {
@@ -73,7 +82,8 @@
   font-family: sans-serif;
   font-size: 16px;
   font-weight: 600;
-  margin-left: 7.5em;
+  margin-top: 1em;
+  margin-left: 7em;
   margin-bottom: 3em;
 }
 

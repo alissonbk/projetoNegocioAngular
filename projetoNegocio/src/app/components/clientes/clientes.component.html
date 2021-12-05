@@ -2,8 +2,11 @@
     <div class="clientesContainer d-flex justify-content-center">
         <form class="form-horizontal" [formGroup]="clientes" (ngSubmit)="onSubmit()">
             <div class="container mt-5">
-                <div class="title">
-                    Clientes
+                <div *ngIf="clientes.get('id')?.value == null" class="title">
+                    Cadastrar Cliente
+                </div>
+                <div *ngIf="clientes.get('id')?.value != null" class="titleEditar">
+                    Editar Cliente
                 </div>
                 <div class="subtitle">
                     Faça o cadastro de um cliente.
