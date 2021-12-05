@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Compra } from 'src/app/models/compra';
+import { Component, forwardRef, Inject, OnInit } from '@angular/core';
 import { ComprasService } from 'src/app/services/compras.service';
+import { ComprasComponent } from '../compras.component';
 
 @Component({
   selector: 'app-mostrar-compras',
@@ -10,7 +10,10 @@ import { ComprasService } from 'src/app/services/compras.service';
 export class MostrarComprasComponent implements OnInit {
 
   data: any;
-  constructor(private comprasService: ComprasService) { }
+  constructor(
+    private comprasService: ComprasService,
+    @Inject(forwardRef(() => ComprasComponent)) private _parent: ComprasComponent
+    ) { }
 
   ngOnInit(): void {
     this.loadCompras();
@@ -20,8 +23,16 @@ export class MostrarComprasComponent implements OnInit {
   loadCompras(){
     this.comprasService.getCompras().subscribe((compras: any) =>{
       this.data = compras;
-      console.log("data =", this.data);
     })
   }
+
+  onEdit(dados: any){
+    this._parent.onEdit(dados);
+  }
+
+  onDelete(dados: any){
+    this._parent.onDelete(dados);
+  }
+
 
 }

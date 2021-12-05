@@ -32,6 +32,7 @@ export class ComprasComponent implements OnInit {
 
   ngOnInit(): void {
     this.compras = this.formBuilder.group({
+      id: [null],
       cliente: [null, Validators.required],
       produto: [null, Validators.required],
       vendedor: [null, Validators.required]
@@ -51,10 +52,29 @@ export class ComprasComponent implements OnInit {
 
 
   onSubmit(){
-    console.log("form compras:", this.compras);
-    this.comprasService.cadastrarCompra(this.compras.value);
+    if(this.compras.get('id')?.value == null){
+      this.comprasService.cadastrarCompra(this.compras.value);
+    }else{
+      this.comprasService.editarCompra(this.compras.value);
+    }
     this.compras.reset();
   }
+
+  onEdit(dados: any){
+    this.compras.patchValue({
+      "id": dados.id,
+      "cliente": dados.cliente,
+      "produto": dados.produto,
+      "vendedor": dados.vendedor
+    })
+  }
+
+  onDelete(dados: any){
+    if(confirm(`Você tem certeza que deseja excluir a compra (cliente:${dados.cliente.nome}, produto:${dados.produto.descricao})?`)){
+      this.clientesService.excluirCliente(dados.id);
+    }
+  }
+
 
 
   hideButton(){

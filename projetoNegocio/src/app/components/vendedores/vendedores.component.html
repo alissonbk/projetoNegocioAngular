@@ -99,7 +99,9 @@
                         </div>
                         <div class="form-group col-md-4" style="margin-left: 2em;">
                             <label for="estado" class="label">Estado</label>
-                            <input class="form-control input" type="text" name="estado" id="estado" formControlName="estado" required [ngClass]="cssErro('endereco.estado')" />
+                            <select class="form-control input" id="estado" placeholder="Selecione o estado" formControlName="estado">
+                                <option *ngFor="let e of todosEstados" [value]="e.sigla">{{ e.nome }}</option>
+                            </select>
                             <div class="erroValidacao">
                                 <app-msg-erro [control]="$any(vendedores.get('endereco.estado'))" label="Estado"></app-msg-erro>
                             </div>

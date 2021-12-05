@@ -14,4 +14,8 @@ export class AppComponent {
   ngOnInit(){
   
   }
+
+  onEdit(test:any){
+
+  }
 }

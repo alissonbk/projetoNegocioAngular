@@ -19,11 +19,22 @@ export class ProdutosService extends AbstractService {
 
   cadastrarProduto(value: any) {
     this.http.post(`${this.API_URL}/api/produtos`, value);
+    console.log("cadastrar : ", value);
+  }
+
+  editarProduto(value: any){
+    this.http.put(`${this.API_URL}/api/produtos`, value);
+    console.log("editar : ", value);
+  }
+
+  excluirProduto(id: number){
+    this.http.delete(`${this.API_URL}/api/produtos`+ id);
+    console.log("deletar id: ", id);
   }
   
   getProdutos(): Observable<any[]>{
     return this.http.get<any[]>('assets/mockProdutos.json').pipe(
-      tap(console.log),
+      //tap(console.log),
       catchError(this.handleError)
     )
   }

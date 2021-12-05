@@ -12,13 +12,23 @@ export class ClientesService extends AbstractService {
     super(http);
  }
 
-  cadastrarClientes(value: any) {
+  cadastrarCliente(value: any) {
     this.http.post(`${this.API_URL}/api/clientes`, value);
+    console.log("cadastrar : ", value);
+  }
+
+  editarCliente(value: any){
+    this.http.put(`${this.API_URL}/api/clientes`, value);
+    console.log("editar : ", value);
+  }
+  excluirCliente(id: number){
+    this.http.delete(`${this.API_URL}/api/clientes`+ id);
+    console.log("deletar id: ", id);
   }
   
   getClientes(): Observable<any[]>{
     return this.http.get<any[]>('assets/mockCliente.json').pipe(
-        tap(console.log),
+        //tap(console.log),
         catchError(this.handleError)
     );
   }

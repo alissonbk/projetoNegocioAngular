@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Host, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
@@ -16,10 +16,12 @@ export class ProdutosComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
-    private produtosService: ProdutosService) { }
+    private produtosService: ProdutosService
+    ) { }
 
   ngOnInit(): void {
     this.produtos = this.formBuilder.group({
+      id: [null],
       descricao: [null, Validators.required],
       marca: [null, Validators.required],
       preco: [null, [Validators.required]]
@@ -28,11 +30,30 @@ export class ProdutosComponent implements OnInit {
 
 
   onSubmit(){
-    // console.log(Object.assign({}, this.clientes.value));
-    console.log("form:",this.produtos);
-    this.produtosService.cadastrarProduto(this.produtos.value);
+    if(this.produtos.get('id')?.value !== null){
+      this.produtosService.editarProduto(this.produtos.value);
+    }else{
+      this.produtosService.cadastrarProduto(this.produtos.value);
+    }
+    
     this.produtos.reset();
   }
+
+  onEdit(dados: any){
+    this.produtos.patchValue({
+      "id": dados.id,
+      "descricao": dados.descricao,
+      "marca": dados.marca,
+      "preco": dados.preco
+    });
+  }
+
+  onDelete(dados: any){
+    if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
+      this.produtosService.excluirProduto(dados.id);
+    }
+  }
+  
 
   hideButton(){
     this.hideBtn = !this.hideBtn;

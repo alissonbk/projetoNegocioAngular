@@ -17,11 +17,22 @@ export class VendedoresService extends AbstractService {
 
   cadastrarVendedor(value: any) {
     this.http.post(`${this.API_URL}/api/vendedores`, value);
+    console.log("cadastrar: ", value);
+  }
+
+  editarVendedor(value: any){
+    this.http.put(`${this.API_URL}/api/vendedores`, value);
+    console.log("editar : ", value);
+  }
+
+  excluirVendedor(id: number){
+    this.http.delete(`${this.API_URL}/api/vendedores`+ id);
+    console.log("deletar id: ", id);
   }
 
   getVendedores(): Observable<any[]>{
     return this.http.get<any[]>('assets/mockVendedores.json').pipe(
-        tap(console.log),
+        //tap(console.log),
         catchError(this.handleError)
     );
   }

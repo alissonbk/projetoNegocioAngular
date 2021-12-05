@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { EstadoBr } from 'src/app/models/estado-br';
 import { CepService } from 'src/app/services/cep.service';
+import { DropdownService } from 'src/app/services/dropdown.service';
 import { VendedoresService } from 'src/app/services/vendedores.service';
 import { FormValidations } from '../shared/form-validations';
 
@@ -16,16 +18,19 @@ export class VendedoresComponent implements OnInit {
 
   vendedores!: FormGroup;
   hideBtn!: boolean;
+  todosEstados!: EstadoBr[];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
     private vendedoresService: VendedoresService,
-    private cepService: CepService
+    private cepService: CepService,
+    private dropdownService: DropdownService
     ) { }
 
   ngOnInit(): void {
     this.vendedores = this.formBuilder.group({
+      id: [null],
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)] ],
       cpf: [null, [Validators.required, FormValidations.cpfValidator]],
       email: [null, [Validators.required, Validators.email]],
@@ -48,14 +53,44 @@ export class VendedoresComponent implements OnInit {
       switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.vendedores.get('endereco.cep')?.value)
         : EMPTY)
       ).subscribe(dados => dados ? this.populaFormCep(dados) : { });
+
+    //Estados
+    this.dropdownService.getEstadosBr().subscribe((estados: any) => {
+      this.todosEstados = estados;
+    })
   }
 
 
   onSubmit(){
-    console.log(this.vendedores.value);
-    this.vendedoresService.cadastrarVendedor(this.vendedores.value);
+    if(this.vendedores.get('id')?.value == null){
+      this.vendedoresService.cadastrarVendedor(this.vendedores.value);
+    }else{
+      this.vendedoresService.editarVendedor(this.vendedores.value);
+    }
     this.vendedores.reset();
+  }
 
+  onEdit(dados: any){
+    this.vendedores.patchValue({
+      "id": dados.id,
+      "nome": dados.nome,
+      "cpf": dados.cpf,
+      "email": dados.email,
+      "endereco": {
+        "cep": dados.endereco.cep,
+        "numero": dados.endereco.numero,
+        "rua": dados.endereco.rua,
+        "bairro": dados.endereco.bairro,
+        "cidade": dados.endereco.cidade,
+        "estado": dados.endereco.estado
+    }
+    });
+  }
+
+  onDelete(dados: any){
+    if(confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`)){
+      this.vendedoresService.excluirVendedor(dados.id);
+    }
   }
 
   hideButton(){
