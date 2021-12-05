@@ -1,7 +1,7 @@
 import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { delay, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
 import { EstadoBr } from 'src/app/models/estado-br';
@@ -20,10 +20,12 @@ export class ClientesComponent implements OnInit {
   clientes!: FormGroup;
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
+  xd!: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router,
+    private router: Router,
+    private route: ActivatedRoute,
     private clientesService: ClientesService,
     private cepService: CepService,
     private dropdownService: DropdownService
@@ -58,6 +60,19 @@ export class ClientesComponent implements OnInit {
     this.dropdownService.getEstadosBr().subscribe((estado: any) =>{
       this.todosEstados = estado;
     })
+    //path param
+    console.log(this.route.snapshot.queryParamMap.get('cep'));
+    this.clientes.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
+    this.clientes.get('nome')?.setValue(this.route.snapshot.queryParamMap.get('nome'));
+    this.clientes.get('email')?.setValue(this.route.snapshot.queryParamMap.get('email'));
+    this.clientes.get('cpf')?.setValue(this.route.snapshot.queryParamMap.get('cpf'));
+    this.clientes.get('endereco.cep')?.setValue(this.route.snapshot.queryParamMap.get('cep'));
+    this.clientes.get('endereco.numero')?.setValue(this.route.snapshot.queryParamMap.get('numero'));
+    this.clientes.get('endereco.rua')?.setValue(this.route.snapshot.queryParamMap.get('rua'));
+    this.clientes.get('endereco.bairro')?.setValue(this.route.snapshot.queryParamMap.get('bairro'));
+    this.clientes.get('endereco.cidade')?.setValue(this.route.snapshot.queryParamMap.get('cidade'));
+    this.clientes.get('endereco.estado')?.setValue(this.route.snapshot.queryParamMap.get('estado'));
+    // console.log(this.clientes.get('id')?.value);
   }
 
 
@@ -99,9 +114,9 @@ export class ClientesComponent implements OnInit {
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
-      this.route.navigate(['/clientes/mostrar']);
+      this.router.navigate(['/clientes/mostrar']);
     }else{
-      this.route.navigate(['/clientes']);
+      this.router.navigate(['/clientes']);
     }
     
   }

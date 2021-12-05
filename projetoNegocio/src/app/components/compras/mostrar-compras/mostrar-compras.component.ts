@@ -17,6 +17,7 @@ export class MostrarComprasComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCompras();
+    
   }
 
 

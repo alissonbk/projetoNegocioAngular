@@ -26,7 +26,7 @@ export class ComprasService extends AbstractService{
     excluirCompra(id: number){
         this.http.delete(`${this.API_URL}/api/compras`+ id);
         console.log("deletar id: ", id);
-      }
+    }
     
     getCompras(): Observable<any[]>{
         return this.http.get<any[]>('assets/mockCompras.json').pipe(

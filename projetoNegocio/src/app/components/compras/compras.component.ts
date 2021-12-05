@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { delay } from 'rxjs/operators';
 import { Compra } from 'src/app/models/compra';
 import { ClientesService } from 'src/app/services/clientes.service';
@@ -20,10 +20,14 @@ export class ComprasComponent implements OnInit {
   produtos: any;
   vendedores: any;
   hideBtn!: boolean;
+  paramId!: any;
+  compraById!: any;
+  allCompras: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router,
+    private router: Router,
+    private route: ActivatedRoute,
     private comprasService: ComprasService,
     private clientesService: ClientesService,
     private produtosService: ProdutosService,
@@ -48,6 +52,18 @@ export class ComprasComponent implements OnInit {
       this.vendedores = vendedores;
     })
 
+    //Path params
+    // this.compras.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
+    // this.compras.get('cliente')?.setValue(this.route.snapshot.queryParamMap.get('cliente'));
+    // this.compras.get('produto')?.setValue(this.route.snapshot.queryParamMap.get('produto'));
+    // this.compras.get('vendedor')?.setValue(this.route.snapshot.queryParamMap.get('vendedor'));
+    this.paramId = this.route.snapshot.queryParamMap.get('id');
+    console.log("id: ",this.paramId);
+    if(this.paramId != null){
+      this.getById(this.paramId);
+    }
+      
+
   }
 
 
@@ -71,8 +87,22 @@ export class ComprasComponent implements OnInit {
 
   onDelete(dados: any){
     if(confirm(`Você tem certeza que deseja excluir a compra (cliente:${dados.cliente.nome}, produto:${dados.produto.descricao})?`)){
-      this.clientesService.excluirCliente(dados.id);
+      this.comprasService.excluirCompra(dados.id);
     }
+  }
+
+  getById(id: number){
+    this.comprasService.getCompras().subscribe((compras: any) => {
+      this.allCompras = compras;
+      for(let compra of (this.allCompras?.compras)){
+        if(compra.id == id){
+          this.compras.get('id')?.setValue(compra.id);
+          this.compras.get('cliente')?.setValue(compra.cliente);
+          this.compras.get('produto')?.setValue(compra.produto);
+          this.compras.get('vendedor')?.setValue(compra.vendedor);
+        }
+      }
+    })
   }
 
 
@@ -80,9 +110,9 @@ export class ComprasComponent implements OnInit {
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
-      this.route.navigate(['/compras/mostrar']);
+      this.router.navigate(['/compras/mostrar']);
     }else{
-      this.route.navigate(['/compras']);
+      this.router.navigate(['/compras']);
     }
   }
 

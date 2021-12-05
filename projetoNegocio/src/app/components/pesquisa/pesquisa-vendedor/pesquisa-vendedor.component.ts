@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EstadoBr } from 'src/app/models/estado-br';
 import { DropdownService } from 'src/app/services/dropdown.service';
 import { VendedoresService } from 'src/app/services/vendedores.service';
@@ -18,7 +19,8 @@ export class PesquisaVendedorComponent implements OnInit {
 
   constructor(
     private vendedoresService: VendedoresService,
-    private dropDownService: DropdownService
+    private dropDownService: DropdownService,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -34,6 +36,29 @@ export class PesquisaVendedorComponent implements OnInit {
       this.data = vendedores;
       console.log("data : ", this.data);
     })
+  }
+
+  onEdit(dados: any){
+    // this.router.navigate(['../../clientes'], {queryParams: {id: dados.id} });
+    this.router.navigate(['../../vendedores'], {queryParams: {
+      id: dados.id,
+      nome: dados.nome,
+      email: dados.email,
+      cpf: dados.cpf,
+      cep: dados.endereco.cep,
+      numero: dados.endereco.numero,
+      rua: dados.endereco.rua,
+      bairro: dados.endereco.bairro,
+      cidade: dados.endereco.cidade,
+      estado: dados.endereco.estado
+    }, skipLocationChange: true 
+    });
+  }
+
+  onDelete(dados: any){
+    if(confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`)){
+      this.vendedoresService.excluirVendedor(dados.id);
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, Host, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class ProdutosComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router,
+    private router: Router,
+    private route: ActivatedRoute,
     private produtosService: ProdutosService
     ) { }
 
@@ -26,6 +27,12 @@ export class ProdutosComponent implements OnInit {
       marca: [null, Validators.required],
       preco: [null, [Validators.required]]
     })
+
+
+    this.produtos.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
+    this.produtos.get('descricao')?.setValue(this.route.snapshot.queryParamMap.get('descricao'));
+    this.produtos.get('marca')?.setValue(this.route.snapshot.queryParamMap.get('marca'));
+    this.produtos.get('preco')?.setValue(this.route.snapshot.queryParamMap.get('preco'));
   }
 
 
@@ -58,9 +65,9 @@ export class ProdutosComponent implements OnInit {
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
-      this.route.navigate(['/produtos/mostrar']);
+      this.router.navigate(['/produtos/mostrar']);
     }else{
-      this.route.navigate(['/produtos']);
+      this.router.navigate(['/produtos']);
     }
   }
 

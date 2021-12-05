@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { ProdutosService } from 'src/app/services/produtos.service';
 
@@ -14,7 +15,10 @@ export class PesquisaProdutoComponent implements OnInit {
   queryMarca!: string;
   queryPreco!: number;
 
-  constructor(private produtosService: ProdutosService) { }
+  constructor(
+    private produtosService: ProdutosService,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this.loadProdutos();
@@ -25,6 +29,23 @@ export class PesquisaProdutoComponent implements OnInit {
       this.data = produtos;
       console.log("data", this.data);
     })
+  }
+
+  onEdit(dados: any){
+    // this.router.navigate(['../../clientes'], {queryParams: {id: dados.id} });
+    this.router.navigate(['../../produtos'], {queryParams: {
+      id: dados.id,
+      descricao: dados.descricao,
+      marca: dados.marca,
+      preco: dados.preco,
+    }, skipLocationChange: true 
+    });
+  }
+
+  onDelete(dados: any){
+    if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
+      this.produtosService.excluirProduto(dados.id);
+    }
   }
 
 }

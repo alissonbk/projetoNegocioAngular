@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { EstadoBr } from 'src/app/models/estado-br';
@@ -22,7 +22,8 @@ export class VendedoresComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: Router,
+    private router: Router,
+    private route: ActivatedRoute,
     private vendedoresService: VendedoresService,
     private cepService: CepService,
     private dropdownService: DropdownService
@@ -58,6 +59,18 @@ export class VendedoresComponent implements OnInit {
     this.dropdownService.getEstadosBr().subscribe((estados: any) => {
       this.todosEstados = estados;
     })
+
+    //path param
+    this.vendedores.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
+    this.vendedores.get('nome')?.setValue(this.route.snapshot.queryParamMap.get('nome'));
+    this.vendedores.get('email')?.setValue(this.route.snapshot.queryParamMap.get('email'));
+    this.vendedores.get('cpf')?.setValue(this.route.snapshot.queryParamMap.get('cpf'));
+    this.vendedores.get('endereco.cep')?.setValue(this.route.snapshot.queryParamMap.get('cep'));
+    this.vendedores.get('endereco.numero')?.setValue(this.route.snapshot.queryParamMap.get('numero'));
+    this.vendedores.get('endereco.rua')?.setValue(this.route.snapshot.queryParamMap.get('rua'));
+    this.vendedores.get('endereco.bairro')?.setValue(this.route.snapshot.queryParamMap.get('bairro'));
+    this.vendedores.get('endereco.cidade')?.setValue(this.route.snapshot.queryParamMap.get('cidade'));
+    this.vendedores.get('endereco.estado')?.setValue(this.route.snapshot.queryParamMap.get('estado'));
   }
 
 
@@ -96,9 +109,9 @@ export class VendedoresComponent implements OnInit {
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
-      this.route.navigate(['/vendedores/mostrar']);
+      this.router.navigate(['/vendedores/mostrar']);
     }else{
-      this.route.navigate(['/vendedores']);
+      this.router.navigate(['/vendedores']);
     }
     
   }
