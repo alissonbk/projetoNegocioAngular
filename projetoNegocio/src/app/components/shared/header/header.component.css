@@ -2,23 +2,12 @@
   max-width: 960px;
 }
 
-/*
- * Cabeçalho translucente customizado
-*/
-
-.site-header {
-  background-color: rgba(0, 0, 0, .85);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
-}
-.site-header a {
+a{
   color: #999;
-  transition: ease-in-out color .15s;
-  text-decoration:none;
 }
-.site-header a:hover {
+
+a:hover{
   color: #fff;
-  text-decoration: none;
 }
 
 /*

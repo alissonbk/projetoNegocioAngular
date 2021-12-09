@@ -1,4 +1,4 @@
-import { Component, Host, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
@@ -43,6 +43,7 @@ export class ProdutosComponent implements OnInit {
       this.produtos.removeControl('id');
       console.log('cadastrar enviando: ', this.produtos.value);
       this.produtosService.cadastrarProduto(this.produtos.value);
+     
     }
     this.produtos.reset();
   }
@@ -54,6 +55,7 @@ export class ProdutosComponent implements OnInit {
       "marca": dados.marca,
       "valor": dados.valor
     });
+    
   }
 
   onDelete(dados: any){

@@ -1,6 +1,6 @@
 import { NgxMaskModule } from 'ngx-mask';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgTemplateOutlet } from '@angular/common';
 import { ProdutosComponent } from './produtos.component';
 import { MostrarProdutosComponent } from './mostrar-produtos/mostrar-produtos.component';
 import { ProdutosRoutingModule } from './produtos.routing.module';
