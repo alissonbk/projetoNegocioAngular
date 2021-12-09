@@ -13,7 +13,7 @@ export class PesquisaProdutoComponent implements OnInit {
   data: any;
   queryDesc!: string;
   queryMarca!: string;
-  queryPreco!: number;
+  queryValor!: number;
 
   constructor(
     private produtosService: ProdutosService,
@@ -37,7 +37,7 @@ export class PesquisaProdutoComponent implements OnInit {
       id: dados.id,
       descricao: dados.descricao,
       marca: dados.marca,
-      preco: dados.preco,
+      valor: dados.valor,
     }, skipLocationChange: true 
     });
   }

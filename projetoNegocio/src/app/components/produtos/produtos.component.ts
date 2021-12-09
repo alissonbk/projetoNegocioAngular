@@ -25,24 +25,25 @@ export class ProdutosComponent implements OnInit {
       id: [null],
       descricao: [null, Validators.required],
       marca: [null, Validators.required],
-      preco: [null, [Validators.required]]
+      valor: [null, [Validators.required]]
     })
 
 
     this.produtos.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
     this.produtos.get('descricao')?.setValue(this.route.snapshot.queryParamMap.get('descricao'));
     this.produtos.get('marca')?.setValue(this.route.snapshot.queryParamMap.get('marca'));
-    this.produtos.get('preco')?.setValue(this.route.snapshot.queryParamMap.get('preco'));
+    this.produtos.get('valor')?.setValue(this.route.snapshot.queryParamMap.get('valor'));
   }
 
 
   onSubmit(){
-    if(this.produtos.get('id')?.value !== null){
+    if(this.produtos.get('id')?.value != null){
       this.produtosService.editarProduto(this.produtos.value);
     }else{
+      this.produtos.removeControl('id');
+      console.log('cadastrar enviando: ', this.produtos.value);
       this.produtosService.cadastrarProduto(this.produtos.value);
     }
-    
     this.produtos.reset();
   }
 
@@ -51,7 +52,7 @@ export class ProdutosComponent implements OnInit {
       "id": dados.id,
       "descricao": dados.descricao,
       "marca": dados.marca,
-      "preco": dados.preco
+      "valor": dados.valor
     });
   }
 

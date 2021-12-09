@@ -35,11 +35,11 @@
                    
                     <div class="row d-flex justify-content-left mt-5">
                         <div class="form-group col-md-6">
-                            <label for="preco" class="label">Preço</label>
-                            <input class="form-control input" type="preco" name="preco" prefix="R$" id="preco" mask="separator.2" thousandSeparator="."
-                            formControlName="preco" [ngClass]="cssErro('preco')" />
+                            <label for="valor" class="label">Preço</label>
+                            <input class="form-control input" type="string" name="valor" prefix="R$" id="valor" mask="separator.2" thousandSeparator="."
+                            formControlName="valor" [ngClass]="cssErro('valor')" />
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(produtos.get('preco'))" label="Preço"></app-msg-erro>
+                                <app-msg-erro [control]="$any(produtos.get('valor'))" label="Preço"></app-msg-erro>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-lg-2 col-md-2 col-sm-2">
-                <input type="text" class="form-control" mask="separator.2" prefix="R$" thousandSeparator="." [(ngModel)]="queryPreco" placeholder="Buscar por Preço ..."
+                <input type="text" class="form-control" mask="separator.2" prefix="R$" thousandSeparator="." [(ngModel)]="queryValor" placeholder="Buscar por Preço ..."
                                 (ngModelChange)="loadProdutos()">
             </div>
         </div>
@@ -49,7 +49,7 @@
             </td>
             <td>{{p.descricao}}</td>
             <td>{{p.marca}}</td>
-            <td>{{p.preco}}</td>
+            <td>{{p.valor}}</td>
         </tr>
     </tbody>
 </table>
