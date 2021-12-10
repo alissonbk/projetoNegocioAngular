@@ -1,2 +1,5 @@
 Template bootstrap:
 https://getbootstrap.com.br/docs/4.1/examples/product/#
+
+loading animation:
+https://loading.io/css/

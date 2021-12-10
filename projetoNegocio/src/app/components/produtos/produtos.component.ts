@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutosService } from 'src/app/services/produtos.service';
+import { MostrarProdutosComponent } from './mostrar-produtos/mostrar-produtos.component';
 
 @Component({
   selector: 'app-produtos',
@@ -17,10 +19,15 @@ export class ProdutosComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
-    private produtosService: ProdutosService
+    private produtosService: ProdutosService,
+    private cf: ChangeDetectorRef
     ) { }
+  @ViewChild(MostrarProdutosComponent) child!: MostrarProdutosComponent;
 
+
+  /*LIFECYCLE*/
   ngOnInit(): void {
+    this.hideBtn = false;
     this.produtos = this.formBuilder.group({
       id: [null],
       descricao: [null, Validators.required],
@@ -28,14 +35,21 @@ export class ProdutosComponent implements OnInit {
       valor: [null, [Validators.required]]
     })
 
-
+    /*DADOS DE PESQUISA(EDITAR)*/
     this.produtos.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
     this.produtos.get('descricao')?.setValue(this.route.snapshot.queryParamMap.get('descricao'));
     this.produtos.get('marca')?.setValue(this.route.snapshot.queryParamMap.get('marca'));
     this.produtos.get('valor')?.setValue(this.route.snapshot.queryParamMap.get('valor'));
+
+    /*Resolve o problema de acessar diretamente o child mostrar e não atualizar o valor no parent*/
+    this.cf.detectChanges();
   }
 
+  // ngOnChanges(){
+  //   console.log("CHANGES");
+  // }
 
+  /*SUBMIT EDIT DELETE*/
   onSubmit(){
     if(this.produtos.get('id')?.value != null){
       this.produtosService.editarProduto(this.produtos.value);
@@ -43,11 +57,10 @@ export class ProdutosComponent implements OnInit {
       this.produtos.removeControl('id');
       console.log('cadastrar enviando: ', this.produtos.value);
       this.produtosService.cadastrarProduto(this.produtos.value);
-     
     }
     this.produtos.reset();
+    this.reloadPage();
   }
-
   onEdit(dados: any){
     this.produtos.patchValue({
       "id": dados.id,
@@ -55,16 +68,24 @@ export class ProdutosComponent implements OnInit {
       "marca": dados.marca,
       "valor": dados.valor
     });
-    
   }
-
   onDelete(dados: any){
     if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
       this.produtosService.excluirProduto(dados.id);
     }
+    this.reloadPage();
+  }
+
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/produtos/mostrar']);
   }
   
 
+
+
+  /*BUTTONS E VALIDATIONS*/
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){

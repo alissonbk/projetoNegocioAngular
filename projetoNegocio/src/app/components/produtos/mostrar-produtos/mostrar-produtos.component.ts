@@ -1,8 +1,8 @@
-import { SimpleChanges } from '@angular/core';
 import { OnChanges } from '@angular/core';
 import { Component, forwardRef, Inject, OnInit } from '@angular/core';
+import { Event, NavigationEnd, Router } from '@angular/router';
 import { EMPTY, Observable, Subject } from 'rxjs';
-import { catchError, isEmpty } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Produto } from 'src/app/models/produto';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { ProdutosComponent } from '../produtos.component';
@@ -19,10 +19,18 @@ export class MostrarProdutosComponent implements OnInit {
 
   constructor(
     private produtosService: ProdutosService,
-    @Inject(forwardRef(() => ProdutosComponent)) private _parent: ProdutosComponent) { 
+    @Inject(forwardRef(() => ProdutosComponent)) private _parent: ProdutosComponent,
+    private router: Router
+    ) { 
     }
 
   ngOnInit(): void {
+    this.loadProdutos();
+    this._parent.hideBtn = true;
+  }
+
+
+  loadProdutos(){
     this.produtos$ = this.produtosService.getProdutos().pipe(
       catchError(error => {
         console.error(error);
@@ -30,9 +38,7 @@ export class MostrarProdutosComponent implements OnInit {
         return EMPTY;
       })
     );
-    this._parent.hideBtn = true;
   }
-
 
   onEdit(dados: any){
     this._parent.onEdit(dados);
