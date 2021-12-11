@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
-import { catchError, delay, tap } from "rxjs/operators";
+import { catchError, delay, take, tap } from "rxjs/operators";
 import { Produto } from "../models/produto";
 import { AbstractService } from "./abstract.service";
 
@@ -29,31 +29,31 @@ export class ProdutosService extends AbstractService {
 
   //REQUESTS TO API
   cadastrarProduto(value: any) {
-    this.http.post<any>(`${this.API_URL}/api/produtos`, value, {headers: this.headers}).subscribe({
-      next: data => {
-        // this.produto = data;
-      },
-      error: error => {
-        this.handleError = error.message;
-      }
-    });
+    // this.http.post<Produto>(`${this.API_URL}/api/produtos`, value, {headers: this.headers}).subscribe({
+    //   next: data => {
+    //     // this.produto = data;
+    //   },
+    //   error: error => {
+    //     this.handleError = error.message;
+    //   }
+    // });
+    return this.http.post(`${this.API_URL}/api/produtos`, value).pipe(take(1));
   }
 
   editarProduto(value: any){
-    this.http.put<any>(`${this.API_URL}/api/produtos/`+ value.id, value, {headers: this.headers}).subscribe({
-      next: data => {
-        // this.produto = data;
-      },
-      error: error => {
-        this.handleError = error.message;
-      }
-    });
-    console.log("editar : ", value);
+    // this.http.put<any>(`${this.API_URL}/api/produtos/`+ value.id, value, {headers: this.headers}).subscribe({
+    //   next: data => {
+    //     // this.produto = data;
+    //   },
+    //   error: error => {
+    //     this.handleError = error.message;
+    //   }
+    // });
+    return this.http.put(`${this.API_URL}/api/produtos/`+ value.id, value).pipe();
   }
 
   excluirProduto(id: number){
-    this.http.delete(`${this.API_URL}/api/produtos/`+ id).subscribe();
-    console.log("deletar id: ", id);
+    return this.http.delete(`${this.API_URL}/api/produtos/`+ id).pipe();
   }
   
   getProdutos(): Observable<any[]>{

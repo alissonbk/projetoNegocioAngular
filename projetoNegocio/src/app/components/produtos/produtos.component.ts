@@ -52,11 +52,35 @@ export class ProdutosComponent implements OnInit {
   /*SUBMIT EDIT DELETE*/
   onSubmit(){
     if(this.produtos.get('id')?.value != null){
-      this.produtosService.editarProduto(this.produtos.value);
+      this.produtosService.editarProduto(this.produtos.value).subscribe(
+        next => {
+          console.log(next);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log("success");
+          this.reloadPage();
+        }
+      );
     }else{
       this.produtos.removeControl('id');
       console.log('cadastrar enviando: ', this.produtos.value);
-      this.produtosService.cadastrarProduto(this.produtos.value);
+
+      //SUBSCRIBE
+      this.produtosService.cadastrarProduto(this.produtos.value).subscribe(
+        next => {
+          console.log("Inicio do subscribe next: ", next);
+        },
+        error => {
+          console.log("Error: ", error);
+        },
+        () => {
+          console.log("success");
+          this.reloadPage();
+        }
+      );
     }
     this.produtos.reset();
     this.reloadPage();
@@ -71,9 +95,19 @@ export class ProdutosComponent implements OnInit {
   }
   onDelete(dados: any){
     if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
-      this.produtosService.excluirProduto(dados.id);
+      this.produtosService.excluirProduto(dados.id).subscribe(
+        next => {
+          console.log("id para excluir:", next);
+        },
+        error => {
+          console.log("Error: ", error);
+        },
+        () => {
+          console.log("success");
+          this.reloadPage();
+        }
+      );
     }
-    this.reloadPage();
   }
 
   reloadPage(){
