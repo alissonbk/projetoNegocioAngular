@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {catchError, tap} from "rxjs/operators";
+import {catchError, delay, take, tap} from "rxjs/operators";
 import { Vendedor } from '../models/vendedor';
 import { AbstractService } from './abstract.service';
 
@@ -13,27 +13,22 @@ export class VendedoresService extends AbstractService {
     super(http)
   }
 
-  private vendedores: Array<Vendedor> = new Array();
-
   cadastrarVendedor(value: any) {
-    this.http.post(`${this.API_URL}/api/vendedores`, value);
-    console.log("cadastrar: ", value);
+    return this.http.post(`${this.API_URL}/api/usuarios`, value).pipe(take(1));
   }
 
   editarVendedor(value: any){
-    this.http.put(`${this.API_URL}/api/vendedores`, value);
-    console.log("editar : ", value);
+    return this.http.put(`${this.API_URL}/api/usuarios/`+ value.id, value).pipe();
   }
 
   excluirVendedor(id: number){
-    this.http.delete(`${this.API_URL}/api/vendedores`+ id);
-    console.log("deletar id: ", id);
+    return this.http.delete(`${this.API_URL}/api/usuarios/`+id).pipe();
   }
 
   getVendedores(): Observable<any[]>{
-    return this.http.get<any[]>('assets/mockVendedores.json').pipe(
-        //tap(console.log),
-        catchError(this.handleError)
+    return this.http.get(`${this.API_URL}/api/usuarios`).pipe(
+      tap(console.log),
+      delay(1000)
     );
   }
 }

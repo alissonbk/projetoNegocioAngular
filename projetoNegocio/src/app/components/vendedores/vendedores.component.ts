@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,10 +27,12 @@ export class VendedoresComponent implements OnInit {
     private route: ActivatedRoute,
     private vendedoresService: VendedoresService,
     private cepService: CepService,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+    private cf: ChangeDetectorRef
     ) { }
 
   ngOnInit(): void {
+    this.hideBtn = false;
     this.vendedores = this.formBuilder.group({
       id: [null],
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)] ],
@@ -71,14 +74,40 @@ export class VendedoresComponent implements OnInit {
     this.vendedores.get('endereco.bairro')?.setValue(this.route.snapshot.queryParamMap.get('bairro'));
     this.vendedores.get('endereco.cidade')?.setValue(this.route.snapshot.queryParamMap.get('cidade'));
     this.vendedores.get('endereco.estado')?.setValue(this.route.snapshot.queryParamMap.get('estado'));
+
+    this.cf.detectChanges();
   }
 
 
   onSubmit(){
-    if(this.vendedores.get('id')?.value == null){
-      this.vendedoresService.cadastrarVendedor(this.vendedores.value);
+    if(this.vendedores.get('id')?.value != null){
+      console.log('')
+      this.vendedoresService.editarVendedor(this.vendedores.value).subscribe(
+        next => {
+          console.log(next);
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          console.log("success");
+          this.reloadPage();
+        }
+      );
     }else{
-      this.vendedoresService.editarVendedor(this.vendedores.value);
+      this.vendedores.removeControl('id');
+      this.vendedoresService.cadastrarVendedor(this.vendedores.value).subscribe(
+        next => {
+          console.log(next);
+        },
+        error => {
+          console.log(error)
+        },
+        () => {
+          console.log("success");
+          this.reloadPage();
+        }
+      );
     }
     this.vendedores.reset();
   }
@@ -102,9 +131,30 @@ export class VendedoresComponent implements OnInit {
 
   onDelete(dados: any){
     if(confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`)){
-      this.vendedoresService.excluirVendedor(dados.id);
+      this.vendedoresService.excluirVendedor(dados.id).subscribe(
+        next => {
+          console.log(next);
+        },
+        error => {
+          console.log(error);
+        },
+        () => {
+          console.log("success");
+          this.reloadPage();
+        }
+      );
     }
   }
+
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/vendedores/mostrar']);
+  }
+
+
+
+  // buttons e validação
 
   hideButton(){
     this.hideBtn = !this.hideBtn;

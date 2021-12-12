@@ -1,4 +1,6 @@
 import { Component, Inject, OnInit, forwardRef } from '@angular/core';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Vendedor } from 'src/app/models/vendedor';
 import { VendedoresService } from 'src/app/services/vendedores.service';
 import { VendedoresComponent } from '../vendedores.component';
@@ -10,7 +12,8 @@ import { VendedoresComponent } from '../vendedores.component';
 })
 export class MostrarVendedoresComponent implements OnInit {
 
-  data: any;
+  vendedores$!: Observable<Vendedor[]>;
+  error$ = new Subject<boolean>();
 
   constructor(
     private vendedoresService: VendedoresService,
@@ -19,13 +22,17 @@ export class MostrarVendedoresComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadVendedores();
+    this._parent.hideBtn = true;
   }
 
   loadVendedores(){
-    this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
-      this.data = vendedores;
-      console.log("data= ",this.data);
-    }) 
+    this.vendedores$ = this.vendedoresService.getVendedores().pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    )
   }
 
   onEdit(dados: any){

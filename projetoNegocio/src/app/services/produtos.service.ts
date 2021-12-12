@@ -17,17 +17,6 @@ export class ProdutosService extends AbstractService {
   }
 
 
-  // loadProdutos(){
-  //   this.getProdutos().subscribe((produtos: any) => {
-  //     this.data = produtos;
-  //     console.log("load produtos: ", this.data);
-  //   })
-  //   return this.data;
-  // }
-
-
-
-  //REQUESTS TO API
   cadastrarProduto(value: any) {
     // this.http.post<Produto>(`${this.API_URL}/api/produtos`, value, {headers: this.headers}).subscribe({
     //   next: data => {
@@ -57,11 +46,6 @@ export class ProdutosService extends AbstractService {
   }
   
   getProdutos(): Observable<any[]>{
-    // return this.http.get<any[]>(`${this.API_URL}/api/produtos`).pipe(
-    //   tap(console.log),
-    //   delay(1000),
-    //   catchError(this.handleError)
-    // );
     return this.http.get<Produto[]>(`${this.API_URL}/api/produtos`).pipe(
       tap(console.log),
       delay(1000)
