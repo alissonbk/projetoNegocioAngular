@@ -1,14 +1,15 @@
-import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
-import { delay, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+
 import { EstadoBr } from 'src/app/models/estado-br';
 import { CepService } from 'src/app/services/cep.service';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
-import { FormValidations } from '../shared/form-validations';
+import { FormValidations } from '../../shared/form-validations';
 
 @Component({
   selector: 'app-clientes',

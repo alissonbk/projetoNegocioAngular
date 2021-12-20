@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit, forwardRef } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+
 import { EstadoBr } from 'src/app/models/estado-br';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
-import { ClientesComponent } from '../../clientes/clientes.component';
 
 @Component({
   selector: 'app-pesquisa-cliente',
@@ -22,9 +23,7 @@ export class PesquisaClienteComponent implements OnInit {
     private clientesService: ClientesService,
     private dropDownService: DropdownService,
     private router: Router
-    // @Inject(forwardRef(() => ClientesComponent)) private _parent: ClientesComponent
     ) {
-    // para nunca ser undefined
     this.queryNome = "";
     this.queryCPF = "";
     this.queryCidade = "";
@@ -39,13 +38,10 @@ export class PesquisaClienteComponent implements OnInit {
   loadClientes(){
     this.clientesService.getClientes().subscribe((clientes:any) => {
       this.data = clientes;
-      // console.log("data= ",this.data);
-      // console.log("query nome:", this.queryNome);
     })
   }
 
   onEdit(dados: any){
-    // this.router.navigate(['../../clientes'], {queryParams: {id: dados.id} });
     this.router.navigate(['../../clientes'], {queryParams: {
       id: dados.id,
       nome: dados.nome,
@@ -66,9 +62,5 @@ export class PesquisaClienteComponent implements OnInit {
       this.clientesService.excluirCliente(dados.id);
     }
   }
-
-  // onDelete(dados: any){
-  //   this._parent.onDelete(dados);
-  // }
 
 }

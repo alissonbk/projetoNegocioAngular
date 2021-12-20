@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { ComprasComponent } from './compras.component';
 import { MostrarComprasComponent } from './mostrar-compras/mostrar-compras.component';
 import { ComprasRoutingModule } from './compras.routing.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MsgErroModule } from '../shared/msg-erro/msg-erro.module';
+import { MsgErroModule } from '../../shared/msg-erro/msg-erro.module';
 
 
 

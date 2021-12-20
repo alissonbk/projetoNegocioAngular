@@ -10,16 +10,16 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   
   {path: 'clientes',
-    loadChildren: ()=> import('./components/clientes/clientes.module').then(m=> m.ClientesModule), canActivate: [AuthGuard]
+    loadChildren: ()=> import('./components/principal/clientes/clientes.module').then(m=> m.ClientesModule), canActivate: [AuthGuard]
     },
   {path: 'vendedores', 
-    loadChildren: ()=> import('./components/vendedores/vendedores.module').then(m=> m.VendedoresModule), canActivate: [AuthGuard]
+    loadChildren: ()=> import('./components/principal/vendedores/vendedores.module').then(m=> m.VendedoresModule), canActivate: [AuthGuard]
     },
   {path: 'produtos',
-    loadChildren: ()=> import('./components/produtos/produtos.module').then(m=> m.ProdutosModule), canActivate: [AuthGuard]
+    loadChildren: ()=> import('./components/principal/produtos/produtos.module').then(m=> m.ProdutosModule), canActivate: [AuthGuard]
     },
   {path: 'compras',
-    loadChildren: ()=> import('./components/compras/compras.module').then(m=> m.ComprasModule), canActivate: [AuthGuard]
+    loadChildren: ()=> import('./components/principal/compras/compras.module').then(m=> m.ComprasModule), canActivate: [AuthGuard]
     },
   {path: 'pesquisa', 
   loadChildren: ()=> import('./components/pesquisa/pesquisa.module').then(m=> m.PesquisaModule), canActivate: [AuthGuard]},

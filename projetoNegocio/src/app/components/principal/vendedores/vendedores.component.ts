@@ -4,11 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+
 import { EstadoBr } from 'src/app/models/estado-br';
 import { CepService } from 'src/app/services/cep.service';
 import { DropdownService } from 'src/app/services/dropdown.service';
 import { VendedoresService } from 'src/app/services/vendedores.service';
-import { FormValidations } from '../shared/form-validations';
+import { FormValidations } from '../../shared/form-validations';
 
 @Component({
   selector: 'app-vendedores',

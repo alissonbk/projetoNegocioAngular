@@ -14,12 +14,6 @@
                 <input type="text" class="form-control" [(ngModel)]="queryVendedor" placeholder="Buscar pelo nome do Vendedor ..."
                                 (ngModelChange)="loadCompras()">
             </div>
-<!-- 
-            <div class="col-lg-2 col-md-2 col-sm-2">
-                <select class="form-control" id="estado" placeholder="Selecione o estado" (ngModelChange)="loadCompras()()">
-                            <option *ngFor="let e of queryProduto" [value]="e.sigla">{{ e.nome }}</option>
-                    </select>
-            </div> -->
 
             <div class="col-lg-2 col-md-2 col-sm-2">
                 <input type="text" class="form-control" [(ngModel)]="queryProduto" placeholder="Buscar pela descrição do Produto ..."

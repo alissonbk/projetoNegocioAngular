@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY } from 'rxjs';
+
+
 import { ProdutosService } from 'src/app/services/produtos.service';
 
 @Component({
@@ -32,7 +33,6 @@ export class PesquisaProdutoComponent implements OnInit {
   }
 
   onEdit(dados: any){
-    // this.router.navigate(['../../clientes'], {queryParams: {id: dados.id} });
     this.router.navigate(['../../produtos'], {queryParams: {
       id: dados.id,
       descricao: dados.descricao,

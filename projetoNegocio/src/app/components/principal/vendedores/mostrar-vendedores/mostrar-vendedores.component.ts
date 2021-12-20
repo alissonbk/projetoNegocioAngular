@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit, forwardRef } from '@angular/core';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
+
 import { Vendedor } from 'src/app/models/vendedor';
 import { VendedoresService } from 'src/app/services/vendedores.service';
 import { VendedoresComponent } from '../vendedores.component';

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+
 import { EstadoBr } from 'src/app/models/estado-br';
 import { DropdownService } from 'src/app/services/dropdown.service';
 import { VendedoresService } from 'src/app/services/vendedores.service';
@@ -39,7 +41,6 @@ export class PesquisaVendedorComponent implements OnInit {
   }
 
   onEdit(dados: any){
-    // this.router.navigate(['../../clientes'], {queryParams: {id: dados.id} });
     this.router.navigate(['../../vendedores'], {queryParams: {
       id: dados.id,
       nome: dados.nome,

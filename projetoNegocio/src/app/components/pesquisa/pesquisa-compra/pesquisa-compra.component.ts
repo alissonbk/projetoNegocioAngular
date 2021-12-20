@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+
 import { ComprasService } from 'src/app/services/compras.service';
 
 @Component({
@@ -32,14 +34,6 @@ export class PesquisaCompraComponent implements OnInit {
   }
 
   onEdit(dados: any){
-    // this.router.navigate(['../../clientes'], {queryParams: {id: dados.id} });
-    // this.router.navigate(['../../compras'], {queryParams: {
-    //   id: dados.id,
-    //   cliente: dados.cliente,
-    //   produto: dados.produto,
-    //   vendedor: dados.vendedor,
-    // }, skipLocationChange: true
-    // });
     this.router.navigate(['../../compras'], {queryParams: {id: dados.id}, skipLocationChange: true });
   }
 

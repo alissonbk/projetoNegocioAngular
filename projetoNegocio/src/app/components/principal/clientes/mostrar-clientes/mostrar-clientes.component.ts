@@ -1,8 +1,8 @@
+import { Component, OnInit, Inject, forwardRef } from '@angular/core';
+
 import { ClientesComponent } from './../clientes.component';
-import { Component, OnInit, Input, Inject, forwardRef } from '@angular/core';
 import { ClientesService } from 'src/app/services/clientes.service';
-import { map } from 'rxjs/operators';
-import { Cliente } from 'src/app/models/cliente';
+
 
 @Component({
   selector: 'app-mostrar-clientes',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { delay } from 'rxjs/operators';
-import { Compra } from 'src/app/models/compra';
+
+
 import { ClientesService } from 'src/app/services/clientes.service';
 import { ComprasService } from 'src/app/services/compras.service';
 import { ProdutosService } from 'src/app/services/produtos.service';

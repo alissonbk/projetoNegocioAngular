@@ -1,8 +1,9 @@
-import { OnChanges } from '@angular/core';
 import { Component, forwardRef, Inject, OnInit } from '@angular/core';
-import { Event, NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+
+
 import { Produto } from 'src/app/models/produto';
 import { ProdutosService } from 'src/app/services/produtos.service';
 import { ProdutosComponent } from '../produtos.component';
