@@ -9,11 +9,11 @@ import localePt from '@angular/common/locales/pt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './components/home/home.module';
-import { LoginModule } from './components/login/login.module';
-import { PaginaNaoEncontradaModule } from './components/pagina-nao-encontrada/pagina-nao-encontrada.module';
-import { HeaderModule } from './components/shared/header/header.module';
-import { MsgErroModule } from './components/shared/msg-erro/msg-erro.module';
+import { HomeModule } from './shared/components/home/home.module';
+import { LoginModule } from './modules/login/login.module';
+import { PaginaNaoEncontradaModule } from './shared/components/pagina-nao-encontrada/pagina-nao-encontrada.module';
+import { HeaderModule } from './core/header/header.module';
+import { MsgErroModule } from './shared/components/msg-erro/msg-erro.module';
 
 
 
