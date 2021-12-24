@@ -27,6 +27,9 @@ export class MostrarClientesComponent implements OnInit {
     this.loadClientes();
     this._parent.hideBtn = true;
   }
+  ngAfterViewInit(): void {
+    window.scroll(0, 500);
+  }
 
 
   loadClientes(){

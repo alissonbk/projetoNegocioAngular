@@ -120,11 +120,11 @@
 
                     <!-- MOSTRAR -->
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
-                        <button type="button" (click)="hideButton(scrollDown)" class="btn btn-block mostrar">Mostrar Todos</button>
+                        <button type="button" (click)="hideButton()" class="btn btn-block mostrar">Mostrar Todos</button>
                     </div>
 
                     <div class="form-group col-md-2" *ngIf="hideBtn">
-                        <button type="button" (click)="hideButton(scrollTop)" class="btn btn-block mostrar">Esconder</button>
+                        <button type="button" (click)="hideButton()" class="btn btn-block mostrar">Esconder</button>
                     </div>
                 </div>  
             </div>
@@ -134,7 +134,7 @@
 
 
 
-<div class="mostrarClientes" #scrollDown>
+<div class="mostrarClientes">
     <router-outlet></router-outlet>
 </div>
 

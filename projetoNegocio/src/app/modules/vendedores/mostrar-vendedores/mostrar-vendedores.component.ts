@@ -26,6 +26,12 @@ export class MostrarVendedoresComponent implements OnInit {
     this.loadVendedores();
     this._parent.hideBtn = true;
   }
+  ngAfterViewInit(): void {
+    window.scroll(0, 500);
+  }
+  ngAfterContentInit(tableContent: any): void {
+    window.scroll(0, 2000);
+  }
 
   loadVendedores(){
     this.vendedores$ = this.vendedoresService.getVendedores().pipe(

@@ -23,8 +23,12 @@ export class MostrarComprasComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCompras();
-    
+    this._parent.hideBtn = true;
   }
+  ngAfterViewInit(): void {
+    window.scroll(0, 500);
+  }
+
 
 
   loadCompras(){
