@@ -46,10 +46,10 @@ export class ProdutosComponent implements OnInit {
     /*Resolve o problema de acessar diretamente o child mostrar e não atualizar o valor no parent*/
     this.cf.detectChanges();
   }
-
-  // ngOnChanges(){
-  //   console.log("CHANGES");
-  // }
+  
+  ngAfterViewInit(): void {
+    window.scroll(0, -300);
+  }
 
   /*SUBMIT EDIT DELETE*/
   onSubmit(){

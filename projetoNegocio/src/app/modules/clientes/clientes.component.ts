@@ -75,6 +75,9 @@ export class ClientesComponent implements OnInit {
     this.clientes.get('endereco.estado')?.setValue(this.route.snapshot.queryParamMap.get('estado'));
     // console.log(this.clientes.get('id')?.value);
   }
+  ngAfterViewInit(): void {
+    window.scroll(0, -300);
+  }
 
 
   onSubmit(){

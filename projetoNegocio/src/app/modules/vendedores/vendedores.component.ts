@@ -80,6 +80,10 @@ export class VendedoresComponent implements OnInit {
     this.cf.detectChanges();
   }
 
+  ngAfterViewInit(): void {
+    window.scroll(0, -300);
+  }
+
 
   onSubmit(){
     if(this.vendedores.get('id')?.value != null){

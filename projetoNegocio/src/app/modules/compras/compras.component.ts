@@ -58,8 +58,10 @@ export class ComprasComponent implements OnInit {
     if(this.paramId != null){
       this.getById(this.paramId);
     }
-      
-
+  }
+  
+  ngAfterViewInit(): void {
+    window.scroll(0, -300);
   }
 
 
