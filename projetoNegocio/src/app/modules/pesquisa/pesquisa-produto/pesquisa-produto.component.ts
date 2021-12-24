@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 import { ProdutosService } from 'src/app/core/services/produtos.service';
+import { Produto } from 'src/app/shared/models/produto';
 
 @Component({
   selector: 'app-pesquisa-produto',
@@ -11,7 +14,8 @@ import { ProdutosService } from 'src/app/core/services/produtos.service';
 })
 export class PesquisaProdutoComponent implements OnInit {
 
-  data: any;
+  produtos$!: Observable<Produto[]>;
+  error$ = new Subject<boolean>();
   queryDesc!: string;
   queryMarca!: string;
   queryValor!: number;
@@ -26,10 +30,13 @@ export class PesquisaProdutoComponent implements OnInit {
   }
 
   loadProdutos(){
-    this.produtosService.getProdutos().subscribe((produtos: any)=>{
-      this.data = produtos;
-      console.log("data", this.data);
-    })
+    this.produtos$ = this.produtosService.getProdutos().pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
   }
 
   onEdit(dados: any){

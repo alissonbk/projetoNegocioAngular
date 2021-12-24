@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { EstadoBr } from 'src/app/shared/models/estado-br';
 import { DropdownService } from 'src/app/core/services/dropdown.service';
 import { VendedoresService } from 'src/app/core/services/vendedores.service';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { Vendedor } from 'src/app/shared/models/vendedor';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pesquisa-vendedor',
@@ -13,7 +16,8 @@ import { VendedoresService } from 'src/app/core/services/vendedores.service';
 })
 export class PesquisaVendedorComponent implements OnInit {
 
-  data: any;
+  vendedores$!: Observable<Vendedor[]>;
+  error$ = new Subject<boolean>();
   queryNome!: string;
   queryCPF!: string;
   queryEstado!: EstadoBr[];
@@ -34,10 +38,13 @@ export class PesquisaVendedorComponent implements OnInit {
 
 
   loadVendedores(){
-    this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
-      this.data = vendedores;
-      console.log("data : ", this.data);
-    })
+    this.vendedores$ = this.vendedoresService.getVendedores().pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
   }
 
   onEdit(dados: any){

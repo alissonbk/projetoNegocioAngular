@@ -5,6 +5,9 @@ import { Router } from '@angular/router';
 import { EstadoBr } from 'src/app/shared/models/estado-br';
 import { ClientesService } from 'src/app/core/services/clientes.service';
 import { DropdownService } from 'src/app/core/services/dropdown.service';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { Cliente } from 'src/app/shared/models/cliente';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pesquisa-cliente',
@@ -13,7 +16,8 @@ import { DropdownService } from 'src/app/core/services/dropdown.service';
 })
 export class PesquisaClienteComponent implements OnInit {
 
-  data: any;
+  clientes$!: Observable<Cliente[]>;
+  error$ = new Subject<boolean>();
   queryNome!: string;
   queryCPF!: string;
   queryEstado!: EstadoBr[];
@@ -36,9 +40,13 @@ export class PesquisaClienteComponent implements OnInit {
 
 
   loadClientes(){
-    this.clientesService.getClientes().subscribe((clientes:any) => {
-      this.data = clientes;
-    })
+    this.clientes$ = this.clientesService.getClientes().pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
   }
 
   onEdit(dados: any){

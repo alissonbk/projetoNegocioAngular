@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 import { ComprasService } from 'src/app/core/services/compras.service';
+import { Compra } from 'src/app/shared/models/compra';
 
 @Component({
   selector: 'app-pesquisa-compra',
@@ -11,7 +14,8 @@ import { ComprasService } from 'src/app/core/services/compras.service';
 })
 export class PesquisaCompraComponent implements OnInit {
 
-  data: any;
+  compras$!: Observable<Compra[]>;
+  error$ = new Subject<boolean>();
   queryCliente!: string;
   queryVendedor!: string;
   queryProduto!: string;
@@ -25,12 +29,14 @@ export class PesquisaCompraComponent implements OnInit {
     this.loadCompras();
   }
 
-
   loadCompras(){
-    this.comprasService.getCompras().subscribe((compras:any) =>{
-      this.data = compras;
-      console.log("data : ", this.data);
-    })
+   this.compras$ = this.comprasService.getCompras().pipe(
+     catchError(error => {
+       console.log(error);
+       this.error$.next(true);
+       return EMPTY;
+     })
+   );
   }
 
   onEdit(dados: any){
