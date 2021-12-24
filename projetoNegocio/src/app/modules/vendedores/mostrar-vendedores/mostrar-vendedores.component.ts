@@ -29,9 +29,6 @@ export class MostrarVendedoresComponent implements OnInit {
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
-  ngAfterContentInit(tableContent: any): void {
-    window.scroll(0, 2000);
-  }
 
   loadVendedores(){
     this.vendedores$ = this.vendedoresService.getVendedores().pipe(

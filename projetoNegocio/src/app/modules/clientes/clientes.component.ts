@@ -102,6 +102,7 @@ export class ClientesComponent implements OnInit {
         "estado": dados.endereco.estado
     }
     });
+    window.scroll(0, -300);
   }
 
   onDelete(dados: any){

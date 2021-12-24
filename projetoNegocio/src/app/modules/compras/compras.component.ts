@@ -78,7 +78,8 @@ export class ComprasComponent implements OnInit {
       "cliente": dados.cliente,
       "produto": dados.produto,
       "vendedor": dados.vendedor
-    })
+    });
+    window.scroll(0, -300);
   }
 
   onDelete(dados: any){

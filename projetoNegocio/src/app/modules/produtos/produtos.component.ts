@@ -94,6 +94,7 @@ export class ProdutosComponent implements OnInit {
       "marca": dados.marca,
       "valor": dados.valor
     });
+    window.scroll(0, -300);
   }
   onDelete(dados: any){
     if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
