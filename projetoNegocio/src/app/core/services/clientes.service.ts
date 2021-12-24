@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import {catchError, tap} from "rxjs/operators";
+import {catchError, delay, tap} from "rxjs/operators";
 
 
 import { Cliente } from '../../shared/models/cliente';
@@ -30,9 +30,9 @@ export class ClientesService extends AbstractService {
   }
   
   getClientes(): Observable<any[]>{
-    return this.http.get<any[]>('assets/mocks/mockCliente.json').pipe(
-        //tap(console.log),
-        catchError(this.handleError)
+    return this.http.get('../assets/mocks/mockCliente.json').pipe(
+      tap(console.log),
+      delay(1000)
     );
   }
 }

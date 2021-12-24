@@ -1,7 +1,10 @@
-import { Component, OnInit, Inject, forwardRef } from '@angular/core';
+import { Component, OnInit, Inject, forwardRef, ViewChild, ElementRef } from '@angular/core';
 
 import { ClientesComponent } from '../clientes.component';
 import { ClientesService } from 'src/app/core/services/clientes.service';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { Cliente } from 'src/app/shared/models/cliente';
+import { catchError } from 'rxjs/operators';
 
 
 @Component({
@@ -11,7 +14,9 @@ import { ClientesService } from 'src/app/core/services/clientes.service';
 })
 export class MostrarClientesComponent implements OnInit {
 
-  data: any;
+  clientes$!: Observable<Cliente[]>;
+  error$ = new Subject<boolean>();
+  @ViewChild('content') content!: ElementRef;
 
   constructor(
     private clientesService: ClientesService,
@@ -20,18 +25,18 @@ export class MostrarClientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClientes();
-
-    // this.clienteService.emitirCliente.subscribe( cliente => console.log("emiiter", cliente));
-    console.log("Mostrar data: ", this.data);
+    this._parent.hideBtn = true;
   }
 
 
   loadClientes(){
-    this.clientesService.getClientes().subscribe((clientes:any) => {
-      this.data = clientes;
-      //console.log("data= ",this.data);
-    })
-    
+    this.clientes$ = this.clientesService.getClientes().pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    );
   }
 
   onEdit(dados: any){

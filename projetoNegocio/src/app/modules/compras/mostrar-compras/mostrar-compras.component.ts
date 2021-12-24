@@ -1,7 +1,10 @@
 import { Component, forwardRef, Inject, OnInit } from '@angular/core';
+import { EMPTY, Observable, Subject } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 
 import { ComprasService } from 'src/app/core/services/compras.service';
+import { Compra } from 'src/app/shared/models/compra';
 import { ComprasComponent } from '../compras.component';
 
 @Component({
@@ -11,7 +14,8 @@ import { ComprasComponent } from '../compras.component';
 })
 export class MostrarComprasComponent implements OnInit {
 
-  data: any;
+  compras$!: Observable<Compra[]>;
+  error$ = new Subject<boolean>();
   constructor(
     private comprasService: ComprasService,
     @Inject(forwardRef(() => ComprasComponent)) private _parent: ComprasComponent
@@ -24,9 +28,13 @@ export class MostrarComprasComponent implements OnInit {
 
 
   loadCompras(){
-    this.comprasService.getCompras().subscribe((compras: any) =>{
-      this.data = compras;
-    })
+    this.compras$ = this.comprasService.getCompras().pipe(
+      catchError(error => {
+        console.log(error);
+        this.error$.next(true);
+        return EMPTY;
+      })
+    )
   }
 
   onEdit(dados: any){

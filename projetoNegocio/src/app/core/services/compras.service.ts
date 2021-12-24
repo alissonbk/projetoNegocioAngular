@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import { catchError, delay, tap } from "rxjs/operators";
 
 
 import { Compra } from "../../shared/models/compra";
@@ -32,9 +32,9 @@ export class ComprasService extends AbstractService{
     }
     
     getCompras(): Observable<any[]>{
-        return this.http.get<any[]>('/assets/mocks/mockCompras.json').pipe(
-            //tap(console.log),
-            catchError(this.handleError)
+        return this.http.get<Compra[]>('/assets/mocks/mockCompras.json').pipe(
+            tap(console.log),
+            delay(1000)
         )
     }
 }

@@ -1,11 +1,4 @@
-<!-- <div *ngFor="let c of data">
-    <pre>
-        {{ c | json}}
-    </pre>
-    
-</div> -->
-
-<table class="table myTable">
+<table class="table myTable" *ngIf="(clientes$ | async) as clientes; else loading">
     <thead class="thead-dark">
     <tr>
         <th class="cursor-pointer w-170p">Action</th>
@@ -38,8 +31,8 @@
         </th>
     </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let c of (data?.clientes)" class="cursor-pointer">
+    <tbody #content>
+        <tr *ngFor="let c of clientes" class="cursor-pointer">
             <td>
                 <ul class="action-list">
                     <li><a (click)="onEdit(c)" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></li>
@@ -58,3 +51,13 @@
         </tr>
     </tbody>
 </table>
+
+<ng-template #loading>
+    <div class="d-flex justify-content-center mt-5" *ngIf="(error$ | async); else noError">
+        <p class="col-md-7 d-flex justify-content-center alert alert-danger">Erro ao carregar Clientes!</p>
+    </div>
+    <ng-template #noError>
+        <div class="lds-dual-ring"></div>
+    </ng-template>
+    
+</ng-template>

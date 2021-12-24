@@ -112,14 +112,15 @@ export class ClientesComponent implements OnInit {
 
 
 
-  hideButton(){
+  hideButton(el: HTMLElement){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
       this.router.navigate(['/clientes/mostrar']);
+      el.scrollIntoView({block: "center", behavior: "smooth"});
     }else{
       this.router.navigate(['/clientes']);
+      el.scrollIntoView();
     }
-    
   }
 
   // VALIDATION FUNCTIONS

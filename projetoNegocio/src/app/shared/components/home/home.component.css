@@ -48,7 +48,7 @@
 /* PARALAX */
 .parallax {
   /* The image used */
-  background-image: url("../../../assets/imgopc2.png");
+  background-image: url("../../../../assets/imgopc2.png");
   opacity: 1;
   /* Set a specific height */
   min-height: 600px;

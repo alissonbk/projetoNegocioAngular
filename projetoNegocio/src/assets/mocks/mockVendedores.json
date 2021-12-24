@@ -1,47 +1,44 @@
-{
-    "vendedores":[
-        {
-            "id": 1,
-            "nome": "Carlos Novaes",
-            "cpf": "18009851000",
-            "email": "joao@email.com",
-            "endereco":{
-                "cep": "69915738",
-                "rua": "Avenida Iáco",
-                "numero": "999",
-                "bairro": "Portal da Amazônia",
-                "cidade": "Rio Branco",
-                "estado": "AC"
-            }
-        },
-        {
-            "id": 2,
-            "nome": "Sophia Josefa Sophia da Mata",
-            "cpf": "17522154006",
-            "email": "sophia@email.com",
-            "endereco":{
-                "cep": "57602280",
-                "rua": "Rua Sebastião Medeiros",
-                "numero": "312",
-                "bairro": "São Francisco",
-                "cidade": "Palmeira dos Índios",
-                "estado": "AL"
-            }
-        },
-        {
-            "id": 3,
-            "nome": "Breno Eduardo Pietro Teixeira",
-            "cpf": "55149346756",
-            "email": "brenoeduardopietroteixeira-80@distribuidorapetfarm.com.br",
-            "endereco":{
-                "cep": "76900057",
-                "rua": "Avenida Marechal Rondon",
-                "numero": "988",
-                "bairro": "Centro",
-                "cidade": "Ji-Paraná",
-                "estado": "RO"
-            }
+[
+    {
+        "id": 1,
+        "nome": "Carlos Novaes",
+        "cpf": "18009851000",
+        "email": "joao@email.com",
+        "endereco":{
+            "cep": "69915738",
+            "rua": "Avenida Iáco",
+            "numero": "999",
+            "bairro": "Portal da Amazônia",
+            "cidade": "Rio Branco",
+            "estado": "AC"
         }
-    ]
-
-}
+    },
+    {
+        "id": 2,
+        "nome": "Sophia Josefa Sophia da Mata",
+        "cpf": "17522154006",
+        "email": "sophia@email.com",
+        "endereco":{
+            "cep": "57602280",
+            "rua": "Rua Sebastião Medeiros",
+            "numero": "312",
+            "bairro": "São Francisco",
+            "cidade": "Palmeira dos Índios",
+            "estado": "AL"
+        }
+    },
+    {
+        "id": 3,
+        "nome": "Breno Eduardo Pietro Teixeira",
+        "cpf": "55149346756",
+        "email": "brenoeduardopietroteixeira-80@distribuidorapetfarm.com.br",
+        "endereco":{
+            "cep": "76900057",
+            "rua": "Avenida Marechal Rondon",
+            "numero": "988",
+            "bairro": "Centro",
+            "cidade": "Ji-Paraná",
+            "estado": "RO"
+        }
+    }
+]

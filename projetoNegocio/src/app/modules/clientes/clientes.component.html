@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
     <div class="clientesContainer d-flex justify-content-center">
         <form class="form-horizontal" [formGroup]="clientes" (ngSubmit)="onSubmit()">
-            <div class="container mt-5">
+            <div class="container mt-5" #scrollTop>
                 <div *ngIf="clientes.get('id')?.value == null" class="title">
                     Cadastrar Cliente
                 </div>
@@ -120,11 +120,11 @@
 
                     <!-- MOSTRAR -->
                     <div class="form-group col-md-2" *ngIf="!hideBtn">
-                        <button type="button" (click)="hideButton()" class="btn btn-block mostrar">Mostrar Todos</button>
+                        <button type="button" (click)="hideButton(scrollDown)" class="btn btn-block mostrar">Mostrar Todos</button>
                     </div>
 
                     <div class="form-group col-md-2" *ngIf="hideBtn">
-                        <button type="button" (click)="hideButton()" class="btn btn-block mostrar">Esconder</button>
+                        <button type="button" (click)="hideButton(scrollTop)" class="btn btn-block mostrar">Esconder</button>
                     </div>
                 </div>  
             </div>
@@ -134,7 +134,7 @@
 
 
 
-<div class="mostrarClientes">
+<div class="mostrarClientes" #scrollDown>
     <router-outlet></router-outlet>
 </div>
 
