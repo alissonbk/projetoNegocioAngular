@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 
-import { ClientesGuard } from "src/app/core/guards/clientes.guard";
+import { UsuariosGuard } from "src/app/core/guards/usuarios.guard";
 import { PesquisaClienteComponent } from "./pesquisa-cliente/pesquisa-cliente.component";
 import { PesquisaCompraComponent } from "./pesquisa-compra/pesquisa-compra.component";
 import { PesquisaProdutoComponent } from "./pesquisa-produto/pesquisa-produto.component";
@@ -11,7 +11,7 @@ import { PesquisaComponent } from "./pesquisa.component";
 
 
 const routes: Routes = [
-    {path: '', component: PesquisaComponent,  canActivateChild: [ClientesGuard],
+    {path: '', component: PesquisaComponent,  canActivateChild: [UsuariosGuard],
         children: [
             {path: 'pesquisaCliente', component: PesquisaClienteComponent},
             {path: 'pesquisaVendedor', component: PesquisaVendedorComponent},

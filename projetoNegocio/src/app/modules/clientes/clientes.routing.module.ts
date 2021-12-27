@@ -2,13 +2,13 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 
-import { ClientesGuard } from "src/app/core/guards/clientes.guard";
+import { UsuariosGuard } from "src/app/core/guards/usuarios.guard";
 import { ClientesComponent } from "./clientes.component";
 import { MostrarClientesComponent } from "./mostrar-clientes/mostrar-clientes.component";
 
 
 const routes: Routes = [
-    {path: '', component: ClientesComponent,  canActivateChild: [ClientesGuard],
+    {path: '', component: ClientesComponent,  canActivateChild: [UsuariosGuard],
         children: [
             {path: 'mostrar', component: MostrarClientesComponent}
         ]
