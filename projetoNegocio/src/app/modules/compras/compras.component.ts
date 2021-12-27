@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -64,11 +64,21 @@ export class ComprasComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-
   onSubmit(){
     if(this.compras.get('id')?.value == null){
       this.comprasService.cadastrarCompra(this.compras.value);
     }else{
+      //Caso o usuario não mude o campo, seleciona apenas o id.
+      if(this.compras.get('cliente')?.value.id){
+        this.compras.get('cliente')?.setValue(this.compras.get('cliente')?.value.id);
+      }
+      if(this.compras.get('produto')?.value.id){
+        this.compras.get('produto')?.setValue(this.compras.get('produto')?.value.id);
+      }
+      if(this.compras.get('vendedor')?.value.id){
+        this.compras.get('vendedor')?.setValue(this.compras.get('vendedor')?.value.id);
+      }
+      
       this.comprasService.editarCompra(this.compras.value);
     }
     this.compras.reset();

@@ -18,13 +18,13 @@
                             <label for="cliente" class="label">Cliente</label>
                             <div *ngIf="compras.get('cliente')?.value?.id == null">
                                 <select class="form-control input" id="cliente" placeholder="Selecione o cliente"  formControlName="cliente">
-                                    <option *ngFor="let c of clientes?.clientes" [value]="c">{{ c.nome }}</option>
+                                    <option *ngFor="let c of clientes" [value]="c?.id">{{ c.nome }}</option>
                                 </select>
                             </div>
                             <div *ngIf="compras.get('cliente')?.value?.id != null">
                                 <select class="form-control input" id="cliente" placeholder="Selecione o cliente" formControlName="cliente">
                                     <option hidden [value]="compras.get('cliente')" selected>{{ compras.get('cliente')?.value.nome }}</option>
-                                    <option *ngFor="let c of clientes?.clientes" [value]="c">{{ c.nome }}</option>
+                                    <option *ngFor="let c of clientes" [value]="c?.id">{{ c.nome }}</option>
                                 </select>
                             </div>
                             
@@ -39,13 +39,13 @@
                             <label for="produto" class="label">Produto</label>
                             <div *ngIf="compras.get('produto')?.value?.id == null">
                                 <select class="form-control input" id="produto" placeholder="Selecione o produto" formControlName="produto">
-                                    <option *ngFor="let p of produtos?.produtos" [value]="p">{{ p.descricao }}</option>
+                                    <option *ngFor="let p of produtos" [value]="p?.id">{{ p.descricao }}</option>
                                 </select>
                             </div>
                             <div *ngIf="compras.get('produto')?.value?.id != null">
                                 <select class="form-control input" id="produto" placeholder="Selecione o produto" formControlName="produto">
                                     <option hidden [value]="compras.get('produto')">{{ compras.get('produto')?.value.descricao }}</option>
-                                    <option *ngFor="let p of produtos?.produtos" [value]="p">{{ p.descricao }}</option>
+                                    <option *ngFor="let p of produtos" [value]="p?.id">{{ p.descricao }}</option>
                                 </select>
                             </div>
                             <div class="erroValidacao">
@@ -59,13 +59,13 @@
                             <label for="vendedor" class="label">Vendedor</label>
                             <div *ngIf="compras.get('vendedor')?.value?.id == null">
                                 <select class="form-control input" id="vendedor" placeholder="Selecione o vendedor" formControlName="vendedor">
-                                    <option *ngFor="let v of vendedores?.vendedores" [value]="v">{{ v.nome }}</option>
+                                    <option *ngFor="let v of vendedores" [value]="v?.id">{{ v.nome }}</option>
                                 </select>
                             </div>
                             <div *ngIf="compras.get('vendedor')?.value?.id != null">
                                 <select class="form-control input" id="vendedor" placeholder="Selecione o vendedor" formControlName="vendedor">
                                     <option hidden [value]="compras.get('vendedor')">{{ compras.get('vendedor')?.value.nome }}</option>
-                                    <option *ngFor="let v of vendedores?.vendedores" [value]="v">{{ v.nome }}</option>
+                                    <option *ngFor="let v of vendedores" [value]="v?.id">{{ v.nome }}</option>
                                 </select>
                             </div>
                             <div class="erroValidacao">
