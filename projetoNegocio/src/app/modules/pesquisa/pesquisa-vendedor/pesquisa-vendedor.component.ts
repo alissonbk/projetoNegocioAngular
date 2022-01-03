@@ -54,19 +54,7 @@ export class PesquisaVendedorComponent implements OnInit {
   }
 
   onEdit(dados: any){
-    this.router.navigate(['../../vendedores'], {queryParams: {
-      id: dados.id,
-      nome: dados.nome,
-      email: dados.email,
-      cpf: dados.cpf,
-      cep: dados.endereco.cep,
-      numero: dados.endereco.numero,
-      rua: dados.endereco.rua,
-      bairro: dados.endereco.bairro,
-      cidade: dados.endereco.cidade,
-      estado: dados.endereco.estado
-    }, skipLocationChange: true 
-    });
+    this.router.navigate(['../../vendedores'], {queryParams: {id: dados.id,}, skipLocationChange: true });
   }
 
   onDelete(dados: any){

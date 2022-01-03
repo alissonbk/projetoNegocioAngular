@@ -21,7 +21,7 @@ export class ClientesComponent implements OnInit {
   clientes!: FormGroup;
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
-  xd!: any;
+  paramId!: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,19 +61,12 @@ export class ClientesComponent implements OnInit {
     this.dropdownService.getEstadosBr().subscribe((estado: any) =>{
       this.todosEstados = estado;
     })
-    //path param
-    console.log(this.route.snapshot.queryParamMap.get('cep'));
-    this.clientes.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
-    this.clientes.get('nome')?.setValue(this.route.snapshot.queryParamMap.get('nome'));
-    this.clientes.get('email')?.setValue(this.route.snapshot.queryParamMap.get('email'));
-    this.clientes.get('cpf')?.setValue(this.route.snapshot.queryParamMap.get('cpf'));
-    this.clientes.get('endereco.cep')?.setValue(this.route.snapshot.queryParamMap.get('cep'));
-    this.clientes.get('endereco.numero')?.setValue(this.route.snapshot.queryParamMap.get('numero'));
-    this.clientes.get('endereco.rua')?.setValue(this.route.snapshot.queryParamMap.get('rua'));
-    this.clientes.get('endereco.bairro')?.setValue(this.route.snapshot.queryParamMap.get('bairro'));
-    this.clientes.get('endereco.cidade')?.setValue(this.route.snapshot.queryParamMap.get('cidade'));
-    this.clientes.get('endereco.estado')?.setValue(this.route.snapshot.queryParamMap.get('estado'));
-    // console.log(this.clientes.get('id')?.value);
+    //Path param
+    this.paramId = this.route.snapshot.queryParamMap.get('id');
+    if(this.paramId != null){
+      this.getById(this.paramId);
+    }
+    
   }
   ngAfterViewInit(): void {
     window.scroll(0, -300);
@@ -112,6 +105,16 @@ export class ClientesComponent implements OnInit {
     if(confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`)){
       this.clientesService.excluirCliente(dados.id);
     }
+  }
+
+  getById(id: number){
+    this.clientesService.getClientes().subscribe((clientes: any) => {
+      for(let cliente of clientes){
+        if(cliente.id == id){
+          this.onEdit(cliente);
+        }
+      }
+    })
   }
 
 

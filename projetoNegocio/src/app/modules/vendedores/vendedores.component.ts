@@ -22,6 +22,7 @@ export class VendedoresComponent implements OnInit {
   vendedores!: FormGroup;
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
+  paramId!: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,17 +66,12 @@ export class VendedoresComponent implements OnInit {
       this.todosEstados = estados;
     })
 
-    //path param
-    this.vendedores.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
-    this.vendedores.get('nome')?.setValue(this.route.snapshot.queryParamMap.get('nome'));
-    this.vendedores.get('email')?.setValue(this.route.snapshot.queryParamMap.get('email'));
-    this.vendedores.get('cpf')?.setValue(this.route.snapshot.queryParamMap.get('cpf'));
-    this.vendedores.get('endereco.cep')?.setValue(this.route.snapshot.queryParamMap.get('cep'));
-    this.vendedores.get('endereco.numero')?.setValue(this.route.snapshot.queryParamMap.get('numero'));
-    this.vendedores.get('endereco.rua')?.setValue(this.route.snapshot.queryParamMap.get('rua'));
-    this.vendedores.get('endereco.bairro')?.setValue(this.route.snapshot.queryParamMap.get('bairro'));
-    this.vendedores.get('endereco.cidade')?.setValue(this.route.snapshot.queryParamMap.get('cidade'));
-    this.vendedores.get('endereco.estado')?.setValue(this.route.snapshot.queryParamMap.get('estado'));
+    //Path param
+    this.paramId = this.route.snapshot.queryParamMap.get('id');
+    if(this.paramId != null){
+      this.getById(this.paramId);
+    }
+    
 
     this.cf.detectChanges();
   }
@@ -152,6 +148,16 @@ export class VendedoresComponent implements OnInit {
       );
     }
   }
+
+  getById(id: number){
+    this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
+      for(let vendedor of vendedores){
+        if(vendedor.id == id){
+          this.onEdit(vendedor);
+        }
+      }
+    })
+  } 
 
   reloadPage(){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;

@@ -16,6 +16,7 @@ export class ProdutosComponent implements OnInit {
 
   produtos!: FormGroup;
   hideBtn!: boolean;
+  paramId!: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,11 +38,11 @@ export class ProdutosComponent implements OnInit {
       valor: [null, [Validators.required]]
     })
 
-    /*DADOS DE PESQUISA(EDITAR)*/
-    this.produtos.get('id')?.setValue(this.route.snapshot.queryParamMap.get('id'));
-    this.produtos.get('descricao')?.setValue(this.route.snapshot.queryParamMap.get('descricao'));
-    this.produtos.get('marca')?.setValue(this.route.snapshot.queryParamMap.get('marca'));
-    this.produtos.get('valor')?.setValue(this.route.snapshot.queryParamMap.get('valor'));
+    // Path param
+    this.paramId = this.route.snapshot.queryParamMap.get('id');
+    if(this.paramId != null){
+      this.getById(this.paramId);
+    }
 
     /*Resolve o problema de acessar diretamente o child mostrar e não atualizar o valor no parent*/
     this.cf.detectChanges();
@@ -112,6 +113,17 @@ export class ProdutosComponent implements OnInit {
       );
     }
   }
+
+  getById(id: number){
+    this.produtosService.getProdutos().subscribe((produtos: any) => {
+      for(let produto of produtos){
+        if(produto.id == id){
+          this.onEdit(produto);
+        }
+      }
+    })
+  }
+
 
   reloadPage(){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;

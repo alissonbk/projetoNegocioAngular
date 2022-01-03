@@ -46,13 +46,7 @@ export class PesquisaProdutoComponent implements OnInit {
   }
 
   onEdit(dados: any){
-    this.router.navigate(['../../produtos'], {queryParams: {
-      id: dados.id,
-      descricao: dados.descricao,
-      marca: dados.marca,
-      valor: dados.valor,
-    }, skipLocationChange: true 
-    });
+    this.router.navigate(['../../produtos'], {queryParams: {id: dados.id}, skipLocationChange: true });
   }
 
   onDelete(dados: any){

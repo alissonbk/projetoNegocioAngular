@@ -53,7 +53,6 @@ export class ComprasComponent implements OnInit {
 
     //Path params
     this.paramId = this.route.snapshot.queryParamMap.get('id');
-    console.log("id: ",this.paramId);
     if(this.paramId != null){
       this.getById(this.paramId);
     }
