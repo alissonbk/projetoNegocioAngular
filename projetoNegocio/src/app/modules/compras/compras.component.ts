@@ -22,7 +22,6 @@ export class ComprasComponent implements OnInit {
   hideBtn!: boolean;
   paramId!: any;
   compraById!: any;
-  allCompras: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -102,13 +101,9 @@ export class ComprasComponent implements OnInit {
 
   getById(id: number){
     this.comprasService.getCompras().subscribe((compras: any) => {
-      this.allCompras = compras;
-      for(let compra of (this.allCompras?.compras)){
+      for(let compra of compras){
         if(compra.id == id){
-          this.compras.get('id')?.setValue(compra.id);
-          this.compras.get('cliente')?.setValue(compra.cliente);
-          this.compras.get('produto')?.setValue(compra.produto);
-          this.compras.get('vendedor')?.setValue(compra.vendedor);
+          this.onEdit(compra);
         }
       }
     })
