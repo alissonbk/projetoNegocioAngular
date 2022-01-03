@@ -93,7 +93,7 @@ export class ProdutosComponent implements OnInit {
       "id": dados.id,
       "descricao": dados.descricao,
       "marca": dados.marca,
-      "valor": dados.valor
+      "valor": dados.valor.split('.').join(',')
     });
     window.scroll(0, -300);
   }
