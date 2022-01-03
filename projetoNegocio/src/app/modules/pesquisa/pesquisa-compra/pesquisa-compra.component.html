@@ -24,6 +24,7 @@
 </div>
 
 <table class="table myTable" *ngIf="(compras$ | async) as compras; else loading">
+    <div *ngIf="compras$ ? changeLoaded() : null"></div>
     <thead class="thead-dark">
     <tr>
         <th class="cursor-pointer w-170p">Action</th>

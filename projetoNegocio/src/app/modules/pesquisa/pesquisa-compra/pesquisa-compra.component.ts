@@ -19,6 +19,7 @@ export class PesquisaCompraComponent implements OnInit {
   queryCliente!: string;
   queryVendedor!: string;
   queryProduto!: string;
+  dataLoaded: boolean = false;
 
   constructor(
     private comprasService: ComprasService,
@@ -27,6 +28,11 @@ export class PesquisaCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCompras();
+  }
+  ngAfterViewChecked(){
+    if(this.dataLoaded){
+      window.scroll(0, 400);
+    }
   }
 
   loadCompras(){
@@ -47,6 +53,10 @@ export class PesquisaCompraComponent implements OnInit {
     if(confirm(`Você tem certeza que deseja excluir a compra (cliente: ${dados.cliente.nome} produto:${dados.produto.descricao})?`)){
       this.comprasService.excluirCompra(dados.id);
     }
+  }
+
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 }

@@ -22,6 +22,7 @@ export class PesquisaVendedorComponent implements OnInit {
   queryCPF!: string;
   queryEstado!: EstadoBr[];
   queryCidade!: string;
+  dataLoaded: boolean = false;
 
   constructor(
     private vendedoresService: VendedoresService,
@@ -34,6 +35,11 @@ export class PesquisaVendedorComponent implements OnInit {
     this.dropDownService.getEstadosBr().subscribe((estados: any) => {
       this.queryEstado = estados;
     })
+  }
+  ngAfterViewChecked(){
+    if(this.dataLoaded){
+      window.scroll(0, 400);
+    }
   }
 
 
@@ -67,6 +73,10 @@ export class PesquisaVendedorComponent implements OnInit {
     if(confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`)){
       this.vendedoresService.excluirVendedor(dados.id);
     }
+  }
+
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 }

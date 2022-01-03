@@ -19,6 +19,7 @@ export class PesquisaProdutoComponent implements OnInit {
   queryDesc!: string;
   queryMarca!: string;
   queryValor!: number;
+  dataLoaded: boolean = false;
 
   constructor(
     private produtosService: ProdutosService,
@@ -27,6 +28,11 @@ export class PesquisaProdutoComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProdutos();
+  }
+  ngAfterViewChecked(){
+    if(this.dataLoaded){
+      window.scroll(0, 400);
+    }
   }
 
   loadProdutos(){
@@ -53,6 +59,10 @@ export class PesquisaProdutoComponent implements OnInit {
     if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
       this.produtosService.excluirProduto(dados.id);
     }
+  }
+  
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 }

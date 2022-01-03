@@ -22,6 +22,7 @@ export class PesquisaClienteComponent implements OnInit {
   queryCPF!: string;
   queryEstado!: EstadoBr[];
   queryCidade!: string;
+  dataLoaded: boolean = false;
   
   constructor(
     private clientesService: ClientesService,
@@ -36,6 +37,11 @@ export class PesquisaClienteComponent implements OnInit {
   ngOnInit(): void {
     this.loadClientes();
     this.dropDownService.getEstadosBr().subscribe(dados => this.queryEstado = dados);
+  }
+  ngAfterViewChecked(): void {
+    if(this.dataLoaded){
+      window.scroll(0, 400);
+    }
   }
 
 
@@ -69,6 +75,10 @@ export class PesquisaClienteComponent implements OnInit {
     if(confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`)){
       this.clientesService.excluirCliente(dados.id);
     }
+  }
+
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 }
