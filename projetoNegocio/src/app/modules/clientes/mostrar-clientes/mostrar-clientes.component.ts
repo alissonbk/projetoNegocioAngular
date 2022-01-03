@@ -16,6 +16,7 @@ export class MostrarClientesComponent implements OnInit {
 
   clientes$!: Observable<Cliente[]>;
   error$ = new Subject<boolean>();
+  dataLoaded: boolean = false;
   @ViewChild('content') content!: ElementRef;
 
   constructor(
@@ -29,6 +30,11 @@ export class MostrarClientesComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     window.scroll(0, 500);
+  }
+  ngAfterViewChecked(): void {
+    if(this.dataLoaded){
+      window.scroll(0, 600);
+    }
   }
 
 
@@ -48,6 +54,10 @@ export class MostrarClientesComponent implements OnInit {
 
   onDelete(dados: any){
     this._parent.onDelete(dados);
+  }
+
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 

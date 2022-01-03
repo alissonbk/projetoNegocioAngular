@@ -17,6 +17,7 @@ export class MostrarProdutosComponent implements OnInit {
 
   produtos$!: Observable<Produto[]>;
   error$ = new Subject<boolean>();
+  dataLoaded: boolean = false;
 
   constructor(
     private produtosService: ProdutosService,
@@ -31,6 +32,11 @@ export class MostrarProdutosComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     window.scroll(0, 500);
+  }
+  ngAfterViewChecked(): void {
+    if(this.dataLoaded){
+      window.scroll(0, 400);
+    }
   }
 
 
@@ -50,6 +56,10 @@ export class MostrarProdutosComponent implements OnInit {
 
   onDelete(dados: any){
     this._parent.onDelete(dados);
+  }
+  
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 }

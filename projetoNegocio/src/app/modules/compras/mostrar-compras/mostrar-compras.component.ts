@@ -16,6 +16,7 @@ export class MostrarComprasComponent implements OnInit {
 
   compras$!: Observable<Compra[]>;
   error$ = new Subject<boolean>();
+  dataLoaded: boolean = false;
   constructor(
     private comprasService: ComprasService,
     @Inject(forwardRef(() => ComprasComponent)) private _parent: ComprasComponent
@@ -27,6 +28,11 @@ export class MostrarComprasComponent implements OnInit {
   }
   ngAfterViewInit(): void {
     window.scroll(0, 500);
+  }
+  ngAfterViewChecked(): void {
+    if(this.dataLoaded){
+      window.scroll(0,300);
+    }
   }
 
 
@@ -47,6 +53,10 @@ export class MostrarComprasComponent implements OnInit {
 
   onDelete(dados: any){
     this._parent.onDelete(dados);
+  }
+
+  changeLoaded(){
+    this.dataLoaded = true;
   }
 
 

@@ -1,4 +1,5 @@
 <table class="table myTable" *ngIf="(vendedores$ | async) as vendedores; else loading">
+    <div *ngIf="vendedores$ ? changeLoaded() : null"></div>
     <thead class="thead-dark">
     <tr>
         <th class="cursor-pointer w-170p">Action</th>
