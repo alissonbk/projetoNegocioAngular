@@ -31,7 +31,7 @@ export class PesquisaCompraComponent implements OnInit {
   }
   ngAfterViewChecked(){
     if(this.dataLoaded){
-      window.scroll(0, 400);
+      window.scroll(0, 700);
     }
   }
 

@@ -40,7 +40,7 @@ export class PesquisaClienteComponent implements OnInit {
   }
   ngAfterViewChecked(): void {
     if(this.dataLoaded){
-      window.scroll(0, 400);
+      window.scroll(0, 700);
     }
   }
 
