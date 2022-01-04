@@ -33,7 +33,7 @@ export class MostrarClientesComponent implements OnInit {
   }
   ngAfterViewChecked(): void {
     if(this.dataLoaded){
-      window.scroll(0, 600);
+      window.scroll(0, 1150);
     }
   }
 

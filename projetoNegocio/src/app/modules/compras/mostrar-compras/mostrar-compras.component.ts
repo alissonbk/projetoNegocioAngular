@@ -31,7 +31,7 @@ export class MostrarComprasComponent implements OnInit {
   }
   ngAfterViewChecked(): void {
     if(this.dataLoaded){
-      window.scroll(0,300);
+      window.scroll(0,800);
     }
   }
 
