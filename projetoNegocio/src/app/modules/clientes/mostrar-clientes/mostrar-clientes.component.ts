@@ -16,7 +16,8 @@ export class MostrarClientesComponent implements OnInit {
 
   clientes$!: Observable<Cliente[]>;
   error$ = new Subject<boolean>();
-  dataLoaded: boolean = false;
+  dataLoaded!: boolean;
+  firstExecution!: boolean;
   @ViewChild('content') content!: ElementRef;
 
   constructor(
@@ -27,13 +28,16 @@ export class MostrarClientesComponent implements OnInit {
   ngOnInit(): void {
     this.loadClientes();
     this._parent.hideBtn = true;
+    this.dataLoaded = false;
+    this.firstExecution = true;
   }
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
   ngAfterViewChecked(): void {
-    if(this.dataLoaded){
+    if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 1150);
+      this.firstExecution = false;
     }
   }
 

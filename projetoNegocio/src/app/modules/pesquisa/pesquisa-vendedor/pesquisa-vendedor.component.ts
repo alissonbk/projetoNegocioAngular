@@ -22,7 +22,8 @@ export class PesquisaVendedorComponent implements OnInit {
   queryCPF!: string;
   queryEstado!: EstadoBr[];
   queryCidade!: string;
-  dataLoaded: boolean = false;
+  dataLoaded!: boolean;
+  firstExecution!: boolean;
 
   constructor(
     private vendedoresService: VendedoresService,
@@ -32,13 +33,16 @@ export class PesquisaVendedorComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadVendedores();
+    this.dataLoaded = false;
+    this.firstExecution = true;
     this.dropDownService.getEstadosBr().subscribe((estados: any) => {
       this.queryEstado = estados;
     })
   }
   ngAfterViewChecked(){
-    if(this.dataLoaded){
+    if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 700);
+      this.firstExecution = false;
     }
   }
 

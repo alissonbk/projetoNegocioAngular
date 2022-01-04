@@ -22,8 +22,8 @@ export class PesquisaClienteComponent implements OnInit {
   queryCPF!: string;
   queryEstado!: EstadoBr[];
   queryCidade!: string;
-  dataLoaded: boolean = false;
-  
+  dataLoaded!: boolean;
+  firstExecution!: boolean;
   constructor(
     private clientesService: ClientesService,
     private dropDownService: DropdownService,
@@ -36,11 +36,14 @@ export class PesquisaClienteComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadClientes();
+    this.dataLoaded = false;
+    this.firstExecution = true;
     this.dropDownService.getEstadosBr().subscribe(dados => this.queryEstado = dados);
   }
   ngAfterViewChecked(): void {
-    if(this.dataLoaded){
+    if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 700);
+      this.firstExecution = false;
     }
   }
 

@@ -17,7 +17,8 @@ export class MostrarProdutosComponent implements OnInit {
 
   produtos$!: Observable<Produto[]>;
   error$ = new Subject<boolean>();
-  dataLoaded: boolean = false;
+  dataLoaded!: boolean;
+  firstExecution!: boolean;
 
   constructor(
     private produtosService: ProdutosService,
@@ -29,13 +30,16 @@ export class MostrarProdutosComponent implements OnInit {
   ngOnInit(): void {
     this.loadProdutos();
     this._parent.hideBtn = true;
+    this.dataLoaded = false;
+    this.firstExecution = true;
   }
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
   ngAfterViewChecked(): void {
-    if(this.dataLoaded){
+    if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 800);
+      this.firstExecution = false;
     }
   }
 

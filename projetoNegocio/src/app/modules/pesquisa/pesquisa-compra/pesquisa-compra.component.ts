@@ -19,8 +19,8 @@ export class PesquisaCompraComponent implements OnInit {
   queryCliente!: string;
   queryVendedor!: string;
   queryProduto!: string;
-  dataLoaded: boolean = false;
-
+  dataLoaded!: boolean;
+  firstExecution!: boolean;
   constructor(
     private comprasService: ComprasService,
     private router: Router
@@ -28,10 +28,13 @@ export class PesquisaCompraComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCompras();
+    this.dataLoaded = false;
+    this.firstExecution = true;
   }
   ngAfterViewChecked(){
-    if(this.dataLoaded){
+    if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 700);
+      this.firstExecution = false;
     }
   }
 

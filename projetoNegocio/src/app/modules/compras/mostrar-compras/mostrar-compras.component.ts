@@ -16,7 +16,8 @@ export class MostrarComprasComponent implements OnInit {
 
   compras$!: Observable<Compra[]>;
   error$ = new Subject<boolean>();
-  dataLoaded: boolean = false;
+  dataLoaded!: boolean;
+  firstExecution!: boolean;
   constructor(
     private comprasService: ComprasService,
     @Inject(forwardRef(() => ComprasComponent)) private _parent: ComprasComponent
@@ -25,13 +26,16 @@ export class MostrarComprasComponent implements OnInit {
   ngOnInit(): void {
     this.loadCompras();
     this._parent.hideBtn = true;
+    this.dataLoaded = false;
+    this.firstExecution = true;
   }
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
   ngAfterViewChecked(): void {
-    if(this.dataLoaded){
+    if(this.dataLoaded && this.firstExecution){
       window.scroll(0,800);
+      this.firstExecution = false;
     }
   }
 
