@@ -135,7 +135,9 @@
     </div>
 </div>
 
-
+<div *ngIf="loading" class="spinner-wrapper">
+    <div class="lds-dual-ring"></div>
+</div>
 
 <div class="mostrarClientes">
     <router-outlet></router-outlet>

@@ -22,6 +22,7 @@ export class ComprasComponent implements OnInit {
   hideBtn!: boolean;
   paramId!: any;
   compraById!: any;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -89,6 +90,7 @@ export class ComprasComponent implements OnInit {
       "produto": dados.produto,
       "vendedor": dados.vendedor
     });
+    this.loading = false;
     window.scroll(0, -300);
   }
 
@@ -99,6 +101,7 @@ export class ComprasComponent implements OnInit {
   }
 
   getById(id: number){
+    this.loading = true;
     this.comprasService.getCompras().subscribe((compras: any) => {
       for(let compra of compras){
         if(compra.id == id){

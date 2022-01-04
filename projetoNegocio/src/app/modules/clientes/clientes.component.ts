@@ -22,6 +22,7 @@ export class ClientesComponent implements OnInit {
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
   paramId!: any;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -98,6 +99,7 @@ export class ClientesComponent implements OnInit {
         "estado": dados.endereco.estado
     }
     });
+    this.loading = false;
     window.scroll(0, -300);
   }
 
@@ -108,6 +110,7 @@ export class ClientesComponent implements OnInit {
   }
 
   getById(id: number){
+    this.loading = true;
     this.clientesService.getClientes().subscribe((clientes: any) => {
       for(let cliente of clientes){
         if(cliente.id == id){

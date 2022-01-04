@@ -23,6 +23,7 @@ export class VendedoresComponent implements OnInit {
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
   paramId!: any;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -129,6 +130,7 @@ export class VendedoresComponent implements OnInit {
         "estado": dados.endereco.estado
     }
     });
+    this.loading = false;
     window.scroll(0, -300);
   }
 
@@ -150,6 +152,7 @@ export class VendedoresComponent implements OnInit {
   }
 
   getById(id: number){
+    this.loading = true;
     this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
       for(let vendedor of vendedores){
         if(vendedor.id == id){

@@ -17,6 +17,7 @@ export class ProdutosComponent implements OnInit {
   produtos!: FormGroup;
   hideBtn!: boolean;
   paramId!: any;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -95,6 +96,7 @@ export class ProdutosComponent implements OnInit {
       "marca": dados.marca,
       "valor": dados.valor.split('.').join(',')
     });
+    this.loading = false;
     window.scroll(0, -300);
   }
   onDelete(dados: any){
@@ -115,6 +117,7 @@ export class ProdutosComponent implements OnInit {
   }
 
   getById(id: number){
+    this.loading = true;
     this.produtosService.getProdutos().subscribe((produtos: any) => {
       for(let produto of produtos){
         if(produto.id == id){
