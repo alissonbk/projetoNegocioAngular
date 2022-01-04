@@ -43,6 +43,7 @@ export class VendedoresComponent implements OnInit {
       cpf: [null, [Validators.required, FormValidations.cpfValidator]],
       email: [null, [Validators.required, Validators.email]],
       senha: [null, [Validators.required, Validators.minLength(4)]],
+      confirmarSenha: [null, [Validators.required, FormValidations.equalsTo('senha')]],
       endereco: this.formBuilder.group({
         cep: [null, [Validators.required, FormValidations.cepValidator]],
         numero: [null, Validators.required],
