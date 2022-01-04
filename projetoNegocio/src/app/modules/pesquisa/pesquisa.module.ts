@@ -11,6 +11,7 @@ import { PesquisaRoutingModule } from './pesquisa.routing.module';
 import { PesquisaCompraComponent } from './pesquisa-compra/pesquisa-compra.component';
 import { PesquisaProdutoComponent } from './pesquisa-produto/pesquisa-produto.component';
 import { PesquisaVendedorComponent } from './pesquisa-vendedor/pesquisa-vendedor.component';
+import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { PesquisaVendedorComponent } from './pesquisa-vendedor/pesquisa-vendedor
     FormsModule,
     NgxPaginationModule,
     NgxMaskModule,
+    LoaderModule,
     ReactiveFormsModule
   ]
 })

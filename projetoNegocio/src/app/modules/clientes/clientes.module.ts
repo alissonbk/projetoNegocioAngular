@@ -8,6 +8,7 @@ import { ClientesComponent } from './clientes.component';
 import { MostrarClientesComponent } from './mostrar-clientes/mostrar-clientes.component';
 import { ClientesRoutingModule } from './clientes.routing.module';
 import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module';
+import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 
 
 
@@ -21,6 +22,7 @@ import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module'
     FormsModule,
     ReactiveFormsModule,
     MsgErroModule,
+    LoaderModule,
     NgxMaskModule.forChild(),
     ClientesRoutingModule
   ]

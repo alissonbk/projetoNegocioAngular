@@ -8,6 +8,7 @@ import { ProdutosComponent } from './produtos.component';
 import { MostrarProdutosComponent } from './mostrar-produtos/mostrar-produtos.component';
 import { ProdutosRoutingModule } from './produtos.routing.module';
 import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module';
+import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 
 
 
@@ -20,6 +21,7 @@ import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module'
     CommonModule,
     FormsModule,
     MsgErroModule,
+    LoaderModule,
     ReactiveFormsModule,
     NgxMaskModule.forChild(),
     ProdutosRoutingModule

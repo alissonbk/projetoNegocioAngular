@@ -7,6 +7,7 @@ import { ComprasComponent } from './compras.component';
 import { MostrarComprasComponent } from './mostrar-compras/mostrar-compras.component';
 import { ComprasRoutingModule } from './compras.routing.module';
 import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module';
+import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 
 
 
@@ -20,6 +21,7 @@ import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module'
     FormsModule,
     ReactiveFormsModule,
     MsgErroModule,
+    LoaderModule,
     ComprasRoutingModule
   ]
 })

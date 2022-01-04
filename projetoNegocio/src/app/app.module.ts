@@ -14,6 +14,7 @@ import { LoginModule } from './modules/login/login.module';
 import { PaginaNaoEncontradaModule } from './shared/components/pagina-nao-encontrada/pagina-nao-encontrada.module';
 import { HeaderModule } from './core/header/header.module';
 import { MsgErroModule } from './shared/components/msg-erro/msg-erro.module';
+import { LoaderModule } from './shared/components/loader/loader.module';
 
 
 
@@ -30,6 +31,7 @@ registerLocaleData(localePt);
     PaginaNaoEncontradaModule,
     HeaderModule,
     HttpClientModule,
+    LoaderModule,
     MsgErroModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: true

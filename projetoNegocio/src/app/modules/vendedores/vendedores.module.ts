@@ -8,6 +8,7 @@ import { VendedoresComponent } from './vendedores.component';
 import { MostrarVendedoresComponent } from './mostrar-vendedores/mostrar-vendedores.component';
 import { VendedoresRoutingModule } from './vendedores.routing.module';
 import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module';
+import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
 
 
 
@@ -22,6 +23,7 @@ import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module'
     FormsModule,
     ReactiveFormsModule,
     MsgErroModule,
+    LoaderModule,
     NgxMaskModule.forChild(),
     VendedoresRoutingModule
   ]
