@@ -33,8 +33,9 @@ export class ClientesComponent implements OnInit {
     private dropdownService: DropdownService
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
-    // FORMULARIO
+    // Form
     this.clientes = this.formBuilder.group({
       id: [null],
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
@@ -49,38 +50,37 @@ export class ClientesComponent implements OnInit {
         estado: [null, Validators.required]
       })
     });
-    //VIACEP
+    //API Viacep
     this.clientes.get('endereco.cep')?.statusChanges
     .pipe(
       distinctUntilChanged(),
-      //tap(value => console.log(value)),
       switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.clientes.get('endereco.cep')?.value)
-        : EMPTY)
-      ).subscribe(dados => dados ? this.populaFormCep(dados) : { });
+        : EMPTY))
+    .subscribe(dados => dados ? this.populaFormCep(dados) : { });
 
     //Estados
     this.dropdownService.getEstadosBr().subscribe((estado: any) =>{
       this.todosEstados = estado;
-    })
+    });
+
     //Path param
     this.paramId = this.route.snapshot.queryParamMap.get('id');
     if(this.paramId != null){
       this.getById(this.paramId);
     }
-    
   }
+
   ngAfterViewInit(): void {
     window.scroll(0, -300);
   }
 
-
+  //Funções principais
   onSubmit(){
     if(this.clientes.get('id')?.value == null){
       this.clientesService.cadastrarCliente(this.clientes.value);
     }else{
       this.clientesService.editarCliente(this.clientes.value);
     }
-    
     this.clientes.reset();
   }
 
@@ -96,8 +96,8 @@ export class ClientesComponent implements OnInit {
         "rua": dados.endereco.rua,
         "bairro": dados.endereco.bairro,
         "cidade": dados.endereco.cidade,
-        "estado": dados.endereco.estado
-    }
+        "estado": dados.endereco.estado 
+      }
     });
     this.loading = false;
     window.scroll(0, -300);
@@ -109,6 +109,7 @@ export class ClientesComponent implements OnInit {
     }
   }
 
+  //getById temporario, antes da API
   getById(id: number){
     this.loading = true;
     this.clientesService.getClientes().subscribe((clientes: any) => {
@@ -117,11 +118,10 @@ export class ClientesComponent implements OnInit {
           this.onEdit(cliente);
         }
       }
-    })
+    });
   }
 
-
-
+  //Utils
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
@@ -131,23 +131,18 @@ export class ClientesComponent implements OnInit {
     }
   }
 
-  // VALIDATION FUNCTIONS
-
   verificaValidTouched(campo: string){
-    //return !this.formulario.controls[campo].valid && this.formulario.controls[campo].touched;
     return (
       !this.clientes.get(campo)?.valid &&
       (this.clientes.get(campo)?.touched || this.clientes.get(campo)?.dirty)
       );
   }
 
-
   cssErro(campo: string){
     return {
       'is-invalid': this.verificaValidTouched(campo)
     }
   }
-
 
   populaFormCep(dados: any){
     this.clientes.patchValue({

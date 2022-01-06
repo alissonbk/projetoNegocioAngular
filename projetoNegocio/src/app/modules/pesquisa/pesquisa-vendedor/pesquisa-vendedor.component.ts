@@ -31,6 +31,7 @@ export class PesquisaVendedorComponent implements OnInit {
     private router: Router
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.loadVendedores();
     this.dataLoaded = false;
@@ -39,6 +40,7 @@ export class PesquisaVendedorComponent implements OnInit {
       this.queryEstado = estados;
     })
   }
+
   ngAfterViewChecked(){
     if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 700);
@@ -46,7 +48,7 @@ export class PesquisaVendedorComponent implements OnInit {
     }
   }
 
-
+  //Functions
   loadVendedores(){
     this.vendedores$ = this.vendedoresService.getVendedores().pipe(
       catchError(error => {

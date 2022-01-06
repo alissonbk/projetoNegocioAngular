@@ -25,15 +25,18 @@ export class MostrarClientesComponent implements OnInit {
     @Inject(forwardRef(() => ClientesComponent)) private _parent: ClientesComponent
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.loadClientes();
     this._parent.hideBtn = true;
     this.dataLoaded = false;
     this.firstExecution = true;
   }
+
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
+
   ngAfterViewChecked(): void {
     if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 1150);
@@ -41,7 +44,7 @@ export class MostrarClientesComponent implements OnInit {
     }
   }
 
-
+  //Functions
   loadClientes(){
     this.clientes$ = this.clientesService.getClientes().pipe(
       catchError(error => {

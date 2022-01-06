@@ -34,6 +34,7 @@ export class ComprasComponent implements OnInit {
     private vendedoresService: VendedoresService,
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.compras = this.formBuilder.group({
       id: [null],
@@ -63,6 +64,7 @@ export class ComprasComponent implements OnInit {
     window.scroll(0, -300);
   }
 
+  //Funções principais
   onSubmit(){
     if(this.compras.get('id')?.value == null){
       this.comprasService.cadastrarCompra(this.compras.value);
@@ -77,7 +79,6 @@ export class ComprasComponent implements OnInit {
       if(this.compras.get('vendedor')?.value.id){
         this.compras.get('vendedor')?.setValue(this.compras.get('vendedor')?.value.id);
       }
-      
       this.comprasService.editarCompra(this.compras.value);
     }
     this.compras.reset();
@@ -100,6 +101,8 @@ export class ComprasComponent implements OnInit {
     }
   }
 
+   //Utils...
+  //getById temporario, antes da API
   getById(id: number){
     this.loading = true;
     this.comprasService.getCompras().subscribe((compras: any) => {
@@ -108,10 +111,8 @@ export class ComprasComponent implements OnInit {
           this.onEdit(compra);
         }
       }
-    })
+    });
   }
-
-
 
   hideButton(){
     this.hideBtn = !this.hideBtn;
@@ -122,16 +123,12 @@ export class ComprasComponent implements OnInit {
     }
   }
 
-
-
   verificaValidTouched(campo: string){
-    //return !this.formulario.controls[campo].valid && this.formulario.controls[campo].touched;
     return (
       !this.compras.get(campo)?.valid &&
       (this.compras.get(campo)?.touched || this.compras.get(campo)?.dirty)
       );
   }
-
 
   cssErro(campo: string){
     return {

@@ -3,7 +3,6 @@ import { cpf } from 'cpf-cnpj-validator';
 
 export class FormValidations{
 
-
     static requiredMinCheckbox(min = 1): ValidatorFn {
         return (control: AbstractControl) =>{
             const controlArray = control as FormArray;

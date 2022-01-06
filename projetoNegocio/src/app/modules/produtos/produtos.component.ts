@@ -29,7 +29,7 @@ export class ProdutosComponent implements OnInit {
   @ViewChild(MostrarProdutosComponent) child!: MostrarProdutosComponent;
 
 
-  /*LIFECYCLE*/
+  //Lifecyclehooks
   ngOnInit(): void {
     this.hideBtn = false;
     this.produtos = this.formBuilder.group({
@@ -53,7 +53,7 @@ export class ProdutosComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-  /*SUBMIT EDIT DELETE*/
+  //Funções principais
   onSubmit(){
     if(this.produtos.get('id')?.value != null){
       this.produtosService.editarProduto(this.produtos.value).subscribe(
@@ -70,12 +70,9 @@ export class ProdutosComponent implements OnInit {
       );
     }else{
       this.produtos.removeControl('id');
-      console.log('cadastrar enviando: ', this.produtos.value);
-
-      //SUBSCRIBE
       this.produtosService.cadastrarProduto(this.produtos.value).subscribe(
         next => {
-          console.log("Inicio do subscribe next: ", next);
+          console.log(next);
         },
         error => {
           console.log("Error: ", error);
@@ -89,6 +86,7 @@ export class ProdutosComponent implements OnInit {
     this.produtos.reset();
     this.reloadPage();
   }
+
   onEdit(dados: any){
     this.produtos.patchValue({
       "id": dados.id,
@@ -99,6 +97,7 @@ export class ProdutosComponent implements OnInit {
     this.loading = false;
     window.scroll(0, -300);
   }
+  
   onDelete(dados: any){
     if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
       this.produtosService.excluirProduto(dados.id).subscribe(
@@ -116,6 +115,8 @@ export class ProdutosComponent implements OnInit {
     }
   }
 
+  //Utils...
+  //getById temporario
   getById(id: number){
     this.loading = true;
     this.produtosService.getProdutos().subscribe((produtos: any) => {
@@ -127,17 +128,12 @@ export class ProdutosComponent implements OnInit {
     })
   }
 
-
   reloadPage(){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/produtos/mostrar']);
   }
-  
 
-
-
-  /*BUTTONS E VALIDATIONS*/
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){
@@ -148,13 +144,11 @@ export class ProdutosComponent implements OnInit {
   }
 
   verificaValidTouched(campo: string){
-    //return !this.formulario.controls[campo].valid && this.formulario.controls[campo].touched;
     return (
       !this.produtos.get(campo)?.valid &&
       (this.produtos.get(campo)?.touched || this.produtos.get(campo)?.dirty)
       );
   }
-
 
   cssErro(campo: string){
     return {

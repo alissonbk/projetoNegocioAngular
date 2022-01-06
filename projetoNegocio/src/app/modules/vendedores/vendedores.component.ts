@@ -35,6 +35,7 @@ export class VendedoresComponent implements OnInit {
     private cf: ChangeDetectorRef
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.hideBtn = false;
     this.vendedores = this.formBuilder.group({
@@ -73,7 +74,6 @@ export class VendedoresComponent implements OnInit {
     if(this.paramId != null){
       this.getById(this.paramId);
     }
-    
 
     this.cf.detectChanges();
   }
@@ -82,7 +82,7 @@ export class VendedoresComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-
+  //Funções principais
   onSubmit(){
     if(this.vendedores.get('id')?.value != null){
       console.log('')
@@ -152,6 +152,8 @@ export class VendedoresComponent implements OnInit {
     }
   }
 
+  //Utils...
+  //getById temporario
   getById(id: number){
     this.loading = true;
     this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
@@ -160,7 +162,7 @@ export class VendedoresComponent implements OnInit {
           this.onEdit(vendedor);
         }
       }
-    })
+    });
   } 
 
   reloadPage(){
@@ -168,10 +170,6 @@ export class VendedoresComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/vendedores/mostrar']);
   }
-
-
-
-  // buttons e validação
 
   hideButton(){
     this.hideBtn = !this.hideBtn;
@@ -184,13 +182,11 @@ export class VendedoresComponent implements OnInit {
   }
 
   verificaValidTouched(campo: string){
-    //return !this.formulario.controls[campo].valid && this.formulario.controls[campo].touched;
     return (
       !this.vendedores.get(campo)?.valid &&
       (this.vendedores.get(campo)?.touched || this.vendedores.get(campo)?.dirty)
       );
   }
-
 
   cssErro(campo: string){
     return {
@@ -208,5 +204,4 @@ export class VendedoresComponent implements OnInit {
       }
     });
   }
-
 }

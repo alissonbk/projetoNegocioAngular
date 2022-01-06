@@ -23,15 +23,18 @@ export class MostrarVendedoresComponent implements OnInit {
     @Inject (forwardRef(() => VendedoresComponent)) private _parent: VendedoresComponent
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.loadVendedores();
     this._parent.hideBtn = true;
     this.dataLoaded = false;
     this.firstExecution = true;
   }
+
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
+
   ngAfterViewChecked(): void {
     if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 1150);
@@ -39,6 +42,7 @@ export class MostrarVendedoresComponent implements OnInit {
     }
   }
   
+  //Functions
   loadVendedores(){
     this.vendedores$ = this.vendedoresService.getVendedores().pipe(
       catchError(error => {

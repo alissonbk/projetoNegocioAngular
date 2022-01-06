@@ -27,15 +27,18 @@ export class MostrarProdutosComponent implements OnInit {
     ) { 
     }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.loadProdutos();
     this._parent.hideBtn = true;
     this.dataLoaded = false;
     this.firstExecution = true;
   }
+
   ngAfterViewInit(): void {
     window.scroll(0, 500);
   }
+  
   ngAfterViewChecked(): void {
     if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 800);
@@ -43,7 +46,7 @@ export class MostrarProdutosComponent implements OnInit {
     }
   }
 
-
+  //Functions
   loadProdutos(){
     this.produtos$ = this.produtosService.getProdutos().pipe(
       catchError(error => {

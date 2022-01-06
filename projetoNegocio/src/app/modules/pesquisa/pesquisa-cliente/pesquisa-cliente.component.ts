@@ -34,12 +34,14 @@ export class PesquisaClienteComponent implements OnInit {
     this.queryCidade = "";
    }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.loadClientes();
     this.dataLoaded = false;
     this.firstExecution = true;
     this.dropDownService.getEstadosBr().subscribe(dados => this.queryEstado = dados);
   }
+
   ngAfterViewChecked(): void {
     if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 700);
@@ -47,7 +49,7 @@ export class PesquisaClienteComponent implements OnInit {
     }
   }
 
-
+  //Functions
   loadClientes(){
     this.clientes$ = this.clientesService.getClientes().pipe(
       catchError(error => {

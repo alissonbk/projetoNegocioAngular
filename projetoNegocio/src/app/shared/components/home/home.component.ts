@@ -17,7 +17,6 @@ export class HomeComponent implements OnInit {
   buttonClick(){
     console.clear();
     alert('click');
-    var asdasd = window.document.querySelector('#data-area');
   }
 
 }

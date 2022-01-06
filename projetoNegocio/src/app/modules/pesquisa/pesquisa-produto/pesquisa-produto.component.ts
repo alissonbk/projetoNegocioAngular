@@ -26,11 +26,13 @@ export class PesquisaProdutoComponent implements OnInit {
     private router: Router
     ) { }
 
+  //Lifecyclehooks
   ngOnInit(): void {
     this.loadProdutos();
     this.dataLoaded = false;
     this.firstExecution = true;
   }
+
   ngAfterViewChecked(){
     if(this.dataLoaded && this.firstExecution){
       window.scroll(0, 700);
@@ -38,6 +40,7 @@ export class PesquisaProdutoComponent implements OnInit {
     }
   }
 
+  //Functions
   loadProdutos(){
     this.produtos$ = this.produtosService.getProdutos().pipe(
       catchError(error => {

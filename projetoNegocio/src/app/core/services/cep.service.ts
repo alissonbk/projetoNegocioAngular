@@ -14,7 +14,7 @@ export class CepService {
     if(cep != ''){
       const validacep = /^[0-9]{8}$/;
       if(validacep.test(cep)){
-        return this.http.get(`https://viacep.com.br/ws/${cep}/json`); //retorna um json da api viacep
+        return this.http.get(`https://viacep.com.br/ws/${cep}/json`);
       }
     }
     return of({}); //para não retornar undefined

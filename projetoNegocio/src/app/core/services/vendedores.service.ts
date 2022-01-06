@@ -17,7 +17,7 @@ export class VendedoresService extends AbstractService {
   }
 
   editarVendedor(value: any){
-    return this.http.put(`${this.API_URL}/api/usuarios/`+ value.id, value).pipe();
+    return this.http.put(`${this.API_URL}/api/usuarios/`+ value.id, value).pipe(take(1));
   }
 
   excluirVendedor(id: number){
