@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 
-import { LoginService } from './login.service';
+import { LoginService } from 'src/app/core/services/login.service';
 
 
 @Component({
@@ -14,6 +14,7 @@ import { LoginService } from './login.service';
 export class LoginComponent implements OnInit {
 
   login!: FormGroup;
+  loading: boolean = false;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -30,13 +31,21 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.login);
-    try{
-      const result = this.loginService.login(this.login)
-        console.log(`Login efetuado: ${result}`);
-        this.router.navigate(['']);
-    } catch(error){
-      console.log(error);
+      this.loading = true;
+      if (this.login.valid) {
+        this.loginService.authenticate(this.login.value.email, this.login.value.password).subscribe(response => {
+            this.router.navigate(['/home/']);
+        }, (error) => {
+            if (error.error.status === 403) {
+                alert('E-mail e/ou senha incorreto(s).');
+            } else {
+                alert('Não foi possível comunicar com o servidor. Tente novamente');
+            }
+            this.loading = false;
+        });
+    } else {
+        this.loading = false;
+       alert('Formulário preenchido incorretamente.');
     }
   }
 

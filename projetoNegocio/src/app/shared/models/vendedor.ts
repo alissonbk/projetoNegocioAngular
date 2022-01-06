@@ -5,5 +5,6 @@ export interface Vendedor{
     cpf: string;
     email: string;
     senha: string;
+    access_token: string;
     endereco: Endereco;
 }
