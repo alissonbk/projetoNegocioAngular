@@ -18,10 +18,18 @@ export class MostrarComprasComponent implements OnInit {
   error$ = new Subject<boolean>();
   dataLoaded!: boolean;
   firstExecution!: boolean;
+  page: number;
+  currentPage: number;
+  itemsPerPage: number;
+
   constructor(
     private comprasService: ComprasService,
     @Inject(forwardRef(() => ComprasComponent)) private _parent: ComprasComponent
-    ) { }
+    ) {
+        this.page = 1; // usado no template pagination
+        this.currentPage = 0; // usado na api
+        this.itemsPerPage = 10;
+     }
 
   //Lifecyclehooks
   ngOnInit(): void {
@@ -44,7 +52,11 @@ export class MostrarComprasComponent implements OnInit {
 
   //Functions
   loadCompras(){
-    this.compras$ = this.comprasService.getCompras().pipe(
+    const pageable: any = {
+      page: this.currentPage,
+      size: this.itemsPerPage
+    }
+    this.compras$ = this.comprasService.getCompras(pageable).pipe(
       catchError(error => {
         console.log(error);
         this.error$.next(true);
@@ -64,6 +76,12 @@ export class MostrarComprasComponent implements OnInit {
   changeLoaded(){
     this.dataLoaded = true;
   }
+
+  pageChanged(p: number) {
+    this.page = p;
+    this.currentPage = this.page - 1;
+    this.loadCompras();
+}
 
 
 }

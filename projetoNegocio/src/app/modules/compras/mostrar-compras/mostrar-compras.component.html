@@ -27,7 +27,17 @@
             <td>{{c.produto.descricao}}</td>
         </tr>
     </tbody>
+    <div *ngIf="compras.length > 0">
+        <div class="text-center">
+            <pagination-controls class="pagination-analises" id="pagination"
+                (pageChange)="pageChanged($event)"
+                [previousLabel]="'Anterior'" [nextLabel]="'Próxima'"
+                [responsive]="true" [directionLinks]="true">
+            </pagination-controls>
+        </div>
+    </div>
 </table>
+
 
 <ng-template #loading>
     <div class="d-flex justify-content-center mt-5" *ngIf="(error$ | async); else noError">

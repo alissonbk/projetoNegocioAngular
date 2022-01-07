@@ -42,7 +42,11 @@ export class PesquisaCompraComponent implements OnInit {
 
   //Functions
   loadCompras(){
-   this.compras$ = this.comprasService.getCompras().pipe(
+    const pageable: any = {
+      page: 0,
+      size: 10
+    }
+   this.compras$ = this.comprasService.getCompras(pageable).pipe(
      catchError(error => {
        console.log(error);
        this.error$.next(true);

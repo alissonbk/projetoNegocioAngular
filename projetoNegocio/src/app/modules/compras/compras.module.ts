@@ -8,6 +8,7 @@ import { MostrarComprasComponent } from './mostrar-compras/mostrar-compras.compo
 import { ComprasRoutingModule } from './compras.routing.module';
 import { MsgErroModule } from '../../shared/components/msg-erro/msg-erro.module';
 import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -22,6 +23,7 @@ import { LoaderModule } from 'src/app/shared/components/loader/loader.module';
     ReactiveFormsModule,
     MsgErroModule,
     LoaderModule,
+    NgxPaginationModule,
     ComprasRoutingModule
   ]
 })

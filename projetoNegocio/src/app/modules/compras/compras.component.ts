@@ -104,8 +104,12 @@ export class ComprasComponent implements OnInit {
    //Utils...
   //getById temporario, antes da API
   getById(id: number){
+    const pageable: any = {
+      page: 0,
+      size: 10
+    }
     this.loading = true;
-    this.comprasService.getCompras().subscribe((compras: any) => {
+    this.comprasService.getCompras(pageable).subscribe((compras: any) => {
       for(let compra of compras){
         if(compra.id == id){
           this.onEdit(compra);
