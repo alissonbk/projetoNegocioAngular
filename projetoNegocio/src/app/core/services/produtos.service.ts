@@ -17,15 +17,15 @@ export class ProdutosService extends AbstractService {
 
 
   cadastrarProduto(value: any) {
-    return this.http.post(`${this.API_URL}/api/produtos`, value).pipe(take(1));
+    return this.http.post(`${this.API_URL}/v1/produtos`, value).pipe(take(1));
   }
 
   editarProduto(value: any){
-    return this.http.put(`${this.API_URL}/api/produtos/`+ value.id, value).pipe();
+    return this.http.put(`${this.API_URL}/v1/produtos/`+ value.id, value).pipe();
   }
 
   excluirProduto(id: number){
-    return this.http.delete(`${this.API_URL}/api/produtos/`+ id).pipe();
+    return this.http.delete(`${this.API_URL}/v1/produtos/`+ id).pipe();
   }
   
   getProdutos(): Observable<any[]>{
@@ -33,7 +33,7 @@ export class ProdutosService extends AbstractService {
       tap(console.log),
       delay(1000)
     );
-    // return this.http.get<Produto[]>(`${this.API_URL}/api/produtos`).pipe(
+    // return this.http.get<Produto[]>(`${this.API_URL}/v1/produtos`).pipe(
     //   tap(console.log),
     //   delay(1000)
     // );

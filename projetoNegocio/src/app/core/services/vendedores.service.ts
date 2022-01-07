@@ -13,15 +13,15 @@ export class VendedoresService extends AbstractService {
   }
 
   cadastrarVendedor(value: any) {
-    return this.http.post(`${this.API_URL}/api/usuarios`, value).pipe(take(1));
+    return this.http.post(`${this.API_URL}/v1/usuarios`, value).pipe(take(1));
   }
 
   editarVendedor(value: any){
-    return this.http.put(`${this.API_URL}/api/usuarios/`+ value.id, value).pipe(take(1));
+    return this.http.put(`${this.API_URL}/v1/usuarios/`+ value.id, value).pipe(take(1));
   }
 
   excluirVendedor(id: number){
-    return this.http.delete(`${this.API_URL}/api/usuarios/`+id).pipe();
+    return this.http.delete(`${this.API_URL}/v1/usuarios/`+id).pipe();
   }
 
   getVendedores(): Observable<any[]>{
@@ -29,7 +29,7 @@ export class VendedoresService extends AbstractService {
       tap(console.log),
       delay(1000)
     );
-    // return this.http.get(`${this.API_URL}/api/usuarios`).pipe(
+    // return this.http.get(`${this.API_URL}/v1/usuarios`).pipe(
     //   tap(console.log),
     //   delay(1000)
     // );

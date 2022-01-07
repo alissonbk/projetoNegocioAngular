@@ -20,7 +20,7 @@ export class LoginService extends AbstractService {
   authenticate(email: string, senha: string){
     const credenciais = {email: email, senha: senha};
     console.log(credenciais);
-    return this.http.post<Vendedor>(`${this.API_URL}/api/login`, credenciais)
+    return this.http.post<Vendedor>(`${this.API_URL}/v1/login`, credenciais)
         .pipe(
             tap(autenticado => {
                 if (LoginService.checkLogged(autenticado)) {

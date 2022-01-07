@@ -17,17 +17,17 @@ export class ComprasService extends AbstractService{
     }
 
     cadastrarCompra(value: any){
-        this.http.post(`${this.API_URL}/api/compras`, value);
+        this.http.post(`${this.API_URL}/v1/compras`, value);
         console.log("cadastrar : ", value);
     }
     
     editarCompra(value: any){
-        this.http.put(`${this.API_URL}/api/compras`, value);
+        this.http.put(`${this.API_URL}/v1/compras`, value);
         console.log("editar : ", value);
     }
 
     excluirCompra(id: number){
-        this.http.delete(`${this.API_URL}/api/compras`+ id);
+        this.http.delete(`${this.API_URL}/v1/compras`+ id);
         console.log("deletar id: ", id);
     }
     

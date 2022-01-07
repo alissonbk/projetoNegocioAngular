@@ -15,16 +15,16 @@ export class ClientesService extends AbstractService {
  }
 
   cadastrarCliente(value: any) {
-    this.http.post(`${this.API_URL}/api/clientes`, value);
+    this.http.post(`${this.API_URL}/v1/clientes`, value);
     console.log("cadastrar : ", value);
   }
 
   editarCliente(value: any){
-    this.http.put(`${this.API_URL}/api/clientes`, value);
+    this.http.put(`${this.API_URL}/v1/clientes`, value);
     console.log("editar : ", value);
   }
   excluirCliente(id: number){
-    this.http.delete(`${this.API_URL}/api/clientes`+ id);
+    this.http.delete(`${this.API_URL}/v1/clientes`+ id);
     console.log("deletar id: ", id);
   }
   
