@@ -33,14 +33,14 @@ export class ComprasService extends AbstractService{
     }
     
     getCompras(pageable: any): Observable<any>{
-        // return this.http.get<Compra[]>('/assets/mocks/mockCompras.json').pipe(
-        //     tap(console.log),
-        //     delay(1000)
-        // )
-        return this.http.get<any[]>(`${this.API_URL}/v1/compras`, {headers: this.headers,params: pageable}).pipe(
+        return this.http.get<Compra[]>('/assets/mocks/mockCompras.json').pipe(
             tap(console.log),
             delay(1000)
         )
+        // return this.http.get<any[]>(`${this.API_URL}/v1/compras`, {headers: this.headers,params: pageable}).pipe(
+        //     tap(console.log),
+        //     delay(1000)
+        // )
     }
     
 }

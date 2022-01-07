@@ -14,13 +14,14 @@ import { ComprasComponent } from '../compras.component';
 })
 export class MostrarComprasComponent implements OnInit {
 
-  compras$!: Observable<Compra[]>;
+  compras$!: Observable<any>;
   error$ = new Subject<boolean>();
   dataLoaded!: boolean;
   firstExecution!: boolean;
   page: number;
   currentPage: number;
   itemsPerPage: number;
+  totalElements: number;
 
   constructor(
     private comprasService: ComprasService,
@@ -29,6 +30,7 @@ export class MostrarComprasComponent implements OnInit {
         this.page = 1; // usado no template pagination
         this.currentPage = 0; // usado na api
         this.itemsPerPage = 10;
+        this.totalElements = 0;
      }
 
   //Lifecyclehooks
@@ -77,11 +79,18 @@ export class MostrarComprasComponent implements OnInit {
     this.dataLoaded = true;
   }
 
+  //Pagination
   pageChanged(p: number) {
     this.page = p;
     this.currentPage = this.page - 1;
     this.loadCompras();
-}
+  }
+
+  switchFirstPage() {
+    this.page = 1;
+    this.currentPage = 0;
+    this.loadCompras();
+  }
 
 
 }

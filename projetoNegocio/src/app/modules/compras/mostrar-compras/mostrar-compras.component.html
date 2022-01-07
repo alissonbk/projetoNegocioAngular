@@ -15,7 +15,8 @@
     </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let c of compras" class="cursor-pointer">
+        <tr *ngFor="let c of compras | paginate:{id: 'pagination',
+            itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalElements}" class="cursor-pointer">
             <td>
                 <ul class="action-list">
                     <li><a (click)="onEdit(c)" class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></li>
@@ -27,15 +28,15 @@
             <td>{{c.produto.descricao}}</td>
         </tr>
     </tbody>
-    <div *ngIf="compras.length > 0">
-        <div class="text-center">
+    <!-- <div *ngIf="compras?.content.length > 0">
+        <div class="paginationCenter">
             <pagination-controls class="pagination-analises" id="pagination"
                 (pageChange)="pageChanged($event)"
                 [previousLabel]="'Anterior'" [nextLabel]="'Próxima'"
                 [responsive]="true" [directionLinks]="true">
             </pagination-controls>
         </div>
-    </div>
+    </div> -->
 </table>
 
 
