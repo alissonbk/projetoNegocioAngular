@@ -16,7 +16,11 @@ export class AbstractService {
         this.headers = new HttpHeaders();
         this.headers = this.headers.set('Content-Type', 'application/json');
         const loggedUser = JSON.parse(JSON.parse(JSON.stringify(sessionStorage.getItem('loggedUser'))));
-        this.headers = this.headers.set('Authorization', `Bearer ${loggedUser.access_token}`);
+        if(loggedUser){
+            this.headers = this.headers.set('Authorization', `Bearer ${loggedUser.access_token}`);
+        }
+        
+        
     }
 
     public handleError(err: HttpErrorResponse): Observable<never> {
