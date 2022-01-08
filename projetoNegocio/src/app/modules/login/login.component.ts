@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { waitForAsync } from '@angular/core/testing';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { delay } from 'rxjs/operators';
 
 
 import { LoginService } from 'src/app/core/services/login.service';
@@ -39,19 +37,24 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home/']);
         }, (error) => {
             if (error.error.status === 403) {
-                alert('E-mail e/ou senha incorreto(s).');
+              alertify.dismissAll();
+              alertify.set('notifier','delay', 3);
+              alertify.set('notifier', 'position', 'top-center');
+              alertify.error('E-mail e/ou senha incorreto(s).');
             } else {
                 alertify.alert('Não foi possível comunicar-se com o servidor. Tente novamente mais tarde!');
-                delay(1000);
-                alertify.close('alert');
             }
             this.loading = false;
+        },
+        () => {
+          alertify.success("Login Efetuado Com Sucesso!");
         });
     } else {
       this.loading = false;
+      alertify.dismissAll();
+      alertify.set('notifier','delay', 3);
       alertify.set('notifier', 'position', 'top-center');
       alertify.error('Formulário preenchido incorretamente.');
-      
     }
   }
 
