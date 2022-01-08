@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { ProdutosService } from 'src/app/core/services/produtos.service';
 import { MostrarProdutosComponent } from './mostrar-produtos/mostrar-produtos.component';
+declare let alertify: any;
 
 @Component({
   selector: 'app-produtos',
@@ -56,15 +57,20 @@ export class ProdutosComponent implements OnInit {
   //Funções principais
   onSubmit(){
     if(this.produtos.get('id')?.value != null){
+      
       this.produtosService.editarProduto(this.produtos.value).subscribe(
         next => {
           console.log(next);
         },
         error => {
+          alertify.dismissAll();
+          alertify.set('notifier','delay', 3);
+          alertify.set('notifier', 'position', 'top-center');
+          alertify.error('Erro ao editar produto!');
           console.log(error);
         },
         () => {
-          console.log("success");
+          alertify.warning('Produto modificado!');
           this.reloadPage();
         }
       );
@@ -75,10 +81,16 @@ export class ProdutosComponent implements OnInit {
           console.log(next);
         },
         error => {
-          console.log("Error: ", error);
+          alertify.dismissAll();
+          alertify.set('notifier','delay', 3);
+          alertify.set('notifier', 'position', 'top-center');
+          alertify.error('Erro ao editar produto!');
+          console.log(error);
         },
         () => {
-          console.log("success");
+          alertify.dismissAll();
+          alertify.set('notifier','delay', 3.5);
+          alertify.success('Produto Cadastrado Com Sucesso!');
           this.reloadPage();
         }
       );

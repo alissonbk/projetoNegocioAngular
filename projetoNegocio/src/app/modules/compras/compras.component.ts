@@ -7,6 +7,7 @@ import { ClientesService } from 'src/app/core/services/clientes.service';
 import { ComprasService } from 'src/app/core/services/compras.service';
 import { ProdutosService } from 'src/app/core/services/produtos.service';
 import { VendedoresService } from 'src/app/core/services/vendedores.service';
+declare let alertify: any;
 
 @Component({
   selector: 'app-compras',
@@ -68,6 +69,7 @@ export class ComprasComponent implements OnInit {
   onSubmit(){
     if(this.compras.get('id')?.value == null){
       this.comprasService.cadastrarCompra(this.compras.value);
+      alertify.success('Compra Cadastrada!');
     }else{
       //Caso o usuario não mude o campo, seleciona apenas o id.
       if(this.compras.get('cliente')?.value.id){
@@ -79,7 +81,13 @@ export class ComprasComponent implements OnInit {
       if(this.compras.get('vendedor')?.value.id){
         this.compras.get('vendedor')?.setValue(this.compras.get('vendedor')?.value.id);
       }
-      this.comprasService.editarCompra(this.compras.value);
+      const comprasValue = this.compras.value;
+      alertify.confirm(`Você tem certeza que deseja modificar esta compra?`, () => {
+        alertify.warning(`Compra modificada!`);
+        this.comprasService.editarCompra(comprasValue);
+      })
+      
+      
     }
     this.compras.reset();
   }
@@ -96,9 +104,10 @@ export class ComprasComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir a compra (cliente:${dados.cliente.nome}, produto:${dados.produto.descricao})?`)){
+    alertify.confirm(`Você tem certeza que deseja excluir a compra (Cliente: ${dados.cliente.nome}, Produto: ${dados.produto.descricao})?`, () => {
+      alertify.warning(`Compra excluida!`);
       this.comprasService.excluirCompra(dados.id);
-    }
+    })
   }
 
    //Utils...

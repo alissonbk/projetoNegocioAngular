@@ -10,6 +10,8 @@ import { CepService } from 'src/app/core/services/cep.service';
 import { ClientesService } from 'src/app/core/services/clientes.service';
 import { DropdownService } from 'src/app/core/services/dropdown.service';
 import { FormValidations } from '../../shared/components/form-validations';
+import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
+declare let alertify: any;
 
 @Component({
   selector: 'app-clientes',
@@ -78,8 +80,14 @@ export class ClientesComponent implements OnInit {
   onSubmit(){
     if(this.clientes.get('id')?.value == null){
       this.clientesService.cadastrarCliente(this.clientes.value);
+      alertify.success('Cliente cadastrado!');
     }else{
-      this.clientesService.editarCliente(this.clientes.value);
+      const nomeCliente = this.clientes.value.nome;
+      const dadosCliente = this.clientes.value;
+      alertify.confirm(`Você tem certeza que deseja modificar o cliente ${nomeCliente}?`, () => {
+        alertify.warning(`Cliente ${nomeCliente} modificado!`);
+        this.clientesService.editarCliente(dadosCliente);
+      });
     }
     this.clientes.reset();
   }
@@ -104,9 +112,10 @@ export class ClientesComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`)){
+    alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
+      alertify.warning(`Cliente ${dados.nome} excluido!`);
       this.clientesService.excluirCliente(dados.id);
-    }
+    })
   }
 
   //getById temporario, antes da API

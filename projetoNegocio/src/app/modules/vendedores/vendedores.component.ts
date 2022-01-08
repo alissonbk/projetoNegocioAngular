@@ -11,6 +11,7 @@ import { CepService } from 'src/app/core/services/cep.service';
 import { DropdownService } from 'src/app/core/services/dropdown.service';
 import { VendedoresService } from 'src/app/core/services/vendedores.service';
 import { FormValidations } from '../../shared/components/form-validations';
+declare let alertify: any;
 
 @Component({
   selector: 'app-vendedores',
@@ -91,10 +92,16 @@ export class VendedoresComponent implements OnInit {
           console.log(next);
         },
         error => {
-          console.log(error)
+          alertify.dismissAll();
+          alertify.set('notifier','delay', 3);
+          alertify.set('notifier', 'position', 'top-center');
+          alertify.error('Erro ao editar produto!');
+          console.log(error);
         },
         () => {
-          console.log("success");
+          alertify.dismissAll();
+          alertify.set('notifier','delay', 3.5);
+          alertify.warning('Vendedor Modificado Com Sucesso!');
           this.reloadPage();
         }
       );
@@ -108,7 +115,9 @@ export class VendedoresComponent implements OnInit {
           console.log(error)
         },
         () => {
-          console.log("success");
+          alertify.dismissAll();
+          alertify.set('notifier','delay', 3.5);
+          alertify.success('Vendedor Cadastrado Com Sucesso!');
           this.reloadPage();
         }
       );
