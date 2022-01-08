@@ -56,8 +56,13 @@ export class ProdutosComponent implements OnInit {
 
   //Funções principais
   onSubmit(){
+
     if(this.produtos.get('id')?.value != null){
-      
+      let valor = '' + this.produtos.get('valor')?.value;
+      valor = valor.split(',').join('.');
+      this.produtos.get('valor')?.setValue(valor);
+      console.log(valor);
+
       this.produtosService.editarProduto(this.produtos.value).subscribe(
         next => {
           console.log(next);
@@ -70,6 +75,7 @@ export class ProdutosComponent implements OnInit {
           console.log(error);
         },
         () => {
+          alertify.set('notifier','delay', 2);
           alertify.warning('Produto modificado!');
           this.reloadPage();
         }
@@ -84,12 +90,12 @@ export class ProdutosComponent implements OnInit {
           alertify.dismissAll();
           alertify.set('notifier','delay', 3);
           alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Erro ao editar produto!');
+          alertify.error('Erro ao cadastrar produto!');
           console.log(error);
         },
         () => {
           alertify.dismissAll();
-          alertify.set('notifier','delay', 3.5);
+          alertify.set('notifier','delay', 2);
           alertify.success('Produto Cadastrado Com Sucesso!');
           this.reloadPage();
         }
@@ -100,11 +106,13 @@ export class ProdutosComponent implements OnInit {
   }
 
   onEdit(dados: any){
+    dados.valor = dados.valor + '';
+    dados.valor = dados.valor.split('.').join(',');
     this.produtos.patchValue({
       "id": dados.id,
       "descricao": dados.descricao,
       "marca": dados.marca,
-      "valor": dados.valor.split('.').join(',')
+      "valor": dados.valor
     });
     this.loading = false;
     window.scroll(0, -300);
@@ -167,6 +175,7 @@ export class ProdutosComponent implements OnInit {
       'is-invalid': this.verificaValidTouched(campo)
     }
   }
+  
 
 
 }

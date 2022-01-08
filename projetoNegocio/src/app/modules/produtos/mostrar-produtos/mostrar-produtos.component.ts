@@ -68,5 +68,6 @@ export class MostrarProdutosComponent implements OnInit {
   changeLoaded(){
     this.dataLoaded = true;
   }
+  isNumber(e: any) {return typeof e === 'number'}
 
 }
