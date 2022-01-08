@@ -24,8 +24,7 @@
             </td>
             <td>{{p.descricao}}</td>
             <td>{{p.marca}}</td>
-            <td>{{ isNumber(p.valor) ? (p.valor|currency:'BRL':true:'1.2-2') : 'R$ '+p.valor }} </td>
-            <!-- <td>{{(p.valor) | currency: 'BRL'}}</td> -->
+            <td>{{(p.valor) | currency: 'BRL'}}</td>
         </tr>
     </tbody>
 </table>

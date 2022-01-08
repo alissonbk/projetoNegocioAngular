@@ -56,12 +56,12 @@ export class ProdutosComponent implements OnInit {
 
   //Funções principais
   onSubmit(){
-
+    //EDITAR
     if(this.produtos.get('id')?.value != null){
+      //  Seta valor para padrão numerico novamente
       let valor = '' + this.produtos.get('valor')?.value;
       valor = valor.split(',').join('.');
       this.produtos.get('valor')?.setValue(valor);
-      console.log(valor);
 
       this.produtosService.editarProduto(this.produtos.value).subscribe(
         next => {
@@ -80,6 +80,7 @@ export class ProdutosComponent implements OnInit {
           this.reloadPage();
         }
       );
+    //CADASTRAR
     }else{
       this.produtos.removeControl('id');
       this.produtosService.cadastrarProduto(this.produtos.value).subscribe(
@@ -106,13 +107,11 @@ export class ProdutosComponent implements OnInit {
   }
 
   onEdit(dados: any){
-    dados.valor = dados.valor + '';
-    dados.valor = dados.valor.split('.').join(',');
     this.produtos.patchValue({
       "id": dados.id,
       "descricao": dados.descricao,
       "marca": dados.marca,
-      "valor": dados.valor
+      "valor": String(dados.valor).split('.').join(',')
     });
     this.loading = false;
     window.scroll(0, -300);
@@ -175,7 +174,7 @@ export class ProdutosComponent implements OnInit {
       'is-invalid': this.verificaValidTouched(campo)
     }
   }
-  
 
+  isNumber(e: any) {return typeof e === 'number'}
 
 }
