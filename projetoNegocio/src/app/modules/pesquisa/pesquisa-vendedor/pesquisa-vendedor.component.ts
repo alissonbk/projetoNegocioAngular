@@ -8,6 +8,8 @@ import { VendedoresService } from 'src/app/core/services/vendedores.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { Vendedor } from 'src/app/shared/models/vendedor';
 import { catchError } from 'rxjs/operators';
+declare let alertify: any;
+
 
 @Component({
   selector: 'app-pesquisa-vendedor',
@@ -64,9 +66,11 @@ export class PesquisaVendedorComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`)){
+    alertify.confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`, () =>{
       this.vendedoresService.excluirVendedor(dados.id);
-    }
+    })
+      
+    
   }
 
   changeLoaded(){

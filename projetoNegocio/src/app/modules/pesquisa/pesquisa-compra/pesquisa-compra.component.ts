@@ -6,6 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 import { ComprasService } from 'src/app/core/services/compras.service';
 import { Compra } from 'src/app/shared/models/compra';
+declare let alertify: any;
+
 
 @Component({
   selector: 'app-pesquisa-compra',
@@ -60,9 +62,10 @@ export class PesquisaCompraComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir a compra (cliente: ${dados.cliente.nome} produto:${dados.produto.descricao})?`)){
+    alertify.confirm(`Você tem certeza que deseja excluir a compra (cliente: ${dados.cliente.nome} produto:${dados.produto.descricao})?`, () =>{
       this.comprasService.excluirCompra(dados.id);
-    }
+    });
+    
   }
 
   changeLoaded(){

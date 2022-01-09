@@ -6,6 +6,8 @@ import { catchError } from 'rxjs/operators';
 
 import { ProdutosService } from 'src/app/core/services/produtos.service';
 import { Produto } from 'src/app/shared/models/produto';
+declare let alertify: any;
+
 
 @Component({
   selector: 'app-pesquisa-produto',
@@ -56,9 +58,11 @@ export class PesquisaProdutoComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
+    alertify.confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`, () => {
       this.produtosService.excluirProduto(dados.id);
-    }
+    });
+      
+    
   }
   
   changeLoaded(){

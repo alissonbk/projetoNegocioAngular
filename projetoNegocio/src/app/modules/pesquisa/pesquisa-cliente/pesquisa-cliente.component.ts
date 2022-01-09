@@ -8,6 +8,7 @@ import { DropdownService } from 'src/app/core/services/dropdown.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { Cliente } from 'src/app/shared/models/cliente';
 import { catchError } from 'rxjs/operators';
+declare let alertify: any;
 
 @Component({
   selector: 'app-pesquisa-cliente',
@@ -65,9 +66,10 @@ export class PesquisaClienteComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`)){
+    alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
       this.clientesService.excluirCliente(dados.id);
-    }
+    })
+    
   }
 
   changeLoaded(){
