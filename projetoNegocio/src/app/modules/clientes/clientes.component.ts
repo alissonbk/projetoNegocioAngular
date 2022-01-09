@@ -130,7 +130,7 @@ export class ClientesComponent implements OnInit {
   reloadPage(){
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/compras/mostrar']);
+    this.router.navigate(['/clientes/mostrar']);
   }
   
   hideButton(){
