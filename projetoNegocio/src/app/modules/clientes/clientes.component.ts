@@ -79,17 +79,13 @@ export class ClientesComponent implements OnInit {
   //Funções principais
   onSubmit(){
     if(this.clientes.get('id')?.value == null){
+      this.clientes.removeControl('id');
       this.clientesService.cadastrarCliente(this.clientes.value);
-      alertify.success('Cliente cadastrado!');
     }else{
-      const nomeCliente = this.clientes.value.nome;
-      const dadosCliente = this.clientes.value;
-      alertify.confirm(`Você tem certeza que deseja modificar o cliente ${nomeCliente}?`, () => {
-        alertify.warning(`Cliente ${nomeCliente} modificado!`);
-        this.clientesService.editarCliente(dadosCliente);
-      });
+      this.clientesService.editarCliente(this.clientes.value);
     }
     this.clientes.reset();
+    this.reloadPage();
   }
 
   onEdit(dados: any){
@@ -115,6 +111,7 @@ export class ClientesComponent implements OnInit {
     alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
       alertify.warning(`Cliente ${dados.nome} excluido!`);
       this.clientesService.excluirCliente(dados.id);
+      this.reloadPage();
     })
   }
 
