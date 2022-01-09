@@ -6,6 +6,8 @@ import { catchError } from 'rxjs/operators';
 import { ComprasService } from 'src/app/core/services/compras.service';
 import { Compra } from 'src/app/shared/models/compra';
 import { ComprasComponent } from '../compras.component';
+declare let alertify: any;
+
 
 @Component({
   selector: 'app-mostrar-compras',
@@ -62,6 +64,11 @@ export class MostrarComprasComponent implements OnInit {
       catchError(error => {
         console.log(error);
         this.error$.next(true);
+        // ALERT
+        alertify.dismissAll();
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-center');
+        alertify.error('Falha em carregar clientes!');
         return EMPTY;
       })
     )

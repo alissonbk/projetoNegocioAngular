@@ -7,6 +7,8 @@ import { catchError } from 'rxjs/operators';
 import { Produto } from 'src/app/shared/models/produto';
 import { ProdutosService } from 'src/app/core/services/produtos.service';
 import { ProdutosComponent } from '../produtos.component';
+declare let alertify: any;
+
 
 @Component({
   selector: 'app-mostrar-produtos',
@@ -52,6 +54,11 @@ export class MostrarProdutosComponent implements OnInit {
       catchError(error => {
         console.error(error);
         this.error$.next(true);
+        // ALERT
+        alertify.dismissAll();
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-center');
+        alertify.error('Falha em carregar clientes!');
         return EMPTY;
       })
     );

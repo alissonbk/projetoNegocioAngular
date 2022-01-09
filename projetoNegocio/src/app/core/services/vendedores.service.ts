@@ -87,8 +87,7 @@ export class VendedoresService extends AbstractService {
   }
 
   getVendedores(): Observable<any[]>{
-    return this.http.get('../assets/mocks/mockVendedores.json').pipe(
-      tap(console.log),
+    return this.http.get('../assets/mocks/mockVendedores.json').pipe<any>(
       delay(1000)
     );
     // return this.http.get(`${this.API_URL}/v1/usuarios`).pipe(

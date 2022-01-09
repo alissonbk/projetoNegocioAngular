@@ -89,8 +89,7 @@ export class ClientesService extends AbstractService {
   }
   
   getClientes(): Observable<any[]>{
-    return this.http.get('../assets/mocks/mockCliente.json').pipe(
-      tap(console.log),
+    return this.http.get('../assets/mocks/mockCliente.json').pipe<any>(
       delay(1000)
     );
   }

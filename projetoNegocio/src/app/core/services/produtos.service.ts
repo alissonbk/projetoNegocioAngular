@@ -89,8 +89,7 @@ export class ProdutosService extends AbstractService {
   }
   
   getProdutos(): Observable<any[]>{
-    return this.http.get<Produto[]>('../assets/mocks/mockProdutos.json').pipe(
-      tap(console.log),
+    return this.http.get<Produto[]>('../assets/mocks/mockProdutos.json').pipe<any>(
       delay(1000)
     );
     // return this.http.get<Produto[]>(`${this.API_URL}/v1/produtos`, {headers: this.headers}).pipe(

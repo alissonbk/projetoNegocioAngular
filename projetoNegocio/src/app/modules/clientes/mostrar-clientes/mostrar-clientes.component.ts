@@ -5,6 +5,7 @@ import { ClientesService } from 'src/app/core/services/clientes.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { Cliente } from 'src/app/shared/models/cliente';
 import { catchError } from 'rxjs/operators';
+declare let alertify: any;
 
 
 @Component({
@@ -50,6 +51,11 @@ export class MostrarClientesComponent implements OnInit {
       catchError(error => {
         console.log(error);
         this.error$.next(true);
+        // ALERT
+        alertify.dismissAll();
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-center');
+        alertify.error('Falha em carregar clientes!');
         return EMPTY;
       })
     );
