@@ -86,43 +86,13 @@ export class VendedoresComponent implements OnInit {
   //Funções principais
   onSubmit(){
     if(this.vendedores.get('id')?.value != null){
-      console.log('')
-      this.vendedoresService.editarVendedor(this.vendedores.value).subscribe(
-        next => {
-          console.log(next);
-        },
-        error => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 3);
-          alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Erro ao editar produto!');
-          console.log(error);
-        },
-        () => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 3.5);
-          alertify.warning('Vendedor Modificado Com Sucesso!');
-          this.reloadPage();
-        }
-      );
+      this.vendedoresService.editarVendedor(this.vendedores.value);
     }else{
       this.vendedores.removeControl('id');
-      this.vendedoresService.cadastrarVendedor(this.vendedores.value).subscribe(
-        next => {
-          console.log(next);
-        },
-        error => {
-          console.log(error)
-        },
-        () => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 3.5);
-          alertify.success('Vendedor Cadastrado Com Sucesso!');
-          this.reloadPage();
-        }
-      );
+      this.vendedoresService.cadastrarVendedor(this.vendedores.value);
     }
     this.vendedores.reset();
+    this.reloadPage();
   }
 
   onEdit(dados: any){
@@ -145,20 +115,11 @@ export class VendedoresComponent implements OnInit {
   }
 
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`)){
-      this.vendedoresService.excluirVendedor(dados.id).subscribe(
-        next => {
-          console.log(next);
-        },
-        error => {
-          console.log(error);
-        },
-        () => {
-          console.log("success");
-          this.reloadPage();
-        }
-      );
-    }
+    alertify.confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`, () => {
+      this.vendedoresService.excluirVendedor(dados.id);
+      this.reloadPage();
+    })
+    
   }
 
   //Utils...
