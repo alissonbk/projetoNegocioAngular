@@ -54,53 +54,19 @@ export class ProdutosComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-  //Funções principais
+  // Funções principais
   onSubmit(){
-    //EDITAR
+    // EDITAR
     if(this.produtos.get('id')?.value != null){
       //  Seta valor para padrão numerico novamente
       let valor = '' + this.produtos.get('valor')?.value;
       valor = valor.split(',').join('.');
       this.produtos.get('valor')?.setValue(valor);
-
-      this.produtosService.editarProduto(this.produtos.value).subscribe(
-        next => {
-          console.log(next);
-        },
-        error => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 3);
-          alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Erro ao editar produto!');
-          console.log(error);
-        },
-        () => {
-          alertify.set('notifier','delay', 2);
-          alertify.warning('Produto modificado!');
-          this.reloadPage();
-        }
-      );
-    //CADASTRAR
+      this.produtosService.editarProduto(this.produtos.value);
+    // CADASTRAR
     }else{
       this.produtos.removeControl('id');
-      this.produtosService.cadastrarProduto(this.produtos.value).subscribe(
-        next => {
-          console.log(next);
-        },
-        error => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 3);
-          alertify.set('notifier', 'position', 'top-center');
-          alertify.error('Erro ao cadastrar produto!');
-          console.log(error);
-        },
-        () => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 2);
-          alertify.success('Produto Cadastrado Com Sucesso!');
-          this.reloadPage();
-        }
-      );
+      this.produtosService.cadastrarProduto(this.produtos.value);
     }
     this.produtos.reset();
     this.reloadPage();
@@ -118,20 +84,11 @@ export class ProdutosComponent implements OnInit {
   }
   
   onDelete(dados: any){
-    if(confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`)){
-      this.produtosService.excluirProduto(dados.id).subscribe(
-        next => {
-          console.log("id para excluir:", next);
-        },
-        error => {
-          console.log("Error: ", error);
-        },
-        () => {
-          console.log("success");
-          this.reloadPage();
-        }
-      );
-    }
+    alertify.confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`, () => {
+      this.produtosService.excluirProduto(dados.id);
+      this.reloadPage();
+    });
+      
   }
 
   //Utils...
