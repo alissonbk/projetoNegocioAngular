@@ -29,7 +29,7 @@ export class VendedoresService extends AbstractService {
           alertify.dismissAll();
           alertify.set('notifier','delay', 2);
           alertify.set('notifier', 'position', 'top-right');
-          alertify.success('Vendedor Cadastrado Com Sucesso!');
+          alertify.success('Vendedor Cadastrado com Sucesso!');
       });
   }
 
@@ -69,7 +69,6 @@ export class VendedoresService extends AbstractService {
         alertify.set('notifier','delay', 2);
         alertify.set('notifier', 'position', 'top-right');
         alertify.warning('Vendedor Excluido!');
-        console.log("success");
       }
     );
   }

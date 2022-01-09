@@ -69,7 +69,6 @@ export class ComprasComponent implements OnInit {
   onSubmit(){
     if(this.compras.get('id')?.value == null){
       this.comprasService.cadastrarCompra(this.compras.value);
-      alertify.success('Compra Cadastrada!');
     }else{
       //Caso o usuario não mude o campo, seleciona apenas o id.
       if(this.compras.get('cliente')?.value.id){
@@ -82,14 +81,10 @@ export class ComprasComponent implements OnInit {
         this.compras.get('vendedor')?.setValue(this.compras.get('vendedor')?.value.id);
       }
       const comprasValue = this.compras.value;
-      alertify.confirm(`Você tem certeza que deseja modificar esta compra?`, () => {
-        alertify.warning(`Compra modificada!`);
-        this.comprasService.editarCompra(comprasValue);
-      })
-      
-      
+      this.comprasService.editarCompra(comprasValue); 
     }
     this.compras.reset();
+    this.reloadPage();
   }
 
   onEdit(dados: any){
@@ -105,8 +100,8 @@ export class ComprasComponent implements OnInit {
 
   onDelete(dados: any){
     alertify.confirm(`Você tem certeza que deseja excluir a compra (Cliente: ${dados.cliente.nome}, Produto: ${dados.produto.descricao})?`, () => {
-      alertify.warning(`Compra excluida!`);
       this.comprasService.excluirCompra(dados.id);
+      this.reloadPage();
     })
   }
 
@@ -125,6 +120,12 @@ export class ComprasComponent implements OnInit {
         }
       }
     });
+  }
+
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/compras/mostrar']);
   }
 
   hideButton(){

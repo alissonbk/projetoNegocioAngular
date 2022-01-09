@@ -118,6 +118,7 @@ export class ClientesComponent implements OnInit {
     })
   }
 
+  //Utils
   //getById temporario, antes da API
   getById(id: number){
     this.loading = true;
@@ -130,7 +131,12 @@ export class ClientesComponent implements OnInit {
     });
   }
 
-  //Utils
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/compras/mostrar']);
+  }
+  
   hideButton(){
     this.hideBtn = !this.hideBtn;
     if(this.hideBtn){

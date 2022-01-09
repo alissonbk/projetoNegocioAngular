@@ -23,7 +23,7 @@ export class ProdutosService extends AbstractService {
       },
       error => {
             alertify.dismissAll();
-            alertify.set('notifier','delay', 3);
+            alertify.set('notifier','delay', 2);
             alertify.set('notifier', 'position', 'top-right');
             alertify.error('Erro ao cadastrar produto!');
             console.log(error);
@@ -32,14 +32,14 @@ export class ProdutosService extends AbstractService {
             alertify.dismissAll();
             alertify.set('notifier','delay', 2);
             alertify.set('notifier', 'position', 'top-right');
-            alertify.success('Produto Cadastrado Com Sucesso!');
+            alertify.success('Produto Cadastrado com Sucesso!');
       });
   }
 
   editarProduto(value: any){
     return this.http.put(`${this.API_URL}/v1/produtos/`+ value.id, value, {headers: this.headers}).subscribe(
       next => {
-        console.log(next);
+        // console.log(next);
       },
       error => {
         alertify.dismissAll();
@@ -59,33 +59,32 @@ export class ProdutosService extends AbstractService {
   excluirProduto(id: number){
     return this.http.delete(`${this.API_URL}/v1/produtos/`+ id, {headers: this.headers}).subscribe(
       next => {
-        console.log("id para excluir:", next);
+        // console.log("id para excluir:", next);
       },
       error => {
         alertify.dismissAll();
         alertify.set('notifier','delay', 2);
         alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao editar produto!');
+        alertify.error('Erro ao excluir produto!');
         console.log("Error: ", error);
       },
       () => {
         alertify.set('notifier','delay', 2);
         alertify.set('notifier', 'position', 'top-right');
         alertify.warning('Produto Excluido!');
-        console.log("success");
       }
     );
   }
   
   getProdutos(): Observable<any[]>{
-    // return this.http.get<Produto[]>('../assets/mocks/mockProdutos.json').pipe(
-    //   tap(console.log),
-    //   delay(1000)
-    // );
-    return this.http.get<Produto[]>(`${this.API_URL}/v1/produtos`, {headers: this.headers}).pipe(
+    return this.http.get<Produto[]>('../assets/mocks/mockProdutos.json').pipe(
       tap(console.log),
       delay(1000)
     );
+    // return this.http.get<Produto[]>(`${this.API_URL}/v1/produtos`, {headers: this.headers}).pipe(
+    //   tap(console.log),
+    //   delay(1000)
+    // );
    
   }
 

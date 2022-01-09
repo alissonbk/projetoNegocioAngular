@@ -5,6 +5,8 @@ import {delay, tap} from "rxjs/operators";
 
 
 import { AbstractService } from './abstract.service';
+declare let alertify: any;
+
 
 @Injectable({providedIn: 'root'})
 
@@ -15,17 +17,66 @@ export class ClientesService extends AbstractService {
  }
 
   cadastrarCliente(value: any) {
-    this.http.post(`${this.API_URL}/v1/clientes`, value);
-    console.log("cadastrar : ", value);
+    // console.log("cadastrar : ", value);
+    this.http.post(`${this.API_URL}/v1/clientes`, value).subscribe(
+      next => { },
+      error => {
+            alertify.dismissAll();
+            alertify.set('notifier','delay', 2);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.error('Erro ao cadastrar cliente!');
+            console.log(error);
+      },
+      () => {
+            alertify.dismissAll();
+            alertify.set('notifier','delay', 2);
+            alertify.set('notifier', 'position', 'top-right');
+            alertify.success('Cliente Cadastrado com Sucesso!');
+      });
+    
   }
 
   editarCliente(value: any){
-    this.http.put(`${this.API_URL}/v1/clientes`, value);
-    console.log("editar : ", value);
+    // console.log("editar : ", value);  
+    this.http.put(`${this.API_URL}/v1/clientes`, value).subscribe(
+      next => {
+        // console.log(next);
+      },
+      error => {
+        alertify.dismissAll();
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Erro ao editar cliente!');
+        console.log(error);
+      },
+      () => {
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.warning('Cliente modificado!');
+      }
+    );
+    
   }
   excluirCliente(id: number){
-    this.http.delete(`${this.API_URL}/v1/clientes`+ id);
-    console.log("deletar id: ", id);
+    // console.log("deletar id: ", id);
+    this.http.delete(`${this.API_URL}/v1/clientes`+ id).subscribe(
+      next => {
+        // console.log("id para excluir:", next);
+      },
+      error => {
+        alertify.dismissAll();
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error('Erro ao excluir cliente!');
+        console.log("Error: ", error);
+      },
+      () => {
+        alertify.set('notifier','delay', 2);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.warning('Cliente Excluido!');
+      }
+    );
+    
   }
   
   getClientes(): Observable<any[]>{

@@ -7,6 +7,7 @@ import { catchError, delay, tap } from "rxjs/operators";
 import { Compra } from "../../shared/models/compra";
 import { AbstractService } from "./abstract.service";
 import { LoginService } from "./login.service";
+declare let alertify: any;
 
 
 @Injectable({providedIn: 'root'})
@@ -18,18 +19,65 @@ export class ComprasService extends AbstractService{
     }
 
     cadastrarCompra(value: any){
-        this.http.post(`${this.API_URL}/v1/compras`, value);
-        console.log("cadastrar : ", value);
+        // console.log("cadastrar : ", value);
+        this.http.post(`${this.API_URL}/v1/compras`, value).subscribe(
+            next => { },
+            error => {
+                  alertify.dismissAll();
+                  alertify.set('notifier','delay', 2);
+                  alertify.set('notifier', 'position', 'top-right');
+                  alertify.error('Erro ao cadastrar Compra!');
+                  console.log(error);
+            },
+            () => {
+                  alertify.dismissAll();
+                  alertify.set('notifier','delay', 2);
+                  alertify.set('notifier', 'position', 'top-right');
+                  alertify.success('Compra Cadastrada com Sucesso!');
+            });     
     }
     
     editarCompra(value: any){
-        this.http.put(`${this.API_URL}/v1/compras`, value);
-        console.log("editar : ", value);
+        // console.log("editar : ", value);
+        this.http.put(`${this.API_URL}/v1/compras`, value).subscribe(
+            next => {
+            //   console.log(next);
+            },
+            error => {
+              alertify.dismissAll();
+              alertify.set('notifier','delay', 2);
+              alertify.set('notifier', 'position', 'top-right');
+              alertify.error('Erro ao editar compra!');
+              console.log(error);
+            },
+            () => {
+              alertify.set('notifier','delay', 2);
+              alertify.set('notifier', 'position', 'top-right');
+              alertify.warning('Compra modificada!');
+            }
+          );
     }
 
     excluirCompra(id: number){
-        this.http.delete(`${this.API_URL}/v1/compras`+ id);
-        console.log("deletar id: ", id);
+        // console.log("deletar id: ", id);
+        this.http.delete(`${this.API_URL}/v1/compras`+ id).subscribe(
+            next => {
+            //   console.log("id para excluir:", next);
+            },
+            error => {
+              alertify.dismissAll();
+              alertify.set('notifier','delay', 2);
+              alertify.set('notifier', 'position', 'top-right');
+              alertify.error('Erro ao excluir compra!');
+              console.log("Error: ", error);
+            },
+            () => {
+              alertify.set('notifier','delay', 2);
+              alertify.set('notifier', 'position', 'top-right');
+              alertify.warning('Compra Excluida!');
+            }
+          );
+        
     }
     
     getCompras(pageable: any): Observable<any>{
