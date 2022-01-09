@@ -60,10 +60,6 @@ export class ComprasComponent implements OnInit {
       this.getById(this.paramId);
     }
   }
-  
-  ngAfterViewInit(): void {
-    window.scroll(0, -300);
-  }
 
   //Funções principais
   onSubmit(){

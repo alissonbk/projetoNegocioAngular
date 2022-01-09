@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
@@ -32,7 +32,8 @@ export class ClientesComponent implements OnInit {
     private route: ActivatedRoute,
     private clientesService: ClientesService,
     private cepService: CepService,
-    private dropdownService: DropdownService
+    private dropdownService: DropdownService,
+    private cf: ChangeDetectorRef
     ) { }
 
   //Lifecyclehooks
@@ -70,11 +71,10 @@ export class ClientesComponent implements OnInit {
     if(this.paramId != null){
       this.getById(this.paramId);
     }
+
+    this.cf.detectChanges();
   }
 
-  ngAfterViewInit(): void {
-    window.scroll(0, -300);
-  }
 
   //Funções principais
   onSubmit(){
@@ -109,7 +109,6 @@ export class ClientesComponent implements OnInit {
 
   onDelete(dados: any){
     alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
-      alertify.warning(`Cliente ${dados.nome} excluido!`);
       this.clientesService.excluirCliente(dados.id);
       this.reloadPage();
     })
