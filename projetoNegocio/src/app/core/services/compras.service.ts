@@ -86,7 +86,7 @@ export class ComprasService extends AbstractService{
       //     });   
     }
     
-    getCompras(pageable: any): Observable<any>{
+    getCompras(pageable: any): Observable<Compra[]>{
         return this.http.get<Compra[]>('/assets/mocks/mockCompras.json').pipe<any>(
             delay(1000)
         )

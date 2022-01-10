@@ -88,7 +88,7 @@ export class ProdutosService extends AbstractService {
     // );
   }
   
-  getProdutos(): Observable<any[]>{
+  getProdutos(): Observable<Produto[]>{
     return this.http.get<Produto[]>('../assets/mocks/mockProdutos.json').pipe<any>(
       delay(1000)
     );

@@ -1,3 +1,4 @@
+import { Vendedor } from 'src/app/shared/models/vendedor';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
@@ -86,7 +87,7 @@ export class VendedoresService extends AbstractService {
     // );
   }
 
-  getVendedores(): Observable<any[]>{
+  getVendedores(): Observable<Vendedor[]>{
     return this.http.get('../assets/mocks/mockVendedores.json').pipe<any>(
       delay(1000)
     );

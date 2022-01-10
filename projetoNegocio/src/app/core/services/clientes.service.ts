@@ -6,6 +6,7 @@ import {delay, tap} from "rxjs/operators";
 
 import { AbstractService } from './abstract.service';
 declare let alertify: any;
+import { Cliente } from 'src/app/shared/models/cliente';
 
 
 @Injectable({providedIn: 'root'})
@@ -88,7 +89,7 @@ export class ClientesService extends AbstractService {
     
   }
   
-  getClientes(): Observable<any[]>{
+  getClientes(): Observable<Cliente[]>{
     return this.http.get('../assets/mocks/mockCliente.json').pipe<any>(
       delay(1000)
     );

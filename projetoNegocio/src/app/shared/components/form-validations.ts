@@ -24,6 +24,7 @@ export class FormValidations{
         }
         return null;
     }
+    
     static cepValidator(control: FormControl) {
         let cep = control.value;
         if (cep && cep !== '') {
