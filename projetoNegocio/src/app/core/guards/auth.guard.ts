@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
+declare let alertify: any;
 
 @Injectable({
   providedIn: 'root'
@@ -15,18 +16,16 @@ export class AuthGuard implements CanActivate, CanLoad {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       return true;
       // const loggedUser = this.loginService.loggedUser;
-      // if (!loggedUser) {
-      //     if (state.url.endsWith('login')) {
-      //         return true;
-      //     }
-      //     this.router.navigate(['login']);
-      // } else {
-      //     if (state.url.endsWith('login')) {
-      //         this.router.navigate(['home']);
-      //     }
-      //     return true;
+      // if(loggedUser){
+      //   return true;
+      // }else{
+      //   alertify.dismissAll();
+      //   alertify.set('notifier','delay', 2);
+      //   alertify.set('notifier', 'position', 'top-right');
+      //   alertify.error('Login Necessário!');
+      //   this.router.navigate(['login']);
+      //   return false;
       // }
-      // return false;
   }
   canLoad(
     route: Route,
