@@ -4,9 +4,9 @@ import { EMPTY, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 
-import { Produto } from 'src/app/shared/models/produto';
 import { ProdutosService } from 'src/app/core/services/produtos.service';
 import { ProdutosComponent } from '../produtos.component';
+import { Produto } from 'src/app/shared/models/produto';
 declare let alertify: any;
 
 

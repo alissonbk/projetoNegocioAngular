@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { catchError, delay, take, tap } from "rxjs/operators";
-import { Produto } from "../../shared/models/produto";
+import { Produto } from "src/app/shared/models/produto";
 import { AbstractService } from "./abstract.service";
 declare let alertify: any;
 
@@ -16,7 +16,9 @@ export class ProdutosService extends AbstractService {
   }
 
 
-  cadastrarProduto(value: any) {
+  cadastrarProduto(value: Produto): void {
+    // let produto: Produto = new Produto();
+    // produto = value;
     console.log(`Produto cadastrado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
@@ -40,7 +42,7 @@ export class ProdutosService extends AbstractService {
     //   });
   }
 
-  editarProduto(value: any){
+  editarProduto(value: Produto){
     console.log(`Produto modificado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
