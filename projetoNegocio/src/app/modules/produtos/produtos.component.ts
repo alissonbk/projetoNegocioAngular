@@ -1,3 +1,4 @@
+import { Produto } from 'src/app/shared/models/produto';
 import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -68,7 +69,7 @@ export class ProdutosComponent implements OnInit {
     this.reloadPage();
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Produto){
     this.produtos.patchValue({
       "id": dados.id,
       "descricao": dados.descricao,
@@ -79,19 +80,19 @@ export class ProdutosComponent implements OnInit {
     window.scroll(0, -300);
   }
   
-  onDelete(dados: any){
+  onDelete(dados: Produto){
     alertify.confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`, () => {
-      this.produtosService.excluirProduto(dados.id);
+      this.produtosService.excluirProduto(dados);
       this.reloadPage();
     });
       
   }
 
   //Utils...
-  //getById temporario
+  //getById temporario até a api
   getById(id: number){
     this.loading = true;
-    this.produtosService.getProdutos().subscribe((produtos: any) => {
+    this.produtosService.getProdutos().subscribe((produtos: Produto[]) => {
       for(let produto of produtos){
         if(produto.id == id){
           this.onEdit(produto);
@@ -128,6 +129,6 @@ export class ProdutosComponent implements OnInit {
     }
   }
 
-  isNumber(e: any) {return typeof e === 'number'}
+  // isNumber(e: any) {return typeof e === 'number'}
 
 }

@@ -66,7 +66,8 @@ export class ProdutosService extends AbstractService {
     // );
   }
 
-  excluirProduto(id: number){
+  excluirProduto(value: Produto){
+    let id = value.id;
     console.log(`ID ${id} excluido!`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');

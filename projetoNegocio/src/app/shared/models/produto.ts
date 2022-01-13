@@ -1,10 +1,10 @@
 export class Produto{
-    private _id: number | undefined;
-    private _descricao: string | undefined;
-    private _marca: string | undefined;
-    private _valor: number | undefined;
+    private _id: number;
+    private _descricao: string;
+    private _marca: string;
+    private _valor: number;
 
-    constructor(id?: number, descricao?: string, marca?: string, valor?: number){
+    constructor(id: number, descricao: string, marca: string, valor: number){
         this._id = id;
         this._marca = marca;
         this._descricao = descricao;
@@ -42,6 +42,5 @@ export class Produto{
     public set valor(valor){
         this._valor = valor;
     }
-
 
 }
