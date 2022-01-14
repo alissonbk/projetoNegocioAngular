@@ -11,6 +11,7 @@ import { ClientesService } from 'src/app/core/services/clientes.service';
 import { DropdownService } from 'src/app/core/services/dropdown.service';
 import { FormValidations } from '../../shared/components/form-validations';
 import { i18nMetaToJSDoc } from '@angular/compiler/src/render3/view/i18n/meta';
+import { Cliente } from 'src/app/shared/models/cliente';
 declare let alertify: any;
 
 @Component({
@@ -78,17 +79,24 @@ export class ClientesComponent implements OnInit {
 
   //Funções principais
   onSubmit(){
-    if(this.clientes.get('id')?.value == null){
-      this.clientes.removeControl('id');
-      this.clientesService.cadastrarCliente(this.clientes.value);
+    let cliente = new Cliente(
+      this.clientes.get('nome')?.value, 
+      this.clientes.get('cpf')?.value, 
+      this.clientes.get('email')?.value, 
+      this.clientes.get('endereco')?.value, 
+      this.clientes.get('id')?.value
+    );
+    if(cliente.id == null){
+      cliente.id = undefined;
+      this.clientesService.cadastrarCliente(cliente);
     }else{
-      this.clientesService.editarCliente(this.clientes.value);
+      this.clientesService.editarCliente(cliente);
     }
     this.clientes.reset();
     this.reloadPage();
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Cliente){
     this.clientes.patchValue({
       "id": dados.id,
       "nome": dados.nome,
@@ -107,9 +115,9 @@ export class ClientesComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-  onDelete(dados: any){
+  onDelete(dados: Cliente){
     alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
-      this.clientesService.excluirCliente(dados.id);
+      this.clientesService.excluirCliente(dados);
       this.reloadPage();
     })
   }

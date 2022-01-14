@@ -61,11 +61,11 @@ export class MostrarClientesComponent implements OnInit {
     );
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Cliente){
     this._parent.onEdit(dados);
   }
 
-  onDelete(dados: any){
+  onDelete(dados: Cliente){
     this._parent.onDelete(dados);
   }
 

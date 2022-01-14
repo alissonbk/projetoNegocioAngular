@@ -17,7 +17,7 @@ export class ClientesService extends AbstractService {
     super(http);
  }
 
-  cadastrarCliente(value: any) {
+  cadastrarCliente(value: Cliente) {
     console.log(`Cliente cadastrado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
@@ -40,7 +40,7 @@ export class ClientesService extends AbstractService {
     
   }
 
-  editarCliente(value: any){
+  editarCliente(value: Cliente){
     console.log(`Cliente modificado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
@@ -64,7 +64,8 @@ export class ClientesService extends AbstractService {
     // );
     
   }
-  excluirCliente(id: number){
+  excluirCliente(value: Cliente){
+    let id = value.id;
     console.log(`ID ${id} excluido!`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');

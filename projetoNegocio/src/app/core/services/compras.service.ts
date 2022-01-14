@@ -18,7 +18,7 @@ export class ComprasService extends AbstractService{
         super(http)
     }
 
-    cadastrarCompra(value: any){
+    cadastrarCompra(value: Compra){
       console.log(`Compra cadastrada -> ${JSON.stringify(value)}`);
       alertify.set('notifier','delay', 2);
       alertify.set('notifier', 'position', 'top-right');
@@ -40,7 +40,7 @@ export class ComprasService extends AbstractService{
       //     });     
     }
     
-    editarCompra(value: any){
+    editarCompra(value: Compra){
       console.log(`Compra modificada -> ${JSON.stringify(value)}`);
       alertify.set('notifier','delay', 2);
       alertify.set('notifier', 'position', 'top-right');
@@ -63,7 +63,8 @@ export class ComprasService extends AbstractService{
       //   });
     }
 
-    excluirCompra(id: number){
+    excluirCompra(value: Compra){
+      let id = value.id;
       console.log(`ID ${id} excluido!`);
       alertify.set('notifier','delay', 2);
       alertify.set('notifier', 'position', 'top-right');
