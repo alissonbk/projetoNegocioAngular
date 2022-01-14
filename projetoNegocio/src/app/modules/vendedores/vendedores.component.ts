@@ -11,6 +11,7 @@ import { CepService } from 'src/app/core/services/cep.service';
 import { DropdownService } from 'src/app/core/services/dropdown.service';
 import { VendedoresService } from 'src/app/core/services/vendedores.service';
 import { FormValidations } from '../../shared/components/form-validations';
+import { Vendedor } from 'src/app/shared/models/vendedor';
 declare let alertify: any;
 
 @Component({
@@ -81,17 +82,25 @@ export class VendedoresComponent implements OnInit {
 
   //Funções principais
   onSubmit(){
-    if(this.vendedores.get('id')?.value != null){
-      this.vendedoresService.editarVendedor(this.vendedores.value);
+    let vendedor: Vendedor = new Vendedor(
+      this.vendedores.get('nome')?.value,
+      this.vendedores.get('cpf')?.value,
+      this.vendedores.get('email')?.value,
+      this.vendedores.get('senha')?.value,
+      this.vendedores.get('endereco')?.value,
+      this.vendedores.get('id')?.value,
+    ); 
+    if(vendedor.id != null){
+      this.vendedoresService.editarVendedor(vendedor);
     }else{
-      this.vendedores.removeControl('id');
-      this.vendedoresService.cadastrarVendedor(this.vendedores.value);
+      vendedor.id = undefined;
+      this.vendedoresService.cadastrarVendedor(vendedor);
     }
     this.vendedores.reset();
     this.reloadPage();
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Vendedor){
     this.vendedores.patchValue({
       "id": dados.id,
       "nome": dados.nome,
@@ -110,9 +119,9 @@ export class VendedoresComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-  onDelete(dados: any){
+  onDelete(dados: Vendedor){
     alertify.confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`, () => {
-      this.vendedoresService.excluirVendedor(dados.id);
+      this.vendedoresService.excluirVendedor(dados);
       this.reloadPage();
     })
     

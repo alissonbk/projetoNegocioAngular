@@ -79,7 +79,7 @@ export class ClientesComponent implements OnInit {
 
   //Funções principais
   onSubmit(){
-    let cliente = new Cliente(
+    let cliente: Cliente = new Cliente(
       this.clientes.get('nome')?.value, 
       this.clientes.get('cpf')?.value, 
       this.clientes.get('email')?.value, 

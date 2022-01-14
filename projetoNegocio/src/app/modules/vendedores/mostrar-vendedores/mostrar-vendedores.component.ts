@@ -60,11 +60,11 @@ export class MostrarVendedoresComponent implements OnInit {
     )
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Vendedor){
     this._parent.onEdit(dados);
   }
 
-  onDelete(dados: any){
+  onDelete(dados: Vendedor){
     this._parent.onDelete(dados);
   }
 
