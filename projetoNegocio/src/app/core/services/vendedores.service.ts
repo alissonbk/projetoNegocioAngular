@@ -14,7 +14,7 @@ export class VendedoresService extends AbstractService {
     super(http)
   }
 
-  cadastrarVendedor(value: any) {
+  cadastrarVendedor(value: Vendedor) {
     console.log(`Vendedor cadastrado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
@@ -38,7 +38,7 @@ export class VendedoresService extends AbstractService {
     //   });
   }
 
-  editarVendedor(value: any){
+  editarVendedor(value: Vendedor){
     console.log(`Vendedor modificado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
@@ -62,7 +62,8 @@ export class VendedoresService extends AbstractService {
     // );
   }
 
-  excluirVendedor(id: number){
+  excluirVendedor(value: Vendedor){
+    let id = value.id;
     console.log(`ID ${id} excluido!`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');
