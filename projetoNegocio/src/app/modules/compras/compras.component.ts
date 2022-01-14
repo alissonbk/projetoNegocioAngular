@@ -7,6 +7,10 @@ import { ClientesService } from 'src/app/core/services/clientes.service';
 import { ComprasService } from 'src/app/core/services/compras.service';
 import { ProdutosService } from 'src/app/core/services/produtos.service';
 import { VendedoresService } from 'src/app/core/services/vendedores.service';
+import { Cliente } from 'src/app/shared/models/cliente';
+import { Compra } from 'src/app/shared/models/compra';
+import { Produto } from 'src/app/shared/models/produto';
+import { Vendedor } from 'src/app/shared/models/vendedor';
 declare let alertify: any;
 
 @Component({
@@ -17,9 +21,9 @@ declare let alertify: any;
 export class ComprasComponent implements OnInit {
 
   compras!: FormGroup;
-  clientes: any;
-  produtos: any;
-  vendedores: any;
+  clientes!: Cliente[];
+  produtos!: Produto[];
+  vendedores!: Vendedor[];
   hideBtn!: boolean;
   paramId!: any;
   compraById!: any;
@@ -44,15 +48,15 @@ export class ComprasComponent implements OnInit {
       vendedor: [null, Validators.required]
     })
 
-    this.clientesService.getClientes().subscribe((clientes: any) =>{
+    this.clientesService.getClientes().subscribe((clientes: Cliente[]) =>{
       this.clientes = clientes;
     });
-    this.produtosService.getProdutos().subscribe((produtos:any) => {
+    this.produtosService.getProdutos().subscribe((produtos: Produto[]) => {
       this.produtos = produtos;
-    })
-    this.vendedoresService.getVendedores().subscribe((vendedores: any) => {
+    });
+    this.vendedoresService.getVendedores().subscribe((vendedores: Vendedor[]) => {
       this.vendedores = vendedores;
-    })
+    });
 
     //Path params
     this.paramId = this.route.snapshot.queryParamMap.get('id');
@@ -63,27 +67,35 @@ export class ComprasComponent implements OnInit {
   
   //Funções principais
   onSubmit(){
-    if(this.compras.get('id')?.value == null){
-      this.comprasService.cadastrarCompra(this.compras.value);
+    let compra: Compra = new Compra(
+      this.compras.get('cliente')?.value,
+      this.compras.get('produto')?.value,
+      this.compras.get('vendedor')?.value,
+      this.compras.get('id')?.value
+    );
+    if(compra.id == null){
+      compra.id = undefined;
+      this.comprasService.cadastrarCompra(compra);
     }else{
-      //Caso o usuario não mude o campo, seleciona apenas o id.
+      // //Caso o usuario não mude o campo, seleciona apenas o id.
+      if(this.compras.get('vendedor')?.value.id){
+        compra.vendedor = this.compras.get('vendedor')?.value.id;
+      }
       if(this.compras.get('cliente')?.value.id){
-        this.compras.get('cliente')?.setValue(this.compras.get('cliente')?.value.id);
+        compra.cliente = this.compras.get('cliente')?.value.id;
       }
       if(this.compras.get('produto')?.value.id){
-        this.compras.get('produto')?.setValue(this.compras.get('produto')?.value.id);
+        compra.produto = this.compras.get('produto')?.value.id;
       }
-      if(this.compras.get('vendedor')?.value.id){
-        this.compras.get('vendedor')?.setValue(this.compras.get('vendedor')?.value.id);
-      }
-      const comprasValue = this.compras.value;
-      this.comprasService.editarCompra(comprasValue); 
+      
+      
+      this.comprasService.editarCompra(compra);
     }
     this.compras.reset();
     this.reloadPage();
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Compra){
     this.compras.patchValue({
       "id": dados.id,
       "cliente": dados.cliente,
@@ -94,11 +106,11 @@ export class ComprasComponent implements OnInit {
     window.scroll(0, -300);
   }
 
-  onDelete(dados: any){
-    alertify.confirm(`Você tem certeza que deseja excluir a compra (Cliente: ${dados.cliente.nome}, Produto: ${dados.produto.descricao})?`, () => {
-      this.comprasService.excluirCompra(dados.id);
+  onDelete(dados: Compra){
+    alertify.confirm(`Você tem certeza que deseja excluir a compra ?`, () => {
+      this.comprasService.excluirCompra(dados);
       this.reloadPage();
-    })
+    });
   }
 
    //Utils...

@@ -12,12 +12,11 @@ export class Compra{
     public data: Date | undefined;
 
 
-    constructor(cliente: Cliente, produto: Produto, vendedor: Vendedor, id?: number, data?: Date){
+    constructor(cliente: Cliente, produto: Produto, vendedor: Vendedor, id?: number){
         this.id = id;
         this.cliente = cliente;
         this.vendedor = vendedor;
         this.produto = produto;
-        this.data = data;
     }
 
 

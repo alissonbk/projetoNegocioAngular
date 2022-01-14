@@ -16,7 +16,7 @@ declare let alertify: any;
 })
 export class MostrarComprasComponent implements OnInit {
 
-  compras$!: Observable<any>;
+  compras$!: Observable<Compra[]>;
   error$ = new Subject<boolean>();
   dataLoaded!: boolean;
   firstExecution!: boolean;
@@ -74,11 +74,11 @@ export class MostrarComprasComponent implements OnInit {
     )
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Compra){
     this._parent.onEdit(dados);
   }
 
-  onDelete(dados: any){
+  onDelete(dados: Compra){
     this._parent.onDelete(dados);
   }
 
