@@ -17,8 +17,6 @@ export class ProdutosService extends AbstractService {
 
 
   cadastrarProduto(value: Produto): void {
-    // let produto: Produto = new Produto();
-    // produto = value;
     console.log(`Produto cadastrado -> ${JSON.stringify(value)}`);
     alertify.set('notifier','delay', 2);
     alertify.set('notifier', 'position', 'top-right');

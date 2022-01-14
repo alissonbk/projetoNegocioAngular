@@ -64,11 +64,11 @@ export class MostrarProdutosComponent implements OnInit {
     );
   }
 
-  onEdit(dados: any){
+  onEdit(dados: Produto){
     this._parent.onEdit(dados);
   }
 
-  onDelete(dados: any){
+  onDelete(dados: Produto){
     this._parent.onDelete(dados);
   }
   

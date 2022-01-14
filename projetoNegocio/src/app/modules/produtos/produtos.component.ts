@@ -53,17 +53,20 @@ export class ProdutosComponent implements OnInit {
 
   // Funções principais
   onSubmit(){
+    //Criando objeto produto apartir do formulario
+    let produto: Produto = new Produto(this.produtos.get('descricao')?.value, this.produtos.get('marca')?.value, 
+    this.produtos.get('valor')?.value, this.produtos.get('id')?.value);
     // EDITAR
-    if(this.produtos.get('id')?.value != null){
+    if(produto.id != null){
       //  Seta valor para padrão numerico novamente
       let valor = '' + this.produtos.get('valor')?.value;
       valor = valor.split(',').join('.');
-      this.produtos.get('valor')?.setValue(valor);
-      this.produtosService.editarProduto(this.produtos.value);
+      produto.valor = Number(valor);
+      this.produtosService.editarProduto(produto);
     // CADASTRAR
     }else{
-      this.produtos.removeControl('id');
-      this.produtosService.cadastrarProduto(this.produtos.value);
+      produto.id = undefined;
+      this.produtosService.cadastrarProduto(produto);
     }
     this.produtos.reset();
     this.reloadPage();
