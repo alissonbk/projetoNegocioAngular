@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-center">
     <div class="clientesContainer d-flex justify-content-center">
-        <form class="form-horizontal" [formGroup]="compras" (ngSubmit)="onSubmit()">
+        <form class="form-horizontal" [formGroup]="formCompra" (ngSubmit)="onSubmit()">
             <div class="container mt-5">
-                <div *ngIf="compras.get('id')?.value == null" class="title">
+                <div *ngIf="formCompra.get('id')?.value == null" class="title">
                     Cadastrar Compra
                 </div>
-                <div *ngIf="compras.get('id')?.value != null" class="titleEditar">
+                <div *ngIf="formCompra.get('id')?.value != null" class="titleEditar">
                     Editar Compra
                 </div>
                 <div class="subtitle">
@@ -16,20 +16,20 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="cliente" class="label">Cliente</label>
-                            <div *ngIf="compras.get('cliente')?.value?.id == null">
+                            <div *ngIf="formCompra.get('cliente')?.value?.id == null">
                                 <select class="form-control input" id="cliente" placeholder="Selecione o cliente"  formControlName="cliente">
                                     <option *ngFor="let c of clientes" [value]="c?.id">{{ c.nome }}</option>
                                 </select>
                             </div>
-                            <div *ngIf="compras.get('cliente')?.value?.id != null">
+                            <div *ngIf="formCompra.get('cliente')?.value?.id != null">
                                 <select class="form-control input" id="cliente" placeholder="Selecione o cliente" formControlName="cliente">
-                                    <option hidden [value]="compras.get('cliente')" selected>{{ compras.get('cliente')?.value.nome }}</option>
+                                    <option hidden [value]="formCompra.get('cliente')" selected>{{ formCompra.get('cliente')?.value.nome }}</option>
                                     <option *ngFor="let c of clientes" [value]="c?.id">{{ c.nome }}</option>
                                 </select>
                             </div>
                             
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(compras.get('cliente'))" label="Cliente"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCompra.get('cliente'))" label="Cliente"></app-msg-erro>
                             </div>
                         </div>
                     </div>
@@ -37,19 +37,19 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="produto" class="label">Produto</label>
-                            <div *ngIf="compras.get('produto')?.value?.id == null">
+                            <div *ngIf="formCompra.get('produto')?.value?.id == null">
                                 <select class="form-control input" id="produto" placeholder="Selecione o produto" formControlName="produto">
                                     <option *ngFor="let p of produtos" [value]="p?.id">{{ p.descricao }}</option>
                                 </select>
                             </div>
-                            <div *ngIf="compras.get('produto')?.value?.id != null">
+                            <div *ngIf="formCompra.get('produto')?.value?.id != null">
                                 <select class="form-control input" id="produto" placeholder="Selecione o produto" formControlName="produto">
-                                    <option hidden [value]="compras.get('produto')">{{ compras.get('produto')?.value.descricao }}</option>
+                                    <option hidden [value]="formCompra.get('produto')">{{ formCompra.get('produto')?.value.descricao }}</option>
                                     <option *ngFor="let p of produtos" [value]="p?.id">{{ p.descricao }}</option>
                                 </select>
                             </div>
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(compras.get('produto'))" label="Produto"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCompra.get('produto'))" label="Produto"></app-msg-erro>
                             </div>
                         </div>
                     </div>
@@ -57,19 +57,19 @@
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="form-group col-md-6">
                             <label for="vendedor" class="label">Vendedor</label>
-                            <div *ngIf="compras.get('vendedor')?.value?.id == null">
+                            <div *ngIf="formCompra.get('vendedor')?.value?.id == null">
                                 <select class="form-control input" id="vendedor" placeholder="Selecione o vendedor" formControlName="vendedor">
                                     <option *ngFor="let v of vendedores" [value]="v?.id">{{ v.nome }}</option>
                                 </select>
                             </div>
-                            <div *ngIf="compras.get('vendedor')?.value?.id != null">
+                            <div *ngIf="formCompra.get('vendedor')?.value?.id != null">
                                 <select class="form-control input" id="vendedor" placeholder="Selecione o vendedor" formControlName="vendedor">
-                                    <option hidden [value]="compras.get('vendedor')">{{ compras.get('vendedor')?.value.nome }}</option>
+                                    <option hidden [value]="formCompra.get('vendedor')">{{ formCompra.get('vendedor')?.value.nome }}</option>
                                     <option *ngFor="let v of vendedores" [value]="v?.id">{{ v.nome }}</option>
                                 </select>
                             </div>
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(compras.get('vendedor'))" label="Vendedor"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCompra.get('vendedor'))" label="Vendedor"></app-msg-erro>
                             </div>
                         </div>
                     </div>
@@ -81,10 +81,10 @@
         
                 <!-- SUBMIT -->
                 <div class="row d-flex justify-content-left mt-4 mb-1">
-                    <div class="form-group col-md-2" *ngIf="compras.status == 'VALID'">
+                    <div class="form-group col-md-2" *ngIf="formCompra.status == 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
                     </div>
-                    <div class="form-group col-md-2" *ngIf="compras.status != 'VALID'">
+                    <div class="form-group col-md-2" *ngIf="formCompra.status != 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
 

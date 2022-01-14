@@ -1,11 +1,11 @@
 <div class="d-flex justify-content-center">
     <div class="clientesContainer d-flex justify-content-center">
-        <form class="form-horizontal" [formGroup]="clientes" (ngSubmit)="onSubmit()">
+        <form class="form-horizontal" [formGroup]="formCliente" (ngSubmit)="onSubmit()">
             <div class="container mt-5" #scrollTop>
-                <div *ngIf="clientes.get('id')?.value == null" class="title">
+                <div *ngIf="formCliente.get('id')?.value == null" class="title">
                     Cadastrar Cliente
                 </div>
-                <div *ngIf="clientes.get('id')?.value != null" class="titleEditar">
+                <div *ngIf="formCliente.get('id')?.value != null" class="titleEditar">
                     Editar Cliente
                 </div>
                 <div class="subtitle">
@@ -20,7 +20,7 @@
                         <label for="nome" class="label">Nome</label>
                         <input class="form-control input" type="text" name="nome" id="nome" formControlName="nome" [ngClass]="cssErro('nome')"/>
                         <div class="erroValidacao">
-                            <app-msg-erro [control]="$any(clientes.get('nome'))" label="Nome"></app-msg-erro>
+                            <app-msg-erro [control]="$any(formCliente.get('nome'))" label="Nome"></app-msg-erro>
                         </div>
                     </div>
                     
@@ -30,7 +30,7 @@
                         <input class="form-control input" type="text" name="cpf" id="cpf" formControlName="cpf"
                          mask="000.000.000-00" [ngClass]="cssErro('cpf') "/>
                         <div class="erroValidacao">
-                            <app-msg-erro [control]="$any(clientes.get('cpf'))" label="CPF"></app-msg-erro>
+                            <app-msg-erro [control]="$any(formCliente.get('cpf'))" label="CPF"></app-msg-erro>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         <label for="email" class="label">E-Mail</label>
                         <input class="form-control input" type="email" name="email" id="email" formControlName="email" [ngClass]="cssErro('email')"/>
                         <div class="erroValidacao">
-                            <app-msg-erro [control]="$any(clientes.get('email'))" label="E-Mail"></app-msg-erro>
+                            <app-msg-erro [control]="$any(formCliente.get('email'))" label="E-Mail"></app-msg-erro>
                         </div>
                     </div>
                 </div>
@@ -55,14 +55,14 @@
                             <input class="form-control input" type="text" name="cep" id="cep" formControlName="cep" 
                                 mask="00000-000" [ngClass]="cssErro('endereco.cep')" />
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(clientes.get('endereco.cep'))" label="CEP"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCliente.get('endereco.cep'))" label="CEP"></app-msg-erro>
                             </div>
                         </div>
                         <div class="form-group col-md-4" style="margin-left: 2em;">
                             <label for="numero" class="label">Número</label>
                             <input class="form-control input" type="number" name="numero" id="numero" formControlName="numero" [ngClass]="cssErro('endereco.numero')" />
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(clientes.get('endereco.numero'))" label="Número"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCliente.get('endereco.numero'))" label="Número"></app-msg-erro>
                             </div>
                         </div>
                     </div>
@@ -72,14 +72,14 @@
                             <label for="rua" class="label">Rua</label>
                             <input class="form-control input" type="text" name="rua" id="rua" formControlName="rua" [ngClass]="cssErro('endereco.rua')" />
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(clientes.get('endereco.rua'))" label="Rua"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCliente.get('endereco.rua'))" label="Rua"></app-msg-erro>
                             </div>
                         </div>
                         <div class="form-group col-md-4" style="margin-left: 2em;">
                             <label for="bairro" class="label">Bairro</label>
                             <input class="form-control input" type="text" name="bairro" id="bairro" formControlName="bairro" [ngClass]="cssErro('endereco.bairro')" />
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(clientes.get('endereco.bairro'))" label="Bairro"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCliente.get('endereco.bairro'))" label="Bairro"></app-msg-erro>
                             </div>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <label for="cidade" class="label">Cidade</label>
                             <input class="form-control input" type="text" name="cidade" id="cidade" formControlName="cidade" [ngClass]="cssErro('endereco.cidade')" />
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(clientes.get('endereco.cidade'))" label="Cidade"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCliente.get('endereco.cidade'))" label="Cidade"></app-msg-erro>
                             </div>
                         </div>
                         <div class="form-group col-md-4" style="margin-left: 2em;">
@@ -101,7 +101,7 @@
                                 <option *ngFor="let e of todosEstados" [value]="e.sigla">{{ e.nome }}</option>
                             </select>
                             <div class="erroValidacao">
-                                <app-msg-erro [control]="$any(clientes.get('endereco.estado'))" label="Estado"></app-msg-erro>
+                                <app-msg-erro [control]="$any(formCliente.get('endereco.estado'))" label="Estado"></app-msg-erro>
                             </div>
                         </div>
                     </div>
@@ -111,10 +111,10 @@
                 <!-- SUBMIT -->
                 <div class="row d-flex justify-content-left mt-5">
                     
-                    <div class="form-group col-md-2" *ngIf="clientes.status == 'VALID'">
+                    <div class="form-group col-md-2" *ngIf="formCliente.status == 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit">Cadastrar</button>
                     </div>
-                    <div class="form-group col-md-2" *ngIf="clientes.status != 'VALID'">
+                    <div class="form-group col-md-2" *ngIf="formCliente.status != 'VALID'">
                         <button type="submit" class="btn btn-success btn-block submit" disabled>Cadastrar</button>
                     </div>
 

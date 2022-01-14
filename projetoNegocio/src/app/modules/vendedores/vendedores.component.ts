@@ -21,7 +21,7 @@ declare let alertify: any;
 })
 export class VendedoresComponent implements OnInit {
 
-  vendedores!: FormGroup;
+  formVendedor!: FormGroup;
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
   paramId!: any;
@@ -40,7 +40,7 @@ export class VendedoresComponent implements OnInit {
   //Lifecyclehooks
   ngOnInit(): void {
     this.hideBtn = false;
-    this.vendedores = this.formBuilder.group({
+    this.formVendedor = this.formBuilder.group({
       id: [null],
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)] ],
       cpf: [null, [Validators.required, FormValidations.cpfValidator]],
@@ -58,11 +58,11 @@ export class VendedoresComponent implements OnInit {
     })
 
     //VIACEP
-    this.vendedores.get('endereco.cep')?.statusChanges
+    this.formVendedor.get('endereco.cep')?.statusChanges
     .pipe(
       distinctUntilChanged(),
       //tap(value => console.log(value)),
-      switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.vendedores.get('endereco.cep')?.value)
+      switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.formVendedor.get('endereco.cep')?.value)
         : EMPTY)
       ).subscribe(dados => dados ? this.populaFormCep(dados) : { });
 
@@ -83,12 +83,12 @@ export class VendedoresComponent implements OnInit {
   //Funções principais
   onSubmit(){
     let vendedor: Vendedor = new Vendedor(
-      this.vendedores.get('nome')?.value,
-      this.vendedores.get('cpf')?.value,
-      this.vendedores.get('email')?.value,
-      this.vendedores.get('senha')?.value,
-      this.vendedores.get('endereco')?.value,
-      this.vendedores.get('id')?.value,
+      this.formVendedor.get('nome')?.value,
+      this.formVendedor.get('cpf')?.value,
+      this.formVendedor.get('email')?.value,
+      this.formVendedor.get('senha')?.value,
+      this.formVendedor.get('endereco')?.value,
+      this.formVendedor.get('id')?.value,
     ); 
     if(vendedor.id != null){
       this.vendedoresService.editarVendedor(vendedor);
@@ -96,12 +96,12 @@ export class VendedoresComponent implements OnInit {
       vendedor.id = undefined;
       this.vendedoresService.cadastrarVendedor(vendedor);
     }
-    this.vendedores.reset();
+    this.formVendedor.reset();
     this.reloadPage();
   }
 
   onEdit(dados: Vendedor){
-    this.vendedores.patchValue({
+    this.formVendedor.patchValue({
       "id": dados.id,
       "nome": dados.nome,
       "cpf": dados.cpf,
@@ -158,8 +158,8 @@ export class VendedoresComponent implements OnInit {
 
   verificaValidTouched(campo: string){
     return (
-      !this.vendedores.get(campo)?.valid &&
-      (this.vendedores.get(campo)?.touched || this.vendedores.get(campo)?.dirty)
+      !this.formVendedor.get(campo)?.valid &&
+      (this.formVendedor.get(campo)?.touched || this.formVendedor.get(campo)?.dirty)
       );
   }
 
@@ -170,7 +170,7 @@ export class VendedoresComponent implements OnInit {
   }
 
   populaFormCep(dados: any){
-    this.vendedores.patchValue({
+    this.formVendedor.patchValue({
       "endereco": {
         "rua": dados.logradouro,
         "bairro": dados.bairro,

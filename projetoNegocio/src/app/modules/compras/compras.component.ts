@@ -20,7 +20,7 @@ declare let alertify: any;
 })
 export class ComprasComponent implements OnInit {
 
-  compras!: FormGroup;
+  formCompra!: FormGroup;
   clientes!: Cliente[];
   produtos!: Produto[];
   vendedores!: Vendedor[];
@@ -41,7 +41,7 @@ export class ComprasComponent implements OnInit {
 
   //Lifecyclehooks
   ngOnInit(): void {
-    this.compras = this.formBuilder.group({
+    this.formCompra = this.formBuilder.group({
       id: [null],
       cliente: [null, Validators.required],
       produto: [null, Validators.required],
@@ -68,35 +68,35 @@ export class ComprasComponent implements OnInit {
   //Funções principais
   onSubmit(){
     let compra: Compra = new Compra(
-      this.compras.get('cliente')?.value,
-      this.compras.get('produto')?.value,
-      this.compras.get('vendedor')?.value,
-      this.compras.get('id')?.value
+      this.formCompra.get('cliente')?.value,
+      this.formCompra.get('produto')?.value,
+      this.formCompra.get('vendedor')?.value,
+      this.formCompra.get('id')?.value
     );
     if(compra.id == null){
       compra.id = undefined;
       this.comprasService.cadastrarCompra(compra);
     }else{
       // //Caso o usuario não mude o campo, seleciona apenas o id.
-      if(this.compras.get('vendedor')?.value.id){
-        compra.vendedor = this.compras.get('vendedor')?.value.id;
+      if(this.formCompra.get('vendedor')?.value.id){
+        compra.vendedor = this.formCompra.get('vendedor')?.value.id;
       }
-      if(this.compras.get('cliente')?.value.id){
-        compra.cliente = this.compras.get('cliente')?.value.id;
+      if(this.formCompra.get('cliente')?.value.id){
+        compra.cliente = this.formCompra.get('cliente')?.value.id;
       }
-      if(this.compras.get('produto')?.value.id){
-        compra.produto = this.compras.get('produto')?.value.id;
+      if(this.formCompra.get('produto')?.value.id){
+        compra.produto = this.formCompra.get('produto')?.value.id;
       }
       
       
       this.comprasService.editarCompra(compra);
     }
-    this.compras.reset();
+    this.formCompra.reset();
     this.reloadPage();
   }
 
   onEdit(dados: Compra){
-    this.compras.patchValue({
+    this.formCompra.patchValue({
       "id": dados.id,
       "cliente": dados.cliente,
       "produto": dados.produto,
@@ -147,8 +147,8 @@ export class ComprasComponent implements OnInit {
 
   verificaValidTouched(campo: string){
     return (
-      !this.compras.get(campo)?.valid &&
-      (this.compras.get(campo)?.touched || this.compras.get(campo)?.dirty)
+      !this.formCompra.get(campo)?.valid &&
+      (this.formCompra.get(campo)?.touched || this.formCompra.get(campo)?.dirty)
       );
   }
 

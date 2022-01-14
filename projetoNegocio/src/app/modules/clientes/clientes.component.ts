@@ -21,7 +21,7 @@ declare let alertify: any;
 })
 export class ClientesComponent implements OnInit {
 
-  clientes!: FormGroup;
+  formCliente!: FormGroup;
   hideBtn!: boolean;
   todosEstados!: EstadoBr[];
   paramId!: any;
@@ -40,7 +40,7 @@ export class ClientesComponent implements OnInit {
   //Lifecyclehooks
   ngOnInit(): void {
     // Form
-    this.clientes = this.formBuilder.group({
+    this.formCliente = this.formBuilder.group({
       id: [null],
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       cpf: [null, [Validators.required, FormValidations.cpfValidator] ],
@@ -55,10 +55,10 @@ export class ClientesComponent implements OnInit {
       })
     });
     //API Viacep
-    this.clientes.get('endereco.cep')?.statusChanges
+    this.formCliente.get('endereco.cep')?.statusChanges
     .pipe(
       distinctUntilChanged(),
-      switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.clientes.get('endereco.cep')?.value)
+      switchMap(status => status === 'VALID' ? this.cepService.consultaCEP(this.formCliente.get('endereco.cep')?.value)
         : EMPTY))
     .subscribe(dados => dados ? this.populaFormCep(dados) : { });
 
@@ -80,11 +80,11 @@ export class ClientesComponent implements OnInit {
   //Funções principais
   onSubmit(){
     let cliente: Cliente = new Cliente(
-      this.clientes.get('nome')?.value, 
-      this.clientes.get('cpf')?.value, 
-      this.clientes.get('email')?.value, 
-      this.clientes.get('endereco')?.value, 
-      this.clientes.get('id')?.value
+      this.formCliente.get('nome')?.value, 
+      this.formCliente.get('cpf')?.value, 
+      this.formCliente.get('email')?.value, 
+      this.formCliente.get('endereco')?.value, 
+      this.formCliente.get('id')?.value
     );
     if(cliente.id == null){
       cliente.id = undefined;
@@ -92,12 +92,12 @@ export class ClientesComponent implements OnInit {
     }else{
       this.clientesService.editarCliente(cliente);
     }
-    this.clientes.reset();
+    this.formCliente.reset();
     this.reloadPage();
   }
 
   onEdit(dados: Cliente){
-    this.clientes.patchValue({
+    this.formCliente.patchValue({
       "id": dados.id,
       "nome": dados.nome,
       "cpf": dados.cpf,
@@ -152,8 +152,8 @@ export class ClientesComponent implements OnInit {
 
   verificaValidTouched(campo: string){
     return (
-      !this.clientes.get(campo)?.valid &&
-      (this.clientes.get(campo)?.touched || this.clientes.get(campo)?.dirty)
+      !this.formCliente.get(campo)?.valid &&
+      (this.formCliente.get(campo)?.touched || this.formCliente.get(campo)?.dirty)
       );
   }
 
@@ -164,7 +164,7 @@ export class ClientesComponent implements OnInit {
   }
 
   populaFormCep(dados: any){
-    this.clientes.patchValue({
+    this.formCliente.patchValue({
       "endereco": {
         "rua": dados.logradouro,
         "bairro": dados.bairro,

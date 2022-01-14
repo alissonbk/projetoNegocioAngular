@@ -16,7 +16,7 @@ declare let alertify: any;
 })
 export class ProdutosComponent implements OnInit {
 
-  produtos!: FormGroup;
+  formProduto!: FormGroup;
   hideBtn!: boolean;
   paramId!: any;
   loading: boolean = false;
@@ -34,7 +34,7 @@ export class ProdutosComponent implements OnInit {
   //Lifecyclehooks
   ngOnInit(): void {
     this.hideBtn = false;
-    this.produtos = this.formBuilder.group({
+    this.formProduto = this.formBuilder.group({
       id: [null],
       descricao: [null, Validators.required],
       marca: [null, Validators.required],
@@ -54,12 +54,12 @@ export class ProdutosComponent implements OnInit {
   // Funções principais
   onSubmit(){
     //Criando objeto produto apartir do formulario
-    let produto: Produto = new Produto(this.produtos.get('descricao')?.value, this.produtos.get('marca')?.value, 
-    this.produtos.get('valor')?.value, this.produtos.get('id')?.value);
+    let produto: Produto = new Produto(this.formProduto.get('descricao')?.value, this.formProduto.get('marca')?.value, 
+    this.formProduto.get('valor')?.value, this.formProduto.get('id')?.value);
     // EDITAR
     if(produto.id != null){
       //  Seta valor para padrão numerico novamente
-      let valor = '' + this.produtos.get('valor')?.value;
+      let valor = '' + this.formProduto.get('valor')?.value;
       valor = valor.split(',').join('.');
       produto.valor = Number(valor);
       this.produtosService.editarProduto(produto);
@@ -68,12 +68,12 @@ export class ProdutosComponent implements OnInit {
       produto.id = undefined;
       this.produtosService.cadastrarProduto(produto);
     }
-    this.produtos.reset();
+    this.formProduto.reset();
     this.reloadPage();
   }
 
   onEdit(dados: Produto){
-    this.produtos.patchValue({
+    this.formProduto.patchValue({
       "id": dados.id,
       "descricao": dados.descricao,
       "marca": dados.marca,
@@ -121,8 +121,8 @@ export class ProdutosComponent implements OnInit {
 
   verificaValidTouched(campo: string){
     return (
-      !this.produtos.get(campo)?.valid &&
-      (this.produtos.get(campo)?.touched || this.produtos.get(campo)?.dirty)
+      !this.formProduto.get(campo)?.valid &&
+      (this.formProduto.get(campo)?.touched || this.formProduto.get(campo)?.dirty)
       );
   }
 
@@ -131,7 +131,5 @@ export class ProdutosComponent implements OnInit {
       'is-invalid': this.verificaValidTouched(campo)
     }
   }
-
-  // isNumber(e: any) {return typeof e === 'number'}
 
 }
