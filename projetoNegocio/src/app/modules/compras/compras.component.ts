@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -37,6 +38,7 @@ export class ComprasComponent implements OnInit {
     private clientesService: ClientesService,
     private produtosService: ProdutosService,
     private vendedoresService: VendedoresService,
+    private cf: ChangeDetectorRef
     ) { }
 
   //Lifecyclehooks
@@ -63,6 +65,8 @@ export class ComprasComponent implements OnInit {
     if(this.paramId != null){
       this.getById(this.paramId);
     }
+
+    this.cf.detectChanges();
   }
   
   //Funções principais
