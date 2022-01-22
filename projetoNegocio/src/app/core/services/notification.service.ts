@@ -25,4 +25,11 @@ export class NotificationService{
         alertify.set('notifier', 'position', 'top-right');
         alertify.warning(msg);
     }
+
+    showErrorLonger(msg: string){
+        alertify.dismissAll();
+        alertify.set('notifier','delay', 5);
+        alertify.set('notifier', 'position', 'top-right');
+        alertify.error(msg);
+    }
 }

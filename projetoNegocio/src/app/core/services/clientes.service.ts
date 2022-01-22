@@ -48,7 +48,11 @@ export class ClientesService extends AbstractService {
     this.http.delete(`${this.API_URL}/v1/clientes/`+ id, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        this.notificationService.showError('Erro ao excluir cliente!');
+        if(error.status == 500){
+          this.notificationService.showErrorLonger('Cliente possui Registro(s) em Compras!!!');
+        }else{
+          this.notificationService.showError('Erro ao excluir cliente!');
+        }
         console.log("Error: ", error);
       },
       () => {

@@ -4,8 +4,9 @@ import { ClientesComponent } from '../clientes.component';
 import { ClientesService } from 'src/app/core/services/clientes.service';
 import { EMPTY, Observable, Subject } from 'rxjs';
 import { Cliente } from 'src/app/shared/models/cliente';
-import { catchError } from 'rxjs/operators';
-declare let alertify: any;
+import { catchError, delay } from 'rxjs/operators';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class MostrarClientesComponent implements OnInit {
 
   constructor(
     private clientesService: ClientesService,
+    private notificationService: NotificationService,
+    private router: Router,
     @Inject(forwardRef(() => ClientesComponent)) private _parent: ClientesComponent
     ) { }
 
@@ -50,12 +53,14 @@ export class MostrarClientesComponent implements OnInit {
     this.clientes$ = this.clientesService.getClientes().pipe(
       catchError(error => {
         console.log(error);
-        this.error$.next(true);
-        // ALERT
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-center');
-        alertify.error('Falha em carregar clientes!');
+        if(error.status == 403){
+          this.notificationService.showError('Token Expirado!');
+          delay(200),
+          this.router.navigate(['/login']);
+        }else{
+          this.error$.next(true);
+          this.notificationService.showError('Falha em carregar clientes!');
+        }
         return EMPTY;
       })
     );

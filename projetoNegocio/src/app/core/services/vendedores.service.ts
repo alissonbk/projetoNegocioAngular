@@ -44,7 +44,11 @@ export class VendedoresService extends AbstractService {
     return this.http.delete(`${this.API_URL}/v1/usuarios/`+id, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        this.notificationService.showError('Erro ao excluir Vendedor!');
+        if(error.status == 500){
+          this.notificationService.showErrorLonger('Vendedor possui Registro(s) em Compras!!!');
+        }else{
+          this.notificationService.showError('Erro ao excluir Vendedor!');
+        }
         console.log("Error: ", error);
       },
       () => {

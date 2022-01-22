@@ -48,7 +48,11 @@ export class ProdutosService extends AbstractService {
     return this.http.delete(`${this.API_URL}/v1/produtos/`+ id, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        this.notificationService.showError('Erro ao excluir produto!');
+        if(error.status == 500){
+          this.notificationService.showErrorLonger('Produto possui Registro(s) em Compras!!!');
+        }else{
+          this.notificationService.showError('Erro ao excluir produto!');
+        }
         console.log("Error: ", error);
       },
       () => {
