@@ -5,6 +5,7 @@ import { AbstractService } from 'src/app/core/services/abstract.service';
 import { tap } from 'rxjs/operators';
 import { ResponseDTO } from 'src/app/shared/models/responseDTO';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 export class LoginService extends AbstractService {
 
   private readonly STORAGE_KEY = 'loggedUser';
+  jwtHelper = new JwtHelperService();
 
   constructor(http: HttpClient, private router: Router) {
     super(http)
@@ -52,6 +54,15 @@ export class LoginService extends AbstractService {
 
   setLoggedUser(usuario: Vendedor): void {
     sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(usuario));
+  }
+
+  tokenExpired(){
+    if(this.jwtHelper.isTokenExpired(this.loggedUser?.access_token)){
+      //TOKEN EXPIRADO!
+      return true;
+    }else{
+      return false;
+    }
   }
 
 
