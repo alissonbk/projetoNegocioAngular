@@ -16,7 +16,7 @@ declare let alertify: any;
 })
 export class MostrarComprasComponent implements OnInit {
 
-  compras$!: Observable<Compra[]>;
+  compras$!: Observable<any>;
   error$ = new Subject<boolean>();
   dataLoaded!: boolean;
   firstExecution!: boolean;

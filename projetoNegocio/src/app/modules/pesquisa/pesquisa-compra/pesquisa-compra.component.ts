@@ -16,7 +16,7 @@ declare let alertify: any;
 })
 export class PesquisaCompraComponent implements OnInit {
 
-  compras$!: Observable<Compra[]>;
+  compras$!: Observable<any>;
   error$ = new Subject<boolean>();
   queryCliente!: string;
   queryVendedor!: string;

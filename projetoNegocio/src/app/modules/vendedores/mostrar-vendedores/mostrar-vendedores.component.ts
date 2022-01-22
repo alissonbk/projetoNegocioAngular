@@ -54,10 +54,10 @@ export class MostrarVendedoresComponent implements OnInit {
         alertify.dismissAll();
         alertify.set('notifier','delay', 2);
         alertify.set('notifier', 'position', 'top-center');
-        alertify.error('Falha em carregar clientes!');
+        alertify.error('Falha em carregar vendedores!');
         return EMPTY;
       })
-    )
+    );
   }
 
   onEdit(dados: Vendedor){

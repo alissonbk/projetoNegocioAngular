@@ -15,7 +15,7 @@
     </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let c of compras | paginate:{id: 'pagination',
+        <tr *ngFor="let c of compras?.content | paginate:{id: 'pagination',
             itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalElements}" class="cursor-pointer">
             <td>
                 <ul class="action-list">
