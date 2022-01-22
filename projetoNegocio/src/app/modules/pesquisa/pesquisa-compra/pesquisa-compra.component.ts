@@ -63,7 +63,7 @@ export class PesquisaCompraComponent implements OnInit {
 
   onDelete(dados: any){
     alertify.confirm(`Você tem certeza que deseja excluir a compra (cliente: ${dados.cliente.nome} produto:${dados.produto.descricao})?`, () =>{
-      this.comprasService.excluirCompra(dados.id);
+      this.comprasService.excluirCompra(dados);
     });
     
   }

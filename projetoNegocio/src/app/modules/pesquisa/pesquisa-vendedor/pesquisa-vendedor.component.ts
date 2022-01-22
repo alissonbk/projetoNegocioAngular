@@ -67,7 +67,7 @@ export class PesquisaVendedorComponent implements OnInit {
 
   onDelete(dados: any){
     alertify.confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`, () =>{
-      this.vendedoresService.excluirVendedor(dados.id);
+      this.vendedoresService.excluirVendedor(dados);
     })
       
     

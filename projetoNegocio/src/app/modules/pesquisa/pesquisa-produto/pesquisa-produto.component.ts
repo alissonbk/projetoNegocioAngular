@@ -59,7 +59,7 @@ export class PesquisaProdutoComponent implements OnInit {
 
   onDelete(dados: any){
     alertify.confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`, () => {
-      this.produtosService.excluirProduto(dados.id);
+      this.produtosService.excluirProduto(dados);
     });
       
     

@@ -67,7 +67,7 @@ export class PesquisaClienteComponent implements OnInit {
 
   onDelete(dados: any){
     alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
-      this.clientesService.excluirCliente(dados.id);
+      this.clientesService.excluirCliente(dados);
     })
     
   }
