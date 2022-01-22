@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {catchError, delay, take, tap} from "rxjs/operators";
 import { AbstractService } from './abstract.service';
-declare let alertify: any;
+import { NotificationService } from './notification.service';
 
 @Injectable({providedIn: 'root'})
 
 export class VendedoresService extends AbstractService {
 
-  constructor(http: HttpClient){
+  constructor(http: HttpClient, private notificationService: NotificationService){
     super(http)
   }
 
@@ -18,17 +18,11 @@ export class VendedoresService extends AbstractService {
     return this.http.post(`${this.API_URL}/v1/usuarios`, value, {headers: this.headers}).subscribe(
       next => { },
       error => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 2);
-          alertify.set('notifier', 'position', 'top-right');
-          alertify.error('Erro ao cadastrar vendedor!');
+          this.notificationService.showError('Erro ao cadastrar Vendedor');
           console.log(error);
       },
       () => {
-          alertify.dismissAll();
-          alertify.set('notifier','delay', 2);
-          alertify.set('notifier', 'position', 'top-right');
-          alertify.success('Vendedor Cadastrado com Sucesso!');
+          this.notificationService.showSuccess('Vendedor cadastrado com sucesso!');
       });
   }
 
@@ -36,16 +30,11 @@ export class VendedoresService extends AbstractService {
     return this.http.put(`${this.API_URL}/v1/usuarios/`+ value.id, value, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao editar vendedor!');
+        this.notificationService.showError('Erro ao editar vendedor!');
         console.log(error);
       },
       () => {
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.warning('Vendedor modificado!');
+        this.notificationService.showWarning('Vendedor Modificado!');
       }
     );
   }
@@ -55,16 +44,11 @@ export class VendedoresService extends AbstractService {
     return this.http.delete(`${this.API_URL}/v1/usuarios/`+id, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao excluir vendedor!');
+        this.notificationService.showError('Erro ao excluir Vendedor!');
         console.log("Error: ", error);
       },
       () => {
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.warning('Vendedor Excluido!');
+        this.notificationService.showWarning('Vendedor Excluido!');
       }
     );
   }

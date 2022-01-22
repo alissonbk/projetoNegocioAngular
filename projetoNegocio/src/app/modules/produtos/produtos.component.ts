@@ -65,6 +65,7 @@ export class ProdutosComponent implements OnInit {
       this.produtosService.editarProduto(produto);
     // CADASTRAR
     }else{
+      // define como undefined para não enviar id: null para a API
       produto.id = undefined;
       this.produtosService.cadastrarProduto(produto);
     }

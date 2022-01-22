@@ -5,15 +5,15 @@ import {delay, tap} from "rxjs/operators";
 
 
 import { AbstractService } from './abstract.service';
-declare let alertify: any;
 import { Cliente } from 'src/app/shared/models/cliente';
+import { NotificationService } from './notification.service';
 
 
 @Injectable({providedIn: 'root'})
 
 export class ClientesService extends AbstractService {
 
-  constructor(http: HttpClient) {
+  constructor(http: HttpClient, private notificationService: NotificationService) {
     super(http);
  }
 
@@ -21,17 +21,11 @@ export class ClientesService extends AbstractService {
     this.http.post(`${this.API_URL}/v1/clientes`, value, {headers: this.headers}).subscribe(
       next => { },
       error => {
-            alertify.dismissAll();
-            alertify.set('notifier','delay', 2);
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.error('Erro ao cadastrar cliente!');
-            console.log(error);
+        this.notificationService.showError('Erro ao cadastrar cliente!');
+        console.log(error);
       },
       () => {
-            alertify.dismissAll();
-            alertify.set('notifier','delay', 2);
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success('Cliente Cadastrado com Sucesso!');
+        this.notificationService.showSuccess('Cliente cadastrado com sucesso!');
       });
     
   }
@@ -40,16 +34,11 @@ export class ClientesService extends AbstractService {
     this.http.put(`${this.API_URL}/v1/clientes/` + value.id, value, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao editar cliente!');
+        this.notificationService.showError('Erro ao editar cliente!');
         console.log(error);
       },
       () => {
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.warning('Cliente modificado!');
+        this.notificationService.showWarning('Cliente Modificado!');
       }
     );
     
@@ -59,16 +48,11 @@ export class ClientesService extends AbstractService {
     this.http.delete(`${this.API_URL}/v1/clientes/`+ id, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao excluir cliente!');
+        this.notificationService.showError('Erro ao excluir cliente!');
         console.log("Error: ", error);
       },
       () => {
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.warning('Cliente Excluido!');
+        this.notificationService.showWarning('Cliente Excluido!');
       }
     );
     

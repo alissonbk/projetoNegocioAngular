@@ -1,17 +1,17 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { catchError, delay, take, tap } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { catchError, delay, tap } from "rxjs/operators";
 import { Produto } from "src/app/shared/models/produto";
 import { AbstractService } from "./abstract.service";
-declare let alertify: any;
+import { NotificationService } from "./notification.service";
 
 
 @Injectable({providedIn: 'root'})
 
 export class ProdutosService extends AbstractService {
 
-  constructor(http: HttpClient){
+  constructor(http: HttpClient,private notificationService: NotificationService){
     super(http)
   }
 
@@ -22,17 +22,11 @@ export class ProdutosService extends AbstractService {
 
       },
       error => {
-            alertify.dismissAll();
-            alertify.set('notifier','delay', 2);
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.error('Erro ao cadastrar produto!');
+            this.notificationService.showError('Erro ao cadastrar Produto');
             console.log(error);
       },
       () => {
-            alertify.dismissAll();
-            alertify.set('notifier','delay', 2);
-            alertify.set('notifier', 'position', 'top-right');
-            alertify.success('Produto Cadastrado com Sucesso!');
+            this.notificationService.showSuccess('Produto Cadastrado com Sucesso!');
       });
   }
 
@@ -40,16 +34,11 @@ export class ProdutosService extends AbstractService {
     return this.http.put(`${this.API_URL}/v1/produtos/`+ value.id, value, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao editar produto!');
+        this.notificationService.showError('Erro ao editar produto!');
         console.log(error);
       },
       () => {
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.warning('Produto modificado!');
+        this.notificationService.showWarning('Produto modificado!');
       }
     );
   }
@@ -59,16 +48,11 @@ export class ProdutosService extends AbstractService {
     return this.http.delete(`${this.API_URL}/v1/produtos/`+ id, {headers: this.headers}).subscribe(
       next => { },
       error => {
-        alertify.dismissAll();
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.error('Erro ao excluir produto!');
+        this.notificationService.showError('Erro ao excluir produto!');
         console.log("Error: ", error);
       },
       () => {
-        alertify.set('notifier','delay', 2);
-        alertify.set('notifier', 'position', 'top-right');
-        alertify.warning('Produto Excluido!');
+        this.notificationService.showWarning('Produto Excluido!');
       }
     );
   }
