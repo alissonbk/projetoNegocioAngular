@@ -96,7 +96,6 @@ export class ComprasComponent implements OnInit {
       this.comprasService.editarCompra(compra);
     }
     this.formCompra.reset();
-    this.reloadPage();
   }
 
   onEdit(dados: Compra){
@@ -113,7 +112,6 @@ export class ComprasComponent implements OnInit {
   onDelete(dados: Compra){
     alertify.confirm(`Você tem certeza que deseja excluir a compra ?`, () => {
       this.comprasService.excluirCompra(dados);
-      this.reloadPage();
     });
   }
 
@@ -132,12 +130,6 @@ export class ComprasComponent implements OnInit {
         }
       }
     });
-  }
-
-  reloadPage(){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/compras/mostrar']);
   }
 
   hideButton(){

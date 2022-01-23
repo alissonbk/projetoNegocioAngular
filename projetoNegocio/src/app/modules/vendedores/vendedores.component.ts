@@ -97,7 +97,6 @@ export class VendedoresComponent implements OnInit {
       this.vendedoresService.cadastrarVendedor(vendedor);
     }
     this.formVendedor.reset();
-    this.reloadPage();
   }
 
   onEdit(dados: Vendedor){
@@ -122,7 +121,6 @@ export class VendedoresComponent implements OnInit {
   onDelete(dados: Vendedor){
     alertify.confirm(`Você tem certeza que deseja excluir o vendedor ${dados.nome}?`, () => {
       this.vendedoresService.excluirVendedor(dados);
-      this.reloadPage();
     })
     
   }
@@ -138,12 +136,6 @@ export class VendedoresComponent implements OnInit {
         }
       }
     });
-  } 
-
-  reloadPage(){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/vendedores/mostrar']);
   }
 
   hideButton(){

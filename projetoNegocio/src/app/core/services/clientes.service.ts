@@ -7,13 +7,14 @@ import {delay, tap} from "rxjs/operators";
 import { AbstractService } from './abstract.service';
 import { Cliente } from 'src/app/shared/models/cliente';
 import { NotificationService } from './notification.service';
+import { Router } from '@angular/router';
 
 
 @Injectable({providedIn: 'root'})
 
 export class ClientesService extends AbstractService {
 
-  constructor(http: HttpClient, private notificationService: NotificationService) {
+  constructor(http: HttpClient, private notificationService: NotificationService, private router: Router) {
     super(http);
  }
 
@@ -25,6 +26,7 @@ export class ClientesService extends AbstractService {
         console.log(error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showSuccess('Cliente cadastrado com sucesso!');
       });
     
@@ -38,6 +40,7 @@ export class ClientesService extends AbstractService {
         console.log(error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showWarning('Cliente Modificado!');
       }
     );
@@ -56,6 +59,7 @@ export class ClientesService extends AbstractService {
         console.log("Error: ", error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showWarning('Cliente Excluido!');
       }
     );
@@ -67,5 +71,11 @@ export class ClientesService extends AbstractService {
       tap(console.log),
       delay(1000)
     );
+  }
+
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/clientes/mostrar']);
   }
 }

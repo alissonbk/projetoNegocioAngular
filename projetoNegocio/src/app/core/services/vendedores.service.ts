@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Vendedor } from 'src/app/shared/models/vendedor';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -10,7 +11,7 @@ import { NotificationService } from './notification.service';
 
 export class VendedoresService extends AbstractService {
 
-  constructor(http: HttpClient, private notificationService: NotificationService){
+  constructor(http: HttpClient, private notificationService: NotificationService, private router: Router){
     super(http)
   }
 
@@ -18,11 +19,12 @@ export class VendedoresService extends AbstractService {
     return this.http.post(`${this.API_URL}/v1/usuarios`, value, {headers: this.headers}).subscribe(
       next => { },
       error => {
-          this.notificationService.showError('Erro ao cadastrar Vendedor');
-          console.log(error);
+        this.notificationService.showError('Erro ao cadastrar Vendedor');
+        console.log(error);
       },
       () => {
-          this.notificationService.showSuccess('Vendedor cadastrado com sucesso!');
+        this.reloadPage();
+        this.notificationService.showSuccess('Vendedor cadastrado com sucesso!');
       });
   }
 
@@ -34,6 +36,7 @@ export class VendedoresService extends AbstractService {
         console.log(error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showWarning('Vendedor Modificado!');
       }
     );
@@ -52,6 +55,7 @@ export class VendedoresService extends AbstractService {
         console.log("Error: ", error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showWarning('Vendedor Excluido!');
       }
     );
@@ -62,5 +66,11 @@ export class VendedoresService extends AbstractService {
       tap(console.log),
       delay(1000)
     );
+  }
+
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/vendedores/mostrar']);
   }
 }

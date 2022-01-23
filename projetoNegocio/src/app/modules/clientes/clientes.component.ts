@@ -93,7 +93,6 @@ export class ClientesComponent implements OnInit {
       this.clientesService.editarCliente(cliente);
     }
     this.formCliente.reset();
-    this.reloadPage();
   }
 
   onEdit(dados: Cliente){
@@ -118,7 +117,6 @@ export class ClientesComponent implements OnInit {
   onDelete(dados: Cliente){
     alertify.confirm(`Você tem certeza que deseja excluir o cliente ${dados.nome}?`, () => {
       this.clientesService.excluirCliente(dados);
-      this.reloadPage();
     })
   }
 
@@ -133,12 +131,6 @@ export class ClientesComponent implements OnInit {
         }
       }
     });
-  }
-
-  reloadPage(){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/clientes/mostrar']);
   }
   
   hideButton(){

@@ -1,7 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { catchError, delay, tap } from "rxjs/operators";
+import { delay, tap } from "rxjs/operators";
 
 
 import { Compra } from "../../shared/models/compra";
@@ -14,7 +15,7 @@ import { NotificationService } from "./notification.service";
 
 export class ComprasService extends AbstractService{
 
-    constructor(http: HttpClient,private loginService: LoginService,private notificationService: NotificationService){
+    constructor(http: HttpClient,private loginService: LoginService,private notificationService: NotificationService, private router: Router){
         super(http)
     }
 
@@ -26,6 +27,7 @@ export class ComprasService extends AbstractService{
                 console.log(error);
           },
           () => {
+            this.reloadPage();
               this.notificationService.showSuccess('Compra Cadastrada com Sucesso!');
           });     
     }
@@ -38,6 +40,7 @@ export class ComprasService extends AbstractService{
           console.log(error);
         },
         () => {
+          this.reloadPage();
           this.notificationService.showWarning('Compra Modificada!');
         });
     }
@@ -51,6 +54,7 @@ export class ComprasService extends AbstractService{
             console.log("Error: ", error);
           },
           () => {
+            this.reloadPage();
             this.notificationService.showWarning('Compra excluida!');
           });   
     }
@@ -60,6 +64,12 @@ export class ComprasService extends AbstractService{
             tap(console.log),
             delay(1000)
         )
+    }
+
+    reloadPage(){
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/compras/mostrar']);
     }
     
 }
