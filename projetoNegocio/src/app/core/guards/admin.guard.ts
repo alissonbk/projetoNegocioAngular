@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateChild, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminGuard implements CanActivateChild {
 
-  constructor(private router: Router){ }
+  constructor(private router: Router, private notificationService: NotificationService){ }
 
   canActivateChild(
     childRoute: ActivatedRouteSnapshot,
@@ -16,11 +17,11 @@ export class AdminGuard implements CanActivateChild {
       if(loggedUser && loggedUser.tipo == "ADMIN"){
         return true;
       }else if(loggedUser && loggedUser.tipo != "ADMIN"){
-        alert("É necessário permissão de ADMIN para acessar esta página!");
+        this.notificationService.showError("É necessário permissão de ADMIN para acessar esta página!");
         this.router.navigate(['/login']);
         return false;
       }else{
-        alert("É necessário login para acessar qualquer página!");
+        this.notificationService.showError("É necessário login para acessar esta página!");
         this.router.navigate(['/login']);
         return false;
       }
@@ -31,11 +32,11 @@ export class AdminGuard implements CanActivateChild {
       if(loggedUser && loggedUser.tipo == "ADMIN"){
         return true;
       }else if(loggedUser && loggedUser.tipo != "ADMIN"){
-        alert("É necessário permissão de ADMIN para acessar esta página!");
+        this.notificationService.showErrorLonger("É necessário permissão de ADMIN para acessar esta página!");
         this.router.navigate(['/login']);
         return false;
       }else{
-        alert("É necessário login para acessar qualquer página!");
+        this.notificationService.showError("É necessário login para acessar esta página!");
         this.router.navigate(['/login']);
         return false;
       }
