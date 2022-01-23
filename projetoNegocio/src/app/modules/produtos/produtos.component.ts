@@ -70,7 +70,6 @@ export class ProdutosComponent implements OnInit {
       this.produtosService.cadastrarProduto(produto);
     }
     this.formProduto.reset();
-    this.reloadPage();
   }
 
   onEdit(dados: Produto){
@@ -87,7 +86,6 @@ export class ProdutosComponent implements OnInit {
   onDelete(dados: Produto){
     alertify.confirm(`Você tem certeza que deseja excluir o produto ${dados.descricao}?`, () => {
       this.produtosService.excluirProduto(dados);
-      this.reloadPage();
     });
       
   }
@@ -103,12 +101,6 @@ export class ProdutosComponent implements OnInit {
         }
       }
     })
-  }
-
-  reloadPage(){
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/produtos/mostrar']);
   }
 
   hideButton(){

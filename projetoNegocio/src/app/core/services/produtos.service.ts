@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { catchError, delay, tap } from "rxjs/operators";
 import { Produto } from "src/app/shared/models/produto";
@@ -11,7 +12,7 @@ import { NotificationService } from "./notification.service";
 
 export class ProdutosService extends AbstractService {
 
-  constructor(http: HttpClient,private notificationService: NotificationService){
+  constructor(http: HttpClient,private notificationService: NotificationService, private router: Router){
     super(http)
   }
 
@@ -22,11 +23,12 @@ export class ProdutosService extends AbstractService {
 
       },
       error => {
-            this.notificationService.showError('Erro ao cadastrar Produto');
-            console.log(error);
+          this.notificationService.showError('Erro ao cadastrar Produto');
+          console.log(error);
       },
       () => {
-            this.notificationService.showSuccess('Produto Cadastrado com Sucesso!');
+          this.reloadPage();
+          this.notificationService.showSuccess('Produto Cadastrado com Sucesso!');
       });
   }
 
@@ -38,6 +40,7 @@ export class ProdutosService extends AbstractService {
         console.log(error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showWarning('Produto modificado!');
       }
     );
@@ -56,6 +59,7 @@ export class ProdutosService extends AbstractService {
         console.log("Error: ", error);
       },
       () => {
+        this.reloadPage();
         this.notificationService.showWarning('Produto Excluido!');
       }
     );
@@ -66,7 +70,12 @@ export class ProdutosService extends AbstractService {
       tap(console.log),
       delay(1000)
     );
-   
+  }
+
+  reloadPage(){
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/produtos/mostrar']);
   }
 
 }
