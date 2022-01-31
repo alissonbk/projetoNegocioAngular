@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.loginService.authenticate(this.login.value.email, this.login.value.password).subscribe(response => {
             this.router.navigate(['/home/']);
         }, (error) => {
-            if(error.status == 403) {
+            if(error.status == 404 || error.status == 403) {
               this.notificationService.showError('E-mail e/ou senha incorreto(s).');
             } else {
                 alertify.alert('Não foi possível comunicar-se com o servidor. Tente novamente mais tarde!');
