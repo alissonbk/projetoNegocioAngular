@@ -44,7 +44,7 @@ export class PesquisaProdutoComponent implements OnInit {
 
   //Functions
   loadProdutos(){
-    this.produtos$ = this.produtosService.getProdutos().pipe(
+    this.produtos$ = this.produtosService.getProdutos(this.queryDesc, this.queryMarca).pipe(
       catchError(error => {
         console.log(error);
         this.error$.next(true);

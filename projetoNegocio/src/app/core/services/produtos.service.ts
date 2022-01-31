@@ -1,6 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import { Params, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { catchError, delay, tap } from "rxjs/operators";
 import { Produto } from "src/app/shared/models/produto";
@@ -65,8 +65,10 @@ export class ProdutosService extends AbstractService {
     );
   }
   
-  getProdutos(): Observable<Produto[]>{
-    return this.http.get<Produto[]>(`${this.API_URL}/v1/produtos`, {headers: this.headers}).pipe(
+  getProdutos(descricao?: string, marca?: string): Observable<Produto[]>{
+    let params: Params = { descricao: descricao ? descricao : "", marca: marca ? marca : ""};
+    console.log(params);
+    return this.http.get<Produto[]>(`${this.API_URL}/v1/produtos`, {headers: this.headers, params: params}).pipe(
       tap(console.log),
       delay(1000)
     );
