@@ -18,7 +18,6 @@ export class AdminGuard implements CanActivateChild {
         return true;
       }else if(loggedUser && loggedUser.tipo != "ADMIN"){
         this.notificationService.showError("É necessário permissão de ADMIN para acessar esta página!");
-        this.router.navigate(['/login']);
         return false;
       }else{
         this.notificationService.showError("É necessário login para acessar esta página!");
@@ -33,7 +32,6 @@ export class AdminGuard implements CanActivateChild {
         return true;
       }else if(loggedUser && loggedUser.tipo != "ADMIN"){
         this.notificationService.showErrorLonger("É necessário permissão de ADMIN para acessar esta página!");
-        this.router.navigate(['/login']);
         return false;
       }else{
         this.notificationService.showError("É necessário login para acessar esta página!");
