@@ -41,6 +41,7 @@ export class LoginService extends AbstractService {
 
   loggout(): void {
     sessionStorage.removeItem(this.STORAGE_KEY);
+    window.location.replace('/login');
     this.redirectLogin();
   }
 
