@@ -17,7 +17,7 @@ export class AdminGuard implements CanActivateChild {
       if(loggedUser && loggedUser.tipo == "ADMIN"){
         return true;
       }else if(loggedUser && loggedUser.tipo != "ADMIN"){
-        this.notificationService.showError("É necessário permissão de ADMIN para acessar esta página!");
+        this.notificationService.showWarning("É necessário permissão de ADMIN!");
         return false;
       }else{
         this.notificationService.showError("É necessário login para acessar esta página!");
@@ -31,7 +31,7 @@ export class AdminGuard implements CanActivateChild {
       if(loggedUser && loggedUser.tipo == "ADMIN"){
         return true;
       }else if(loggedUser && loggedUser.tipo != "ADMIN"){
-        this.notificationService.showErrorLonger("É necessário permissão de ADMIN para acessar esta página!");
+        this.notificationService.showWarning("É necessário permissão de ADMIN!");
         return false;
       }else{
         this.notificationService.showError("É necessário login para acessar esta página!");

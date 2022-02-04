@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { ResponseDTO } from 'src/app/shared/models/responseDTO';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class LoginService extends AbstractService {
 
   private readonly STORAGE_KEY = 'loggedUser';
   jwtHelper = new JwtHelperService();
+  $loggedUserEvent = new BehaviorSubject(this.loggedUser?.nome);
 
   constructor(http: HttpClient, private router: Router) {
     super(http)
@@ -28,6 +30,7 @@ export class LoginService extends AbstractService {
             tap(autenticado => {
                 if (LoginService.checkLogged(autenticado)) {
                     sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(autenticado));
+                    this.$loggedUserEvent.next(this.loggedUser?.nome);
                 } else {
                     alert('Não permitido!');
                 }
@@ -50,7 +53,7 @@ export class LoginService extends AbstractService {
   }
 
   get loggedUser(): Vendedor | null {
-      return JSON.parse(sessionStorage.getItem(this.STORAGE_KEY) as string);
+    return JSON.parse(sessionStorage.getItem(this.STORAGE_KEY) as string);
   }
 
 

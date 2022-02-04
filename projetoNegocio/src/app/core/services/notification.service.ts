@@ -21,6 +21,7 @@ export class NotificationService{
     }
 
     showWarning(msg: string){
+        alertify.dismissAll();
         alertify.set('notifier','delay', 2);
         alertify.set('notifier', 'position', 'top-right');
         alertify.warning(msg);

@@ -9,9 +9,14 @@ import { LoginService } from '../services/login.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private loginService: LoginService, private router: Router) { }
-
   logged!: boolean;
+  nomeDoUsuario!: string | undefined;
+
+  constructor(private loginService: LoginService, private router: Router) {
+    this.loginService.$loggedUserEvent.subscribe(value => this.nomeDoUsuario = value);
+  }
+
+  
 
   ngOnInit(): void {
     this.loginService.loggedUser != null ? this.logged = true : this.logged = false;
@@ -19,7 +24,6 @@ export class HeaderComponent implements OnInit {
 
   ngAfterContentChecked(): void {
     this.loginService.loggedUser != null ? this.logged = true : this.logged = false;
-    
   }
   
   logout(){

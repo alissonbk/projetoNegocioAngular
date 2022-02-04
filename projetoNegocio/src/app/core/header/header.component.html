@@ -22,7 +22,13 @@
     <li class="nav-item login" *ngIf="!logged">
       <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active" >Login</a>
     </li>
-    <li class="nav-item login" *ngIf="logged">
-      <a class="nav-link" (click)="logout()" [routerLink]="['/login']" routerLinkActive="active" >Logout</a>
+    <li class="nav-item login dropdown" *ngIf="logged">
+      <a class="nav-link dropdown-toggle naoSelecionavel" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="bi bi-person-fill"></i>
+        {{ nomeDoUsuario }}
+      </a>
+      <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" (click)="logout()" [routerLink]="['/login']" routerLinkActive="active" >Logout</a>
+      </div>
     </li>
 </nav>
